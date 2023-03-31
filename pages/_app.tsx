@@ -4,7 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import { ChakraProvider, extendBaseTheme } from '@chakra-ui/react'
 import chakraTheme from '@chakra-ui/theme'
 import { extendTheme } from "@chakra-ui/react"
-
+import { SpotifyContextProvider } from '@component/context/SpotifyContext';
 
 const config = {
   initialColorMode: 'light',
@@ -25,7 +25,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
       <div className='bg-background1'>
         <SessionProvider session={pageProps.session}>
-              <Component {...pageProps} />
+          <SpotifyContextProvider session={pageProps.session}>
+            <Component {...pageProps} />
+          </SpotifyContextProvider>
         </SessionProvider>
       </div>
     
