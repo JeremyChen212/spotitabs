@@ -6,6 +6,7 @@ import chakraTheme from '@chakra-ui/theme'
 import { extendTheme } from "@chakra-ui/react"
 import { SpotifyContextProvider } from '@component/context/SpotifyContext';
 
+
 const config = {
   initialColorMode: 'light',
   useSystemColorMode: false,
@@ -23,13 +24,11 @@ const theme = extendTheme({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-      <div className='bg-background1'>
-        <SessionProvider session={pageProps.session}>
-          <SpotifyContextProvider session={pageProps.session}>
-            <Component {...pageProps} />
-          </SpotifyContextProvider>
-        </SessionProvider>
-      </div>
+    <SessionProvider session={pageProps.session}>
+      <SpotifyContextProvider session={pageProps.session}>
+        <Component {...pageProps} />
+      </SpotifyContextProvider>
+    </SessionProvider>
     
   )
 }
