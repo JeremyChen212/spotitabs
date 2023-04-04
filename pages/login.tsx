@@ -1,7 +1,6 @@
-import { signIn } from "next-auth/react";
 import Image from "next/image";
-
-export default function Login() {
+import { getProviders, signIn } from "next-auth/react"
+export default function Login( { providers }) {
   const handleLogin = () => {
     signIn("spotify", { callbackUrl: "http://localhost:3000/" });
   };
@@ -15,12 +14,26 @@ export default function Login() {
           height={96}
           objectFit="contain"
         />
-        <button
-          className="flex px-12 py-2 text-lg text-white from-spotifygreen tracking-widest uppercase rounded-full focus:outline-none bg-spotifygreen hover:bg-opacity-50 transition-all"
-          onClick={handleLogin}
-        >
-          Login
-        </button>
+        {Object.values(providers).map((provider) => (
+          <div key={provider.name}>
+          <button
+            className="flex px-12 py-2 text-lg text-white from-spotifygreen tracking-widest uppercase rounded-full focus:outline-none bg-spotifygreen hover:bg-opacity-50 transition-all"
+            onClick={() => signIn(provider.id, { callbackUrl: "/"})}
+          >
+            Login
+          </button>
+          </div>
+        ))}
+        
       </div>
   );
+}
+
+export async function getServerSideProps() {
+  const providers = await getProviders();
+  return {
+    props: {
+      providers,
+    },
+  };
 }
