@@ -1,26 +1,35 @@
-import {useSession, signIn, signOut} from 'next-auth/react';
+import {useSession, signIn, signOut, } from 'next-auth/react';
+import { getSession, GetSessionParams } from 'next-auth/react'
 import { useRouter } from 'next/router';
 import { Container, Center, Image, Button } from '@chakra-ui/react'
 import * as Popover from '@radix-ui/react-popover';
 import SpotitabsLogo from '/public/Spotitabs_Logo.jpg'
 import PlaylistDashboard from '../components/PlaylistDashboard';
-import { getSession } from "next-auth/react";
 import { getUsersPlaylists } from '../lib/spotify'
 import { GetServerSideProps } from "next";
 import { useEffect } from 'react';
 import { useSpotify } from '../context/SpotifyContext'
 import { customGet } from '@component/utils/customGet';
+import axios from 'axios';
+import Loader from '../components/Loader'
 
-function Home( {} ) {
-  const {data: session} = useSession();
+function Home() {
+  const router = useRouter()
+  const {status, data: session} = useSession();
+  console.log(session)
+  const { accessToken } = session
+  if(status === "loading") {
+    console.log("loading")
+    return <Loader />
+  }
   const {status: loading} = useSession();
-  const router = useRouter();
 
   const handleLogin = () => {
     signIn("spotify", { callbackUrl: "http://localhost:3000/" });
   };
   
   useEffect(() => {
+    console.log(session)
     // Redirect to login page if session is expired or missing tokens
     if (!loading && (!session || !session.accessToken || !session.refreshToken)) {
       router.push('/login');
@@ -38,7 +47,7 @@ function Home( {} ) {
   if (session) {
     return (
       <div className="flex flex-col items-center justify-center gap-20 text-white">
-        Signed in as {session?.token?.email} <br />
+        Signed in as {session?.user?.email} <br />
         <button onClick={() => signOut()}>Sign out</button>
         <PlaylistDashboard ></PlaylistDashboard>
       </div>
@@ -58,6 +67,23 @@ function Home( {} ) {
     </Button>
   </div>
   )
+}
+
+export async function getServerSideProps(context: GetSessionParams | undefined) {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      session,
+    },
+  };
 }
 
 // export const getServerSideProps: GetServerSideProps = async (ctx) => {
