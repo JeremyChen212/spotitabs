@@ -9,15 +9,24 @@ import { getUsersPlaylists } from '../lib/spotify'
 
 function PlaylistDashboard() {
     const router = useRouter();
+    const { status, data: session } = useSession()
     const { playlists, fetchPlaylists } = useSpotify();
     const { playlistComponent, setPlaylistComponent } = useState();
-   
+    // const [playlists, setPlaylists] = useState();
+    const spotifyApi = useSpotify()
     useEffect(() => {
-      fetchPlaylists();
+        console.log(status)
+        if(session) {
+            console.log(session.accessToken)
+        }
+        fetchPlaylists()
       if(playlists) {
-        console.log(playlists)
       }
-    }, [playlists]);
+    }, []);
+
+    if (router.isFallback) {
+        return <div>Loading...</div>
+      }
     if(playlists !== undefined) {
     return (
         <div className={`grid transition-all grid-cols-1 gap-[1.5rem] max-w-[50rem] sm:grid-cols-3 ${styles.slideInLeft}`}>
@@ -37,7 +46,7 @@ function PlaylistDashboard() {
             loading...
         </div>
     }
-    }
+}
     
 
 export default PlaylistDashboard
