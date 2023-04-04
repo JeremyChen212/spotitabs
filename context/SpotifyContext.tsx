@@ -2,9 +2,12 @@ import  { Children, createContext, useState, useContext } from 'react'
 import axios from 'axios'
 import { PlaylistType, SearchResults } from '../types/types'
 import { useMemo } from "react"
+import { getUsersPlaylists } from '@component/lib/spotify'
+import {useSession} from 'next-auth/react'
 
 // These are the props that context will take in
 interface ContextProps {
+    accessToken: string,
   playlists: PlaylistType[],
   fetchPlaylists: () => void
   searchResults : SearchResults[],
@@ -22,13 +25,15 @@ export const SpotifyContextProvider = ({children}: any) => {
   const [playlists, setPlaylists] = useState<PlaylistType[]>([])
   const [searchResults, setSearchResults] = useState<SearchResults[]>([])
   const [spinner, setSpinner] = useState(true)
+  const {data: session} = useSession()
   function setSpinnerState(value) {
     setSpinner(value)
   }
   const fetchPlaylists = async() => {
+    console.log(session.accessToken)
     try {
-      const resp = await axios.get("/api/playlists")
-      const data = resp.data
+    const resp = await axios("/api/playlists");
+    const data = await resp.data;
       setPlaylists(data.items)
       setSpinner(false)
     } catch (err) {
@@ -48,6 +53,7 @@ export const SpotifyContextProvider = ({children}: any) => {
   return (
     <SpotifyContext.Provider 
       value={{
+        session,
         playlists, 
         fetchPlaylists,
         searchResults,
