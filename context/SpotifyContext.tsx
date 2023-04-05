@@ -1,7 +1,7 @@
 import  { Children, createContext, useState, useContext } from 'react'
 import axios from 'axios'
 import { PlaylistType, SearchResults } from '../types/types'
-import { useMemo } from "react"
+import { Dispatch, SetStateAction, useMemo } from "react"
 import { getUsersPlaylists } from '@component/lib/spotify'
 import {useSession} from 'next-auth/react'
 
@@ -13,7 +13,9 @@ interface ContextProps {
   searchResults : SearchResults[],
   fetchSearchResults: () => void,
   spinner: boolean,
-  setSpinnerState: any
+  setSpinnerState: any,
+  query: string,
+  setQuery: Dispatch<SetStateAction<string>>
 }
 
 
@@ -26,6 +28,8 @@ export const SpotifyContextProvider = ({children}: any) => {
   const [searchResults, setSearchResults] = useState<SearchResults[]>([])
   const [spinner, setSpinner] = useState(true)
   const {data: session} = useSession()
+  const [query, setQuery] = useState("");
+
   function setSpinnerState(value) {
     setSpinner(value)
   }
@@ -59,7 +63,9 @@ export const SpotifyContextProvider = ({children}: any) => {
         searchResults,
         fetchSearchResults,
         spinner,
-        setSpinnerState
+        setSpinnerState,
+        query,
+        setQuery
       }}>
       {children}
     </SpotifyContext.Provider>
