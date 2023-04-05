@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { useSpotify } from '../context/SpotifyContext'
 import { customGet } from '@component/utils/customGet';
 import axios from 'axios';
+import SearchInput from '@component/components/SearchInput';
 import Loader from '../components/Loader'
 
 function Home() {
@@ -49,6 +50,7 @@ function Home() {
       <div className="flex flex-col items-center justify-center gap-20 text-white">
         Signed in as {session?.user?.email} <br />
         <button onClick={() => signOut()}>Sign out</button>
+        <SearchInput ></SearchInput>
         <PlaylistDashboard ></PlaylistDashboard>
       </div>
     );
