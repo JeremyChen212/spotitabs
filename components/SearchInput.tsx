@@ -13,13 +13,13 @@ export default function SearchInput() {
 
   return (
     <form 
-      className="flex items-center px-3 py-1.5 max-[400px]:w-9 w-full max-w-[50rem] gap-3 bg-[#1d4e447b] rounded-full m-auto "
+      className="container flex items-center max-sm:w-fit px-3 py-2  w-full max-w-[50rem] gap-3 bg-[#1d4e447b] rounded-full m-auto "
       onSubmit={handleSubmit}
     >
       <IoSearchOutline className="text-2xl text-[#ffffff6e]" />
       <input 
        type="text"
-        className="flex-grow w-full text-sm font-semibold bg-transparent text-white focus:outline-none"
+        className="max-sm:hidden flex-grow w-full text-sm font-semibold bg-transparent text-white focus:outline-none"
         placeholder="Artists and songs"
         value={query}
         onChange={(e) => setQuery(e.target.value)}

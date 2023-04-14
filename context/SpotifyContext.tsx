@@ -15,7 +15,8 @@ interface ContextProps {
   spinner: boolean,
   setSpinnerState: any,
   query: string,
-  setQuery: Dispatch<SetStateAction<string>>
+  setQuery: Dispatch<SetStateAction<string>>,
+  mobileMenuOpen: boolean
 }
 
 
@@ -27,6 +28,7 @@ export const SpotifyContextProvider = ({children}: any) => {
   const [playlists, setPlaylists] = useState<PlaylistType[]>([])
   const [searchResults, setSearchResults] = useState<SearchResults[]>([])
   const [spinner, setSpinner] = useState(true)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const {data: session} = useSession()
   const [query, setQuery] = useState("");
 
@@ -40,6 +42,7 @@ export const SpotifyContextProvider = ({children}: any) => {
     const data = await resp.data;
       setPlaylists(data.items)
       setSpinner(false)
+      console.log("fetching playlists")
     } catch (err) {
       console.error(err)
     }
@@ -57,7 +60,6 @@ export const SpotifyContextProvider = ({children}: any) => {
   return (
     <SpotifyContext.Provider 
       value={{
-        session,
         playlists, 
         fetchPlaylists,
         searchResults,
@@ -65,7 +67,8 @@ export const SpotifyContextProvider = ({children}: any) => {
         spinner,
         setSpinnerState,
         query,
-        setQuery
+        setQuery,
+        mobileMenuOpen
       }}>
       {children}
     </SpotifyContext.Provider>

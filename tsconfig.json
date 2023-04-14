@@ -19,6 +19,6 @@
       "@component/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/spotify.js", "lib/spotify.js"],
   "exclude": ["node_modules"]
 }

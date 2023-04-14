@@ -8,7 +8,7 @@ export default function Login( { providers }) {
   return (
       <div className="flex flex-col items-center justify-center w-screen h-screen gap-20 bg-[background1]">
         <Image
-          src="/public/images/spotitabs_logo.png"
+          src="/images/Spotitabs_Logo.png"
           alt="spotify logo"
           width={320}
           height={96}

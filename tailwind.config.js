@@ -16,7 +16,14 @@ module.exports = {
         background2: '#499081',
         background3: '#0F3B33',
         spotifygreen: '#1BB954',
-      }
+      },
+      backgroundImage: {
+        'leafyshoe': "url('/public/images/shoebg.jpeg')",
+      },
+      screens: {
+        'xsm': '539px',
+        'xlg': '1234px'
+      },
     }
   },
   plugins: [],
