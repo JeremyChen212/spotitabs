@@ -7,7 +7,7 @@ import {useSession} from 'next-auth/react'
 
 // These are the props that context will take in
 interface ContextProps {
-    accessToken: string,
+  accessToken: string,
   playlists: PlaylistType[],
   fetchPlaylists: () => void
   searchResults : SearchResults[],
@@ -16,7 +16,12 @@ interface ContextProps {
   setSpinnerState: any,
   query: string,
   setQuery: Dispatch<SetStateAction<string>>,
-  mobileMenuOpen: boolean
+  mobileMenuOpen: boolean,
+  overlayTab: string,
+  setOverlayTab: Dispatch<SetStateAction<string>>,
+  currentPlaylist: PlaylistType[],
+  popupActive: boolean,
+  setPopupActive: Dispatch<SetStateAction<boolean>>
 }
 
 
@@ -31,7 +36,9 @@ export const SpotifyContextProvider = ({children}: any) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const {data: session} = useSession()
   const [query, setQuery] = useState("");
-
+  const [overlayTab, setOverlayTab] = useState("playlists")
+  const [popupActive, setPopupActive] = useState(false)
+  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>([])
   function setSpinnerState(value) {
     setSpinner(value)
   }
@@ -68,7 +75,12 @@ export const SpotifyContextProvider = ({children}: any) => {
         setSpinnerState,
         query,
         setQuery,
-        mobileMenuOpen
+        mobileMenuOpen,
+        overlayTab,
+        setOverlayTab,
+        currentPlaylist,
+        popupActive,
+        setPopupActive
       }}>
       {children}
     </SpotifyContext.Provider>
