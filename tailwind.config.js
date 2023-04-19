@@ -11,11 +11,20 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        'custom6': 'repeat(3, 1fr)'
+      },
       colors: {
-        background1: '#032A22',
-        background2: '#499081',
-        background3: '#0F3B33',
-        spotifygreen: '#1BB954',
+        // background1: '#032A22',
+        // background2: '#499081',
+        // background3: '#0F3B33',
+        // spotifygreen: '#1BB954',
+        bg1: '#212121',
+        bg2: '#262626',
+        bg3: '#A4FDD3',
+        textbg: '#393737',
+        textmain: '#FFFFFF',
+        textsec: "#A7A9B2",
       },
       backgroundImage: {
         'leafyshoe': "url('/public/images/shoebg.jpeg')",
