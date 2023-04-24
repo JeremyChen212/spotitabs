@@ -9,7 +9,7 @@ export default async function handler(
   const session = await getSession({ req });
 
   const playlists = await customGet(
-    "https://api.spotify.com/v1/me/playlists",
+    "https://api.spotify.com/v1/users/4b1nihkq46jxmxbmhh1in2ymx/playlists?offset=0&limit=50",
     session
   );
 

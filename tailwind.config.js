@@ -19,7 +19,7 @@ module.exports = {
         // background2: '#499081',
         // background3: '#0F3B33',
         // spotifygreen: '#1BB954',
-        bg1: '#212121',
+        bg1: '#1E1E1E',
         bg2: '#262626',
         bg3: '#A4FDD3',
         textbg: '#393737',

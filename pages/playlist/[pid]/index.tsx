@@ -13,12 +13,15 @@ export default function PlaylistPlayer({playlist}) {
     const router = useRouter()
     const { pid } = router.query
     const {overlayTab, setOverlayTab} = useSpotify();
+    const {popupActive, setPopupActive} = useSpotify();
     console.log(playlist.tracks.items[0])
     useEffect(() => {
       setOverlayTab("")
-    }, [pid])
+      setPopupActive(false)
+    }, [])
     return (
-      <div className={`max-w-[1800px] m-auto  mx-8 items-start h-fit flex flex-col text-white`}>
+      <div className={`max-w-[1800px] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
+        <MainOverlay></MainOverlay>
         <Navbar></Navbar>
         <div className="flex w-full gap-5">
           <div className="bg-bg2 rounded-md overflow-hidden max-w-md w-[50rem]">
@@ -54,7 +57,6 @@ export default function PlaylistPlayer({playlist}) {
         </div>
         {/* <YourPlaylists></YourPlaylists> */}
         {/* <SavedOverlay></SavedOverlay> */}
-        <MainOverlay></MainOverlay>
       </div>
     )
 }

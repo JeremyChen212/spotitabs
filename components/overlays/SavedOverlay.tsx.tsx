@@ -11,7 +11,7 @@ export default function SavedOverlay() {
     return(
         // <div className={`${overlayTab === "saved" && "scale-100"} absolute z-30 transition-all scale-0 w-full origin-top  right-0 h-fit bg-bg2`}>
             // <IoClose onClick={()=> {setOverlayTab("")}} className={`${router.pathname === "/home" && "hidden"} cursor-pointer text-3xl absolute top-16 left-16`}></IoClose>
-            <div className="mx-0.25 h-fit p-8 items-center flex flex-col gap-5 text-white">
+            <div className="mx-4 h-fit p-4 items-center flex flex-col gap-5 text-white">
                     <Heading className={"text-center w-full"} text={"Saved Songs"} />
                     <PlaylistDashboard ></PlaylistDashboard>
             </div>

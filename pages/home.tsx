@@ -17,13 +17,19 @@ import Navbar from '@component/components/Navbar';
 import Heading from '@component/components/Heading';
 import leafyshoe from "../public/images/shoebg.jpeg"
 import Image from 'next/image'
-
-
+import OverlayTab from '@component/components/OverlayTab';
+import YourPlaylists from '@component/components/overlays/YourPlaylists';
+import MainOverlay from '@component/components/overlays/MainOverlay'
 function Home({session}) {
   const router = useRouter()
   // const {status, data: session} = useSession();
   console.log(session)
   const { accessToken } = session
+  const {currentPlaylist} = useSpotify();
+  const {overlayTab, setOverlayTab} = useSpotify();
+  useEffect(() => {
+    // setOverlayTab("playlists")
+  })
   // if(status === "loading") {
   //   console.log("loading")
   //   return <Loader />
@@ -50,7 +56,7 @@ function Home({session}) {
 
   if (session) {
     return (
-      <div className={`mx-8 items-center flex flex-col gap-5 text-white`}>
+      <div className={`max-w-[1800px] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
           {/* <div
             className='z-0 brightness-50' 
             style={{
@@ -68,9 +74,13 @@ function Home({session}) {
               sizes="100vw"
             />
           </div> */}
+        <MainOverlay></MainOverlay>
+
         <Navbar></Navbar>
-        <Heading className={"z-10"} text={"My Playlists"} />
-        <PlaylistDashboard ></PlaylistDashboard>
+
+        {/* <Heading className={"z-10"} text={"My Playlists"} /> */}
+        {/* <PlaylistDashboard ></PlaylistDashboard> */}
+        {/* <YourPlaylists></YourPlaylists> */}
       </div>
     );
   } 
@@ -95,11 +105,12 @@ export async function getServerSideProps(context: GetSessionParams | undefined) 
   if (!session) {
     return {
       redirect: {
-        destination: "/",
+        destination: "/login",
         permanent: false,
       },
     };
   }
+  
   return {
     props: {
       session,

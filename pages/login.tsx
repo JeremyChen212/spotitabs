@@ -18,7 +18,7 @@ export default function Login( { providers }) {
           <div key={provider.name}>
           <button
             className="flex px-12 py-2 text-lg text-white from-spotifygreen tracking-widest uppercase rounded-full focus:outline-none bg-spotifygreen hover:bg-opacity-50 transition-all"
-            onClick={() => signIn(provider.id, { callbackUrl: "/"})}
+            onClick={() => mySignIn(provider.id, { callbackUrl: "/"})}
           >
             Login
           </button>

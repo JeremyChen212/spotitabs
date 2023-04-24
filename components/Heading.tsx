@@ -6,6 +6,6 @@ interface IProps {
 
 export default function Header({text, className} : IProps) {
     return (
-        <h1 className={`${className} text-2xl inline-block mb-4 font-semibold`}>{text}</h1>
+        <h1 className={`${className} text-2xl inline-block my-4 font-semibold`}>{text}</h1>
     )
 }

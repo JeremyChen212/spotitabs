@@ -6,8 +6,6 @@ import { useSpotify } from "../context/SpotifyContext";
 import styles from '../styles/Custom.module.css'
 import { getSession, useSession } from "next-auth/react";
 import { getUsersPlaylists } from '../lib/spotify'
-import 'react-loading-skeleton/dist/skeleton.css'
-import Skeleton from 'react-loading-skeleton'
 import Card from "./Card";
 import { SkeletonCard } from "./SkeletonCard";
 function PlaylistDashboard() {
@@ -32,7 +30,7 @@ function PlaylistDashboard() {
 
     if (spinner) {
         return (
-            <div className={`grid w-full md:px-0 transition-all grid-cols-1 gap-[1.5rem] max-w-[50rem] sm:grid-cols-4 `}>
+            <div className={`grid w-full md:px-0  transition-all gap-[1.5rem] max-w-[50rem] sm:grid-cols-4 grid-cols-1 `}>
                 {Array(skeletonCount).fill(<SkeletonCard />)}
             </div>
         )
@@ -40,7 +38,9 @@ function PlaylistDashboard() {
     if(playlists !== undefined) {
     return (
         <>
-        <div className={`grid transition-all grid-cols-1 gap-[1.5rem] max-w-[50rem] sm:grid-cols-4 `}>
+        <div 
+        // className={`grid transition-all grid-cols-1 gap-[1.5rem] xl:grid-cols-4 max-w-[50rem] lg:grid-cols-3 md:grid-cols-2 xl`}
+        className="flex h-[13rem] gap-4 overflow-x-scroll w-full">
             {playlists.map((playlist, index) => (
                 //         <Link key={playlist.id} href={`/playlist/${playlist.id}`}>
                 // <Link key={playlists.name} href={`/playlist/${playlist.id}`} >

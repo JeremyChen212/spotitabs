@@ -32,9 +32,9 @@ export default function Profile({session}) {
         return (
             <div className="relative group inline-block h-full">
                 <button 
-                    className="flex gap-2 items-center w-fit transition-all h-full py-1 pr-4 max-lg:p-0   bg-[#337264]  hover:opacity-80 rounded-full focus:outline-nonebg-[#1d4e447b]"
+                    className="flex gap-2 items-center w-fit transition-all h-fit py-1 pr-4 max-lg:p-0   bg-[#337264]  hover:opacity-80 rounded-full focus:outline-nonebg-[#1d4e447b]"
                     onClick={handleProfileClick}>
-                    <div className="imagecn overflow-hidden w-10 h-10 rounded-full  border-2 border-[#3C524E]">
+                    <div className="imagecn overflow-hidden w-10 h-10 rounded-full  border-2 border-bg1">
                         {session?.user?.image === undefined ? (
                             <IoPerson className="text-2xl m-auto" height="1em" width="1em"/>
                         ): 
@@ -42,14 +42,14 @@ export default function Profile({session}) {
                             <img className="" src={session.user.image} alt="" />
                         )}
                     </div>
-                    <span className="text-sm max-lg:hidden font-bold tracking-wide">
+                    <span className="text-sm hidden font-bold tracking-wide">
                         {session?.user?.name}
                     </span>
                 </button>
                 <ul 
                 // onMouseLeave={handleMouseEvent}
                     id={styles.dropdown}
-                    className={`bg-[#337263] mt-2 w-fit border-[#337263] rounded-sm transform scale-0 right-0 absolute transition duration-150 ease-in-out flex-column gap-2 p-3 origin-top-right min-w-fit items`}
+                    className={`bg-[#337263] mt-2 w-fit border-[#337263] rounded-sm transform scale-0 top-[3rem] right-0 absolute transition duration-150 ease-in-out flex-column gap-2 p-3 origin-top-right min-w-fit items`}
                 >
                     <li className="cursor-pointer whitespace-nowrap transition-all rounded-sm px-3 flex gap-2 items-center py-2 hover:bg-[#235147] w-full justify-start min-w-fit ">
                         <IoSettingsSharp className="text-xl text-[#ffffff6e]" />
