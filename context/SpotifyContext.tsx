@@ -21,7 +21,14 @@ interface ContextProps {
   setOverlayTab: Dispatch<SetStateAction<string>>,
   currentPlaylist: PlaylistType[],
   popupActive: boolean,
-  setPopupActive: Dispatch<SetStateAction<boolean>>
+  setPopupActive: Dispatch<SetStateAction<boolean>>,
+  menuOpen: boolean,
+  setMenuOpen: Dispatch<SetStateAction<boolean>>,
+  getStartedPlaylists: [],
+  topArtists: [],
+  fetchTopArtists: () => void,
+  topGenres: [],
+  getTopGenres: () => void
 }
 
 
@@ -39,20 +46,23 @@ export const SpotifyContextProvider = ({children}: any) => {
   const [overlayTab, setOverlayTab] = useState("playlists")
   const [popupActive, setPopupActive] = useState(false)
   const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>([])
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [getStartedPlaylists, setGetStartedPlaylists] = useState([])
+  const [topArtists, setTopArtists] = useState([])
+  const [topGenres, setTopGenres] = useState([])
   function setSpinnerState(value) {
     setSpinner(value)
   }
   const fetchPlaylists = async() => {
     console.log(session.accessToken)
-    try {
-    const resp = await axios("/api/playlists");
-    const data = await resp.data;
-      setPlaylists(data.items)
+    if (session) {
+      const response = await fetch("/api/playlists");
+      const data = await response.json();
+      const playlists = data.playlists;
+      setPlaylists(playlists);
       setSpinner(false)
-      console.log("fetching playlists")
-    } catch (err) {
-      console.error(err)
     }
+    console.log(playlists)
   }
   const fetchSearchResults = async() => {
     try {
@@ -63,7 +73,48 @@ export const SpotifyContextProvider = ({children}: any) => {
       console.log(err)
     }
   }
-  
+  const fetchTopArtists = async() => {
+    try {
+      const resp = await axios.get("/api/topartists")
+      const data = resp.data
+      console.log(topArtists)
+      setTopArtists(data.topArtists)
+    } catch (err) { 
+      console.log(err)
+    }
+  }
+  const getTopGenres = async() => {
+    console.log(topArtists)
+    const genresOfTopArtsts = [];
+    // GET GENRES OF TOP ARTISTS
+    for(let index = 0; index < topArtists.length; index++) {
+      console.log(topArtists[index])
+      for(let secIndex = 0; secIndex < topArtists[index].genres.length; secIndex++) {
+        console.log(topArtists[index].genres[secIndex])
+        genresOfTopArtsts.push(topArtists[index].genres[secIndex])
+      }
+    }
+    const countOccurrences = (arr) =>
+    arr.reduce((acc, curr) => {
+      if (!acc[curr]) {
+        acc[curr] = 1;
+      } else {
+        acc[curr] += 1;
+      }
+      return acc;
+    }, {});
+    const occurrences = countOccurrences(genresOfTopArtsts);
+    console.log(occurrences)
+    console.log(genresOfTopArtsts)
+    const top100 = Object.keys(occurrences)
+    .sort((a, b) => occurrences[b] - occurrences[a])
+    .slice(0, 100);
+    console.log(top100)
+    setTopGenres(top100)
+  }
+
+
+
   return (
     <SpotifyContext.Provider 
       value={{
@@ -80,7 +131,13 @@ export const SpotifyContextProvider = ({children}: any) => {
         setOverlayTab,
         currentPlaylist,
         popupActive,
-        setPopupActive
+        setPopupActive,
+        menuOpen,
+        setMenuOpen,
+        topArtists,
+        fetchTopArtists,
+        topGenres, 
+        getTopGenres
       }}>
       {children}
     </SpotifyContext.Provider>

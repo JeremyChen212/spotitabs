@@ -30,9 +30,9 @@ export default function Profile({session}) {
     };
     if(session) {
         return (
-            <div className="relative group inline-block h-full">
+            <div className="relative group inline-block h-full ">
                 <button 
-                    className="flex gap-2 items-center w-fit transition-all h-fit py-1 pr-4 max-lg:p-0   bg-[#337264]  hover:opacity-80 rounded-full focus:outline-nonebg-[#1d4e447b]"
+                    className="flex gap-2 z-40 curor-pointer items-center w-fit transition-all h-fit py-1 pr-4 max-lg:p-0   bg-[#337264]  hover:opacity-80 rounded-full focus:outline-nonebg-[#1d4e447b]"
                     onClick={handleProfileClick}>
                     <div className="imagecn overflow-hidden w-10 h-10 rounded-full  border-2 border-bg1">
                         {session?.user?.image === undefined ? (
@@ -47,7 +47,7 @@ export default function Profile({session}) {
                     </span>
                 </button>
                 <ul 
-                // onMouseLeave={handleMouseEvent}
+                onMouseLeave={handleMouseEvent}
                     id={styles.dropdown}
                     className={`bg-[#337263] mt-2 w-fit border-[#337263] rounded-sm transform scale-0 top-[3rem] right-0 absolute transition duration-150 ease-in-out flex-column gap-2 p-3 origin-top-right min-w-fit items`}
                 >

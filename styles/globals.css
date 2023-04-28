@@ -88,14 +88,14 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: bg1;
+  background-color: #1E1E1E;
   min-height: 100vh;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   /* background-color: #032a22; */
-  background-color: #212121;
+  background-color: #1E1E1E;
   /* background: linear-gradient(
       to bottom,
       transparent,
@@ -145,9 +145,9 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   border: none;
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: rgb(28, 23, 23);
   -webkit-box-shadow: none;
-  caret-color: white;
+  caret-color: rgb(56, 39, 39);
   transition: background-color 5000s ease-in-out 0s;
 }
 

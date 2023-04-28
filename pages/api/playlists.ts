@@ -7,11 +7,22 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const session = await getSession({ req });
+  if (!session) {
+    res.status(401).send("Unauthorized");
+    return;
+  }
 
-  const playlists = await customGet(
-    "https://api.spotify.com/v1/users/4b1nihkq46jxmxbmhh1in2ymx/playlists?offset=0&limit=50",
-    session
-  );
+  const accessToken = session.accessToken;
 
-  res.status(200).json(playlists);
+  const response = await fetch("https://api.spotify.com/v1/me/playlists", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  const data = await response.json();
+  const playlists = data.items;
+
+  res.status(200).json({ playlists });
 }
+

@@ -8,15 +8,14 @@ import SavedOverlay from "./SavedOverlay.tsx"
 import SearchOverlay from "./SearchOverlay"
 import Icon from '../reusable/Icon'
 export default function PopupZoom({active}) {
-    const searchInput = useRef(null)
-    const [searchQuery, setSearchQuery] = useState("")
+    
     const {popupActive, setPopupActive}= useSpotify()
     const {overlayTab, setOverlayTab} = useSpotify();
     var fired = false;
     const handleKeyDown = (event) => {
         if(event.metaKey && event.key == "k") {
             setPopupActive(!popupActive)
-            setSearchQuery("")
+            // setSearchQuery("")
             // if(popupActive === true) {
             //     setOverlayTab("search")
             // }
@@ -27,22 +26,23 @@ export default function PopupZoom({active}) {
         console.log(overlayTab)
         // If clicked outside div...close popup
         document.addEventListener("mousedown", function(e) {
-            if (!document.getElementById('zoomContainer').contains(e.target)){
+            if (!document.getElementById('zoomContainer').contains(e.target) && !document.getElementById('toolbar').contains(e.target)){
                 setPopupActive(false)
+                console.log(document.getElementById('toolbar'))
             } 
         })
         let searchInput = document.getElementById("searchInput")
         // If popup not open...OPEN popup
         if(!popupActive) {
-            searchInput.blur();
-            document.addEventListener("keydown", handleKeyDown)
-            return () => document.removeEventListener("keydown", handleKeyDown)
+            // searchInput.blur();
+            document.addEventListener("keypress", handleKeyDown)
+            return () => document.removeEventListener("keypress", handleKeyDown)
         } else {
         // If popup open...CLOSE popup
-            setSearchQuery('')
-            searchInput.focus()
-            document.addEventListener("keydown", handleKeyDown)
-            return () => document.removeEventListener("keydown", handleKeyDown)
+            // setSearchQuery('')
+            // searchInput.focus()
+            document.addEventListener("keypress", handleKeyDown)
+            return () => document.removeEventListener("keypress", handleKeyDown)
         }
     }, [popupActive])
     function checkActiveTab(tab) {
@@ -59,22 +59,13 @@ export default function PopupZoom({active}) {
         console.log(overlayTab)
     }
     return (
-        <div id="overlayParent" className="fixed left-0 top-0 h-full w-full m-auto text-center pointer-events-none z-30">
-            <div id="zoomContainer" className={`scale-50 z-30 opacity-0 fixed left-[50%] rounded-md overflow-hidden translate-x-[-50%] lg:max-w-[50%] sm:w-[70%] sm:h-[80%] w-[100%] h-[100%] top-[50%] translate-y-[-50%] text-white bg-[#8c8a8a52] pointer-events-none backdrop-blur-[50px] origin-center  ${!popupActive ? "zoomContainerClose" : "zoomContainerOpen"} `}>
+        <div id="overlayParent" className={`${popupActive ? "bg-[#0b0b0bb2]" : ""} transition-all fixed left-0 top-0 h-full w-full m-auto text-center pointer-events-none z-30`}>
+            <div id="zoomContainer" className={`scale-50 z-30 opacity-0 fixed left-[50%] rounded-md overflow-hidden translate-x-[-50%]  sm:w-[80%] sm:h-[80%] w-full max-w-[1550px] h-[100%] top-[50%] translate-y-[-50%] text-white bg-[#232428] pointer-events-none backdrop-blur-[50px] origin-center  ${!popupActive ? "zoomContainerClose" : "zoomContainerOpen"} `}>
                 <p className="hidden">e</p>
-                <div className="fixed top-2 z-8 w-full">
-                    <div className="flex px-8 left-8 top-4 gap-3 w-fit h-[1.5rem]">
-                            <Icon popupActive={popupActive}  onClickFunc={() => setPopupActive(false)}  icon={"/images/MinimizeIcon.svg"} myClass={"mr-6"}></Icon>
-                            {/* <Icon active={false}
-                        icon={"/images/HomeIcon.svg"}></Icon> */}
-                            {/* <Icon popupActive={popupActive} active={checkActiveTab("search")} onClickFunc={() => showTab("search")}  icon={"/images/SearchIcon.svg"}></Icon>
-                            <Icon popupActive={popupActive} active={checkActiveTab("playlists")} onClickFunc={() => showTab("playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
-                            <Icon popupActive={popupActive} active={checkActiveTab("saved")} onClickFunc={() => showTab("saved")} icon={"/images/SaveIcon.svg"}></Icon> */}
-                    </div>
-                    <input id="searchInput" type="text" onChange={e => setSearchQuery(e.target.value)} value={searchQuery} className="outline-none bg-[#ffffff00] w-full p-8" placeholder="Type a song"/>
-                    <hr className="opacity-20 z-3"/>
+                <div className="w-fit">
+                    <Icon popupActive={popupActive}  onClickFunc={() => setPopupActive(false)}  icon={"/images/CloseIcon.svg"} myClass={"w-fit m-5 h-[2.1rem]"}></Icon>
                 </div>
-                <div className="mt-[8.04rem] z-1 overflow-hidden h-full">
+                <div className="z-1 overflow-hidden h-full">
                 {overlayTab === "playlists" && <YourPlaylists></YourPlaylists>}
                 {overlayTab === "saved" && <SavedOverlay></SavedOverlay> }
                 {overlayTab === "search" && <SearchOverlay></SearchOverlay>}

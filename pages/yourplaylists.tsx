@@ -74,10 +74,6 @@ import OverlayTab from '@component/components/OverlayTab';
 import YourPlaylists from '@component/components/overlays/YourPlaylists';
 import MainOverlay from '@component/components/overlays/MainOverlay'
 import Icon from '@component/components/reusable/Icon';
-import Toolbar from '@component/components/Toolbar'
-import PlaylistCard from '../components/reusable/PlaylistCard';
-import Searchbar from '@component/components/Searchbar';
-import GetStarted from '@component/components/ExplorePage/GetStarted';
 
 function Home({session}) {
   const router = useRouter()
@@ -129,7 +125,7 @@ function Home({session}) {
 
   if (session) {
     return (
-      <div className={`min-h-[100vh] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
+      <div className={`max-w-[1800px] min-h-[100vh] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
           {/* <div
             className='z-0 brightness-50' 
             style={{
@@ -149,61 +145,9 @@ function Home({session}) {
           </div> */}
           <MainOverlay></MainOverlay>
           <Navbar></Navbar>
-          <Toolbar></Toolbar>
-          <div className='px-5 w-full'>
-            <Searchbar></Searchbar>
-            <div>
-              <Heading text={"Get Started"}></Heading>
-              <GetStarted></GetStarted>
-              <PlaylistCard playlistImage={'https://mosaic.scdn.co/640/ab67616d0000b273795e7069de7cb188b7c821b4ab67616d0000b2738940ac99f49e44f59e6f7fb3ab67616d0000b2738b52c6b9bc4e43d873869699ab67616d0000b273aa95a399fd30fbb4f6f59fca'}
-              playlistTitle={"R&B Mix"} artistPreview={"Jordan Ward, Bruno Major, and more"}></PlaylistCard>
-            </div>
+          <div className='text-center h-fit mx-auto w-full m-auto sm:w-fit'>
+            <Heading text={'Your Playlists'}></Heading>
           </div>
-          {/* <SearchInput></SearchInput> */}
-          
-          {/* <div className='text-center h-fit mx-auto w-full m-auto sm:w-fit'>
-            <Heading text={'Open Control Menu'}></Heading>
-            <p className="opacity-70 mb-[2rem]"></p>
-            <div className='w-full pointer-events-none  h-fit border p-10'>
-              <p>Open the control menu with this command:</p>
-              <div className='flex gap-6 user-select-none h-20 w-fit mt-8 m-auto'>
-                <div className={`${commandDown ? "bg-bg3 " : "border-2"} transition-all  relative h-full w-[7rem] rounded-md`}>
-                  <Image 
-                  className={`${commandDown ? "brightness-0" : "text-white"} transition-all user-select-none absolute w-fit top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] h-fit`}
-                  src={'/images/CommandIcon.svg'}
-                  alt="Command Icon"
-                  width={40}
-                  height={40}
-                  objectFit="contain"
-                  /> 
-                </div>
-                <div className={`${jDown ? "bg-bg3 " : "border-2"} transition-all border-2 relative h-full w-20 rounded-md`}>
-                  <Image 
-                  className={`${jDown ? "brightness-0" : "text-white"} transition-all absolute w-fit top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] h-fit`}
-                  src={'/images/KIcon.svg'}
-                  alt="Command Icon"
-                  width={20}
-                  height={20}
-                  objectFit="contain"
-                  /> 
-                </div>
-              </div>
-            </div>
-            <p className='my-4 opacity-70'>OR</p>
-            <div className='w-full h-fit border p-10'>
-              <p>Open the control menu with top-left icons:</p>
-              <div className='flex gap-6  h-fit w-fit mt-8 m-auto'>
-                  <Image 
-                  className='w-40 h-fit'
-                  src={'/images/NavbarScreenshot.svg'}
-                  alt="Command Icon"
-                  width={200}
-                  height={200}
-                  objectFit="contain"
-                  /> 
-              </div>
-            </div>
-          </div> */}
           {/* <div className='text-center h-fit mx-auto w-full m-auto sm:w-fit'>
             <Heading text={'Open Control Menu'}></Heading>
             <p className="opacity-70 mb-[2rem]">Use the control menu to select a playlist or song to follow along.</p>
