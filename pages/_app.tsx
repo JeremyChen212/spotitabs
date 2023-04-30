@@ -5,6 +5,8 @@ import { ChakraProvider, extendBaseTheme } from '@chakra-ui/react'
 import chakraTheme from '@chakra-ui/theme'
 import { extendTheme } from "@chakra-ui/react"
 import { SpotifyContextProvider } from '@component/context/SpotifyContext';
+import axios from 'axios';
+import { getSession, GetSessionParams } from 'next-auth/react'
 
 
 const config = {
@@ -20,6 +22,8 @@ const theme = extendTheme({
     }),
   },
 });
+
+
 
 
 export default function App({ Component, pageProps }: AppProps) {

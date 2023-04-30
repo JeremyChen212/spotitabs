@@ -23,7 +23,7 @@ export default async function handler(
   
     const data = await response.json();
     const topArtists = data.items;
-    console.log(topArtists)
+    // console.log(topArtists)
     res.status(200).json({ topArtists });
   }
   

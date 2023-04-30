@@ -79,23 +79,7 @@ function Explore({session, serverGetStartedPlaylists}) {
           <MainOverlay></MainOverlay>
           <Navbar></Navbar>
           <Toolbar></Toolbar>
-          <div className='px-5 w-full'>
-            <Searchbar></Searchbar>
-                
-                <PlaylistSection items={serverGetStartedPlaylists} title={"Get Started"}></PlaylistSection>
-                <PlaylistSection items={playlists} title={"Your playlists"} showAll={"playlist"}></PlaylistSection>
-                {/* {getStartedPlaylists.map((playlist, index)=>(
-                    // <PlaylistCard key={playlist.id} playlistImage={playlist?.images?.[0]?.url} playlistTitle={playlist.name} preview={playlist?.description}></PlaylistCard>
-                    <PlaylistCard key={playlist.id} playlist={playlist} ></PlaylistCard>
-                ))} */}
-
-            {/* <p>TASKS: 
-                <br /> Create a function to search chatgpt: "out of these genres what are the most chord and guitar heavy: [topGenres]". 
-               <br /> Store that into a new usestate variable.
-               <br />  Then randomly pick one of those and search spotify for a playlist for that (EG: search spotify for "indie soul" + guitar) and get top playlist.
-               <br /> Display that in for you section</p> */}
-          </div>
-         
+        <PlaylistDashboard></PlaylistDashboard>
       </div>
     );
   } 

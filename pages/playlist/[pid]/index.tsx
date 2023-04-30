@@ -21,7 +21,7 @@ export default function PlaylistPlayer({playlist}) {
     }, [])
     return (
       <div className={`max-w-[1800px] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
-        <MainOverlay></MainOverlay>
+        {/* <MainOverlay></MainOverlay> */}
         <Navbar></Navbar>
         <div className="flex w-full gap-5">
           <div className="bg-bg2 rounded-md overflow-hidden max-w-md w-[50rem]">

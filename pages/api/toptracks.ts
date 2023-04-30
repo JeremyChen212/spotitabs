@@ -2,6 +2,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import { customGet } from "../../utils/customGet";
 
+
+
+
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
@@ -24,6 +27,7 @@ export default async function handler(
     const data = await response.json();
     const topArtists = data.items;
     console.log(topArtists)
+
     res.status(200).json({ topArtists });
   }
   

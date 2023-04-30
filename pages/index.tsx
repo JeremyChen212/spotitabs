@@ -77,7 +77,7 @@ import Icon from '@component/components/reusable/Icon';
 import Toolbar from '@component/components/Toolbar'
 import PlaylistCard from '../components/reusable/PlaylistCard';
 import Searchbar from '@component/components/Searchbar';
-import GetStarted from '@component/components/ExplorePage/GetStarted';
+import GetStarted from '@component/components/ExplorePage/PlaylistSection';
 
 function Home({session}) {
   const router = useRouter()

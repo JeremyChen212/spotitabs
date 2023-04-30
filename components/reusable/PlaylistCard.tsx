@@ -1,18 +1,42 @@
 import React from "react";
 import Image from "next/image";
+import Link from 'next/Link'
+import { useState } from "react";
+const PlaylistCard = ({ playlist }) => {
+  // Get all the <a> tags on the page
+  var parse = require('html-react-parser');
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-const PlaylistCard = ({ playlistImage, playlistTitle, artistPreview }) => {
+  const handleLoadComplete = () => {
+    setIsLoading(false);
+  };
+
+  const regex = /(<([^>]+)>)/ig;
+  const playlistDescription = playlist?.description.replace(regex, "");
+
   return (
-    <div className="flex bg-[#282828] rounded-lg p-4 w-80 mb-4">
-      <div className="flex-none mr-4">
-        <Image loader={() => playlistImage} src={playlistImage} width={"120"} height={"120"} alt="Song Image" className="rounded-lg" />
-      </div>
-      <div className="flex-grow">
-        <h2 className="text-xl font-semibold mb-2">{playlistTitle}</h2>
-        <p className="text-[#A9A9A9]">{artistPreview}</p>
-      </div>
-    </div>
-  );
+    <>
+     <Link href={`/playlist/${playlist.id}`} className="flex cursor-pointer hover:scale-[1.01] transition-all grid-cols-3 bg-[#282828] p-4 rounded-lg h-[9rem] overflow-hidden min-w-[20rem] w-full  gap-4">
+       <div className="h-[7rem] w-[7rem] rounded-lg bg-[#343333] overflow-hidden">
+         <Image  onLoadingComplete={handleLoadComplete}
+ loader={() => playlist?.images?.[0]?.url} src={playlist?.images?.[0]?.url} width={"120"} height={"120"} alt="Song Image" className="h-full  w-full object-cover" />
+       </div> 
+       <div className="w-full max-w-10 flex-1">
+         <h2 className="text-lg font-semibold mb-2 w-full line-clamp-2 text-ellipse">{playlist.name}</h2>
+         {playlist?.description ? (
+            <div className="text-[#A9A9A9]  w-full max-w-full pointer-events-none line-clamp-2 text-ellipse">
+              {playlistDescription}
+            </div>
+          ) : (
+            <div className="text-[#A9A9A9] pointer-events-none line-clamp-2 text-ellipse">
+              by {playlist?.owner.display_name}
+            </div>
+          )}
+       </div>
+     </Link>
+    </>
+  )
 };
 
 export default PlaylistCard;
