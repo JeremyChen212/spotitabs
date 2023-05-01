@@ -86,9 +86,8 @@ function Explore({session, serverGetStartedPlaylists, myGlobalVar}) {
           <Toolbar></Toolbar>
           <div className='px-5 w-full'>
             <Searchbar></Searchbar>
-                
                 <PlaylistSection items={getStartedPlaylists} title={"Get Started"}></PlaylistSection>
-                <PlaylistSection items={playlists} title={"Your playlists"} showAll={"playlist"}></PlaylistSection>
+                <PlaylistSection items={playlists} title={"Your playlists"} showAll={"playlists"}></PlaylistSection>
                 {/* {getStartedPlaylists.map((playlist, index)=>(
                     // <PlaylistCard key={playlist.id} playlistImage={playlist?.images?.[0]?.url} playlistTitle={playlist.name} preview={playlist?.description}></PlaylistCard>
                     <PlaylistCard key={playlist.id} playlist={playlist} ></PlaylistCard>
