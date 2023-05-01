@@ -33,7 +33,7 @@ function PlaylistSection({items, playlist, title, showAll}) {
             <div className="flex items-center justify-between">
                 <Heading text={title}></Heading>
                 {showAll !== undefined && (
-                    <Link className="opacity-70 font-medium" href={showAll}>Show all</Link>
+                    <Link className="opacity-70 font-medium hover:underline" href={showAll}>Show all</Link>
                 )}
             </div>
             
