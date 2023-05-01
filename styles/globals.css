@@ -123,7 +123,7 @@ a:hover {
   pointer-events: none;
 }
 #searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.581);
+  color: rgba(23, 23, 23, 0.785);
 }
 .zoomContainerOpen {
   pointer-events: all;

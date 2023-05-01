@@ -74,7 +74,7 @@ function Home({session}) {
               sizes="100vw"
             />
           </div> */}
-        <MainOverlay></MainOverlay>
+        {/* <MainOverlay></MainOverlay> */}
 
         <Navbar></Navbar>
 
