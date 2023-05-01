@@ -29,7 +29,7 @@ function PlaylistSection({items, playlist, title, showAll}) {
     //   }
     if(items.length > 0) {
         return (
-        <div className="w-full h-fit relative">
+        <div className="w-full h-fit relative pb-10">
             <div className="flex items-center justify-between">
                 <Heading text={title}></Heading>
                 {showAll !== undefined && (

@@ -26,6 +26,7 @@ import PlaylistCard from '../components/reusable/PlaylistCard';
 import Searchbar from '@component/components/Searchbar';
 import PlaylistSection from '@component/components/ExplorePage/PlaylistSection';
 import SpotifyWebApi from "spotify-web-api-js";
+import { PlaylistType, SearchResults } from '../types/types'
 
 
 async function getRecomendedPlaylistBasedOnGenre(topGenres) {
@@ -41,21 +42,24 @@ async function getRecomendedPlaylistBasedOnGenre(topGenres) {
 }
 
 
-function Explore({session, serverGetStartedPlaylists}) {
+function Explore({session, serverGetStartedPlaylists, myGlobalVar}) {
     const router = useRouter()
     // const {status, data: session} = useSession();
     console.log(session)
     const { accessToken } = session
     const {currentPlaylist} = useSpotify();
     const {overlayTab, setOverlayTab} = useSpotify();
-    const {playlists, fetchPlaylists, topArtists, fetchTopArtists, topGenres, getTopGenres, getStartedPlaylists, fetchGetStartedPlaylists} = useSpotify();
+    const {playlists, fetchPlaylists, test, topArtists, fetchTopArtists, topGenres, getTopGenres, getStartedPlaylists, setGetStartedPlaylists} = useSpotify();
+    
     const {status: loading} = useSession();
     useEffect(() => {
         if (topArtists.length === 0) {
             fetchTopArtists()
             console.log(topArtists.length)
         }
+        console.log(myGlobalVar)
         fetchPlaylists()
+        console.log(test)
     }, []);
     useEffect(()=>{
         console.log(getStartedPlaylists.length)
@@ -64,6 +68,7 @@ function Explore({session, serverGetStartedPlaylists}) {
         }
         console.log(getStartedPlaylists)
         console.log(getStartedPlaylists[1]?.description)
+        setGetStartedPlaylists(serverGetStartedPlaylists)
     }, [getStartedPlaylists])
     useEffect (() => {
         if(topGenres.length === 0) {
@@ -76,13 +81,13 @@ function Explore({session, serverGetStartedPlaylists}) {
   if (session) {
     return (
       <div className={`min-h-[100vh] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
-          <MainOverlay></MainOverlay>
+          {/* <MainOverlay></MainOverlay> */}
           <Navbar></Navbar>
           <Toolbar></Toolbar>
           <div className='px-5 w-full'>
             <Searchbar></Searchbar>
                 
-                <PlaylistSection items={serverGetStartedPlaylists} title={"Get Started"}></PlaylistSection>
+                <PlaylistSection items={getStartedPlaylists} title={"Get Started"}></PlaylistSection>
                 <PlaylistSection items={playlists} title={"Your playlists"} showAll={"playlist"}></PlaylistSection>
                 {/* {getStartedPlaylists.map((playlist, index)=>(
                     // <PlaylistCard key={playlist.id} playlistImage={playlist?.images?.[0]?.url} playlistTitle={playlist.name} preview={playlist?.description}></PlaylistCard>
@@ -111,14 +116,14 @@ export async function getServerSideProps(context: GetSessionParams | undefined) 
       },
     };
   } 
-  let serverGetStartedPlaylists = []
-  const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "2CtbFy5I7LxvXk3pqk77AO", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
+  let serverGetStartedPlaylists:PlaylistType[] = [];
+  const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
   if(session) {
     try {
       const responses = await Promise.all(playlistsIds.map(playlistId =>
         axios({
           method: 'get',
-          url: `https://api.spotify.com/v1/playlists/${playlistId}`,
+          url: `https://api.spotify.com/v1/playlists/${playlistId}?fields=description%2C+name%2C+id%2C+owner%2C+images`,
           headers: {
             Authorization: `Bearer ${session.accessToken}`,
           }
@@ -129,7 +134,7 @@ export async function getServerSideProps(context: GetSessionParams | undefined) 
         console.log(error);
         }
     };
-
+    console.log("fetching get started playlists")
     return {
       props: {
         session,

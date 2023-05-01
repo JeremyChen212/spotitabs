@@ -147,7 +147,7 @@ function Home({session}) {
               sizes="100vw"
             />
           </div> */}
-          <MainOverlay></MainOverlay>
+          {/* <MainOverlay></MainOverlay> */}
           <Navbar></Navbar>
           <Toolbar></Toolbar>
           <div className='px-5 w-full'>

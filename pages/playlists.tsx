@@ -19,7 +19,6 @@ import leafyshoe from "../public/images/shoebg.jpeg"
 import Image from 'next/image'
 import OverlayTab from '@component/components/OverlayTab';
 import YourPlaylists from '@component/components/overlays/YourPlaylists';
-import MainOverlay from '@component/components/overlays/MainOverlay'
 import Icon from '@component/components/reusable/Icon';
 import Toolbar from '@component/components/Toolbar'
 import PlaylistCard from '../components/reusable/PlaylistCard';
@@ -76,7 +75,7 @@ function Explore({session, serverGetStartedPlaylists}) {
   if (session) {
     return (
       <div className={`min-h-[100vh] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
-          <MainOverlay></MainOverlay>
+          {/* <MainOverlay></MainOverlay> */}
           <Navbar></Navbar>
           <Toolbar></Toolbar>
         <PlaylistDashboard></PlaylistDashboard>

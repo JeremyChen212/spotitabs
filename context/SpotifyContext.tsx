@@ -6,7 +6,7 @@ import { getUsersPlaylists } from '@component/lib/spotify'
 import {useSession} from 'next-auth/react'
 import { useEffect } from 'react'
 import { customGet } from '@component/utils/customGet'
-
+import getSession from 'next-auth'
 
 
 // These are the props that context will take in
@@ -29,18 +29,21 @@ interface ContextProps {
   menuOpen: boolean,
   setMenuOpen: Dispatch<SetStateAction<boolean>>,
   getStartedPlaylists: any[],
-  fetchGetStartedPlaylists: () => void,
+  setGetStartedPlaylists: () => void,
   topArtists: [],
   fetchTopArtists: () => void,
   topGenres: [],
   getTopGenres: () => void,
+  test: null
 }
+
+
 
 
 const SpotifyContext = createContext({} as ContextProps)
 
 // CREATES A CONTEXT PROVIDER WITH ALL THE SPOTIFY FUNCTIONS (THE CHILDREN)
-export const SpotifyContextProvider = ({children}: any) => {
+export default function SpotifyContextProvider ({children, test}: any)  {
   // THESE ARE THE VALUES PASSING INTO CONTEXT
   const [playlists, setPlaylists] = useState<PlaylistType[]>([])
   const [searchResults, setSearchResults] = useState<SearchResults[]>([])
@@ -171,8 +174,7 @@ export const SpotifyContextProvider = ({children}: any) => {
     }
     console.log(getStartedPlaylists)    
   }
-
-
+  console.log(test)
 
   return (
     <SpotifyContext.Provider 
@@ -194,10 +196,12 @@ export const SpotifyContextProvider = ({children}: any) => {
         menuOpen,
         setMenuOpen,
         getStartedPlaylists,
+        setGetStartedPlaylists,
         topArtists,
         fetchTopArtists,
         topGenres, 
-        getTopGenres
+        getTopGenres,
+        test
       }}>
       {children}
     </SpotifyContext.Provider>
@@ -205,4 +209,7 @@ export const SpotifyContextProvider = ({children}: any) => {
 }
 
 
+
+
 export const useSpotify = () => useContext(SpotifyContext);
+

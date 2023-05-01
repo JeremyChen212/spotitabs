@@ -143,7 +143,7 @@ function Home({session}) {
               sizes="100vw"
             />
           </div> */}
-          <MainOverlay></MainOverlay>
+          {/* <MainOverlay></MainOverlay> */}
           <Navbar></Navbar>
           <div className='text-center h-fit mx-auto w-full m-auto sm:w-fit'>
             <Heading text={'Your Playlists'}></Heading>
