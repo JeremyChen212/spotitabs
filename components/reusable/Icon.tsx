@@ -12,7 +12,7 @@ export default function Icon({icon, type, active, onClickFunc, myClass, imgClass
         onClick={
             onClickFunc
         }>
-<button className={` ${myClass}  ${active && popupActive ? "opacity-100" : "opacity-50 hover:opacity-80 "} pointer-events-auto h-full block cursor-pointer active:scale-90 `}
+<button className={` ${myClass}  ${active ? "opacity-100" : "opacity-50 hover:opacity-80 "} pointer-events-auto h-full block cursor-pointer active:scale-90 `}
           >
             {type === "icon" ? (
                 <div>

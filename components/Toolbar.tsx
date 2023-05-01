@@ -40,7 +40,8 @@ export default function Navbar() {
     }
 
     function checkActiveTab(tab) {
-        if (tab === overlayTab) {
+        console.log(router.asPath)
+        if (router.asPath === "/" + tab) {
             return true
         }else {
             return false
@@ -59,9 +60,9 @@ export default function Navbar() {
             <div id="toolbar" className="flex gap-3 w-fit h-fit z-50 pointer-events-auto">
                 {/* <Icon active={checkPage("/playlist")}
                 icon={"/images/HomeIcon.svg"}></Icon> */}
-                <Icon popupActive={popupActive} active={checkActiveTab("search")} onClickFunc={() => showTab("search")}  icon={"/images/SearchIcon.svg"}></Icon>
-                <Icon popupActive={popupActive} active={checkActiveTab("playlists")} onClickFunc={() => showTab("playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
-                <Icon popupActive={popupActive} active={checkActiveTab("saved")} onClickFunc={() => showTab("saved")} icon={"/images/SaveIcon.svg"}></Icon>
+                <Icon popupActive={popupActive} active={checkActiveTab("explore")} onClickFunc={() => router.push("/explore")}  icon={"/images/SearchIcon.svg"}></Icon>
+                <Icon popupActive={popupActive} active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
+                <Icon popupActive={popupActive} active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
             </div>
         </div>
         

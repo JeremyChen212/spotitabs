@@ -279,7 +279,14 @@ export async function getServerSideProps(context: GetSessionParams | undefined) 
         permanent: false,
       },
     };
-  } 
+  }  else {
+    return {
+      redirect: {
+        destination: "/explore",
+        permanent: false,
+      },
+    };
+  }
   
   return {
     props: {
