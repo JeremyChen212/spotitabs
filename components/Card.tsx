@@ -1,6 +1,5 @@
-import Link from "next/link"
-import styles from '../styles/Custom.module.scss'
-import { useSpotify } from "@component/context/SpotifyContext"
+import Link from "next/link";
+import { useSpotify } from "@component/context/SpotifyContext";
 import Image from "next/image";
 export default function Card({playlist}: any) {
     const {overlayTab, setOverlayTab} = useSpotify();

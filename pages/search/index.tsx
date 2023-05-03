@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { getSession } from 'next-auth/react';
-
+import { GetSessionParams } from "next-auth/react";
 export default function Search() {
     const router = useRouter();
     const { pid } = router.query

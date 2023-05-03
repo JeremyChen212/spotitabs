@@ -1,12 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSpotify } from "../context/SpotifyContext";
-import styles from '../styles/Custom.module.css'
-import { getSession, useSession } from "next-auth/react";
-import { getUsersPlaylists } from '../lib/spotify'
-import Card from "./Card";
+import { useSession } from "next-auth/react";
 import { SkeletonCard } from "./SkeletonCard";
 
 function PlaylistDashboard() {
@@ -23,6 +18,7 @@ function PlaylistDashboard() {
         fetchPlaylists()
       if(playlists) {
       }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (spinner) {

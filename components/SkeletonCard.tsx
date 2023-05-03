@@ -1,4 +1,4 @@
-import styles from '../styles/Custom.module.scss'
+import styles from '../styles/Custom.module.scss';
 
 
 

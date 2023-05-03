@@ -51,34 +51,20 @@
 
 // export default Home
 
-import {useSession, signIn, signOut, } from 'next-auth/react';
-import { getSession, GetSessionParams } from 'next-auth/react'
+import { useSession } from 'next-auth/react';
+import { getSession, GetSessionParams } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { Container, Center, Button } from '@chakra-ui/react'
-import * as Popover from '@radix-ui/react-popover';
-import SpotitabsLogo from '/public/Spotitabs_Logo.jpg'
-import PlaylistDashboard from '../components/PlaylistDashboard';
-import { getUsersPlaylists } from '../lib/spotify'
-import { GetServerSideProps } from "next";
+import { Button } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { useSpotify } from '../context/SpotifyContext'
-import { customGet } from '@component/utils/customGet';
-import axios from 'axios';
-import SearchInput from '@component/components/SearchInput';
-import Loader from '../components/Loader'
+import { useSpotify } from '../context/SpotifyContext';
 import Navbar from '@component/components/Navbar';
 import Heading from '@component/components/Heading';
-import leafyshoe from "../public/images/shoebg.jpeg"
-import Image from 'next/image'
-import OverlayTab from '@component/components/OverlayTab';
-import YourPlaylists from '@component/components/overlays/YourPlaylists';
+import Image from 'next/image';
 // import MainOverlay from '@component/components/overlays/MainOverlay'
-import Icon from '@component/components/reusable/Icon';
-import Toolbar from '@component/components/Toolbar'
+import Toolbar from '@component/components/Toolbar';
 import PlaylistCard from '../components/reusable/PlaylistCard';
 import Searchbar from '@component/components/Searchbar';
 import GetStarted from '@component/components/ExplorePage/PlaylistSection';
-import { MySession } from '@component/types/types';
 function Home({session}: any) {
   const router = useRouter()
   // const {status, data: session} = useSession();
@@ -87,21 +73,21 @@ function Home({session}: any) {
   const {overlayTab, setOverlayTab} = useSpotify();
   const [commandDown, setCommandDown] = useState(false)
   const [jDown, setJDown] = useState(false)
-  useEffect(() => {
-    document.addEventListener("keydown", function(e) {
-      if(event.metaKey) {
-        setCommandDown(true)
-      } 
-      if(event.metaKey && e.key === "k") {
-        setJDown(true)
-      } 
-    })
-    document.addEventListener("keyup", function(e) {
-      setCommandDown(false)
-      setJDown(false)
-    })
-    // setOverlayTab("playlists")
-  })
+  // useEffect(() => {
+  //   document.addEventListener("keydown", function(e) {
+  //     if(event.metaKey) {
+  //       setCommandDown(true)
+  //     } 
+  //     if(event.metaKey && e.key === "k") {
+  //       setJDown(true)
+  //     } 
+  //   })
+  //   document.addEventListener("keyup", function(e) {
+  //     setCommandDown(false)
+  //     setJDown(false)
+  //   })
+  //   // setOverlayTab("playlists")
+  // })
   // if(status === "loading") {
   //   console.log("loading")
   //   return <Loader />
@@ -153,7 +139,6 @@ function Home({session}: any) {
             <Searchbar></Searchbar>
             <div>
               <Heading text={"Get Started"}></Heading>
-              <GetStarted></GetStarted>
               <PlaylistCard playlistImage={'https://mosaic.scdn.co/640/ab67616d0000b273795e7069de7cb188b7c821b4ab67616d0000b2738940ac99f49e44f59e6f7fb3ab67616d0000b2738b52c6b9bc4e43d873869699ab67616d0000b273aa95a399fd30fbb4f6f59fca'}
               playlistTitle={"R&B Mix"} artistPreview={"Jordan Ward, Bruno Major, and more"}></PlaylistCard>
             </div>
@@ -255,21 +240,12 @@ function Home({session}: any) {
   } 
   return (
     <div className="flex column">
-    <Image
-      src='/public/Spotitabs_Logo.jpg'
-      alt="spotify logo"
-    />
-    <Button
-      size='lg' width="100%"
-      onClick={handleLogin}
-    >
-      Login
-    </Button>
+    Not logged in. Please navigate to /login.
   </div>
   )
 }
 
-export async function getServerSideProps(context: GetSessionParams | undefined) {
+export async function getServerSideProps(context: any) {
   const session = await getSession(context);
   if (!session) {
     return {

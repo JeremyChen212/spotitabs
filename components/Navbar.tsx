@@ -1,19 +1,11 @@
-import Search from "@component/pages/search"
-import SearchInput from "./SearchInput"
-import { IoHome } from 'react-icons/io5'
-import { IoBookmark, IoMenu, IoPerson, IoLibrary } from 'react-icons/io5'
-import { useSession, signIn } from 'next-auth/react';
-import styles from '../styles/Custom.module.scss'
-import { useEffect, useState } from "react"
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { useSpotify } from "@component/context/SpotifyContext";
-import { useWindowSize, useWindowPath } from '../lib/window'
-import Image from "next/image";
+import { useWindowSize } from '../lib/window';
 import Profile from "./Profile";
-import Button from "./reusable/Button";
-import OverlayTab from './OverlayTab';
 import Icon from "./reusable/Icon";
-import Hamburger from './reusable/Hamburger'
+import Hamburger from './reusable/Hamburger';
 
 export default function Navbar() {
     const windowSize = useWindowSize()

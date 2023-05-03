@@ -1,15 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSpotify } from "../../context/SpotifyContext";
-import styles from '../../styles/Custom.module.css'
-import { getSession, useSession } from "next-auth/react";
-import { getUsersPlaylists } from '../../lib/spotify'
+import { useSession } from "next-auth/react";
 import PlaylistCard from "../reusable/PlaylistCard";
-import { SkeletonCard } from "../SkeletonCard";
 import Heading from '../Heading';
-function PlaylistSection({items, playlist, title, showAll}: any) {
+export default function PlaylistSection({items, title, showAll}: any) {
     const router = useRouter();
     const { status, data: session } = useSession()
     const spotifyApi = useSpotify()
@@ -41,16 +36,15 @@ function PlaylistSection({items, playlist, title, showAll}: any) {
                     <PlaylistCard key={playlist.id} playlist={playlist}></PlaylistCard>
                 ))}
             </div>
-            test
         </div>
         )
     } else {
+        return (
         <div>
-            ae
+            Could not fetch. Please Reload.
         </div>
+        )
     }
    
 }
 
-
-export default PlaylistSection

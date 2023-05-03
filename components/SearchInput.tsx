@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
 import { IoSearchOutline, IoCloseOutline } from "react-icons/io5";
 import { useSpotify } from "../context/SpotifyContext";
 
@@ -6,7 +6,7 @@ export default function SearchInput() {
   const router = useRouter();
   const { query, setQuery } = useSpotify();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     router.push(`/search/${query}`);
 }

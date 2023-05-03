@@ -1,18 +1,6 @@
-import Search from "@component/pages/search"
-import SearchInput from "./SearchInput"
-import { IoHome } from 'react-icons/io5'
-import { IoSearch } from 'react-icons/io5'
-import { useSession, signIn } from 'next-auth/react';
-import styles from '../styles/Custom.module.scss'
-import { useEffect, useState, useRef } from "react"
-import { useRouter } from 'next/router';
+import { IoSearch } from 'react-icons/io5';
+import { useState, useRef } from "react";
 import { useSpotify } from "@component/context/SpotifyContext";
-import { useWindowSize, useWindowPath } from '../lib/window'
-import Image from "next/image";
-import Profile from "./Profile";
-import Button from "./reusable/Button";
-import OverlayTab from './OverlayTab';
-import Icon from "./reusable/Icon";
 
 
 export default function Searchbar() {

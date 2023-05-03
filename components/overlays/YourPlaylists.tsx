@@ -1,7 +1,6 @@
-import {IoClose} from "react-icons/io5"
 import Heading from "../Heading";
 import PlaylistDashboard from "../PlaylistDashboard";
-import { useSpotify } from "../../context/SpotifyContext"
+import { useSpotify } from "../../context/SpotifyContext";
 import { useRouter } from "next/router";
 export default function YourPlaylists() {
     const {overlayTab, setOverlayTab} = useSpotify();

@@ -14,7 +14,7 @@ export default function Search() {
 
 
 
-export async function getServerSideProps(context: GetSessionParams | undefined) {
+export async function getServerSideProps(context: any) {
     const session = await getSession(context);
     if (!session) {
       return {

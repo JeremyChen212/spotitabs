@@ -6,7 +6,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export default async function handler(req, res) {
+export default async function handler({req, res}: any) {
     console.log(req.body)
   const prompt = req.body;
   const completion = await openai.createCompletion({
@@ -19,6 +19,6 @@ export default async function handler(req, res) {
 
 }
 
-function generatePrompt(song) {
+function generatePrompt(song: any) {
   return `What is the key, tempo, and chords of redbone. Please list the results out in seperate lines.`;
 }

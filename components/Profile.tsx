@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export function dropdownLink({icon, title}: any) {
     return (
-        <li className="z-100 cursor-pointer whitespace-nowrap transition-all rounded-sm px-3 flex gap-2 px-6 py-2 hover:bg-[#235147] w-full min-w-fit">
+        <li className="z-100 cursor-pointer whitespace-nowrap transition-all rounded-sm flex gap-2 px-6 py-2 hover:bg-[#235147] w-full min-w-fit">
             <IoSettingsSharp className="text-2xl text-[#ffffff6e]" />
             {title}
         </li>
@@ -18,12 +18,12 @@ export default function Profile({session}: any) {
 
     const handleProfileClick = () => {
         const dropdown = document.getElementById(styles.dropdown);
-        dropdown.classList.toggle("scale-100")
+        dropdown?.classList.toggle("scale-100")
     }
-    const handleMouseEvent = (e) => {
+    const handleMouseEvent = (e: any) => {
         e.persist();
         const dropdown = document.getElementById(styles.dropdown);
-        dropdown.classList.remove("scale-100")
+        dropdown?.classList.remove("scale-100")
       };
     const handleLogin = () => {
         signIn("spotify", { callbackUrl: "http://localhost:3000/" });

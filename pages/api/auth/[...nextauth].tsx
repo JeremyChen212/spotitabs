@@ -6,13 +6,14 @@ import SpotifyProvider from "next-auth/providers/spotify";
  * `accessToken` and `accessTokenExpires`. If an error occurs,
  * returns the old token and an error property
  */
+
 async function refreshAccessToken(token: any) {
   try {
     const url =
       "https://accounts.spotify.com/api/token?" +
       new URLSearchParams({
-        client_id: process.env.SPOTIFY_CLIENT_ID,
-        client_secret: process.env.SPOTIFY_CLIENT_SECRET,
+        client_id: process.env.SPOTIFY_CLIENT_ID as string,
+        client_secret: process.env.SPOTIFY_CLIENT_SECRET as string,
         grant_type: "refresh_token",
         refresh_token: token.refreshToken,
       });
@@ -92,7 +93,7 @@ export default NextAuth({
       session.user.accessToken = token.accessToken;
       session.user.refreshToken - token.refreshToken;
       session.user.username = token.username;
-
+      session.error = token.error;
       return session;
     },
   },

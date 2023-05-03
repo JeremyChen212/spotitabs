@@ -1,24 +1,10 @@
-import {useSession, signIn, signOut, } from 'next-auth/react';
-import { getSession, GetSessionParams } from 'next-auth/react'
+import { useSession } from 'next-auth/react';
+import { getSession, GetSessionParams } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { Container, Center, Button } from '@chakra-ui/react'
-import * as Popover from '@radix-ui/react-popover';
-import SpotitabsLogo from '/public/Spotitabs_Logo.jpg'
-import PlaylistDashboard from '../components/PlaylistDashboard';
-import { getUsersPlaylists } from '../lib/spotify'
-import { GetServerSideProps } from "next";
 import { useEffect } from 'react';
-import { useSpotify } from '../context/SpotifyContext'
-import { customGet } from '@component/utils/customGet';
-import axios from 'axios';
-import SearchInput from '@component/components/SearchInput';
-import Loader from '../components/Loader'
+import { useSpotify } from '../context/SpotifyContext';
 import Navbar from '@component/components/Navbar';
-import Heading from '@component/components/Heading';
-import leafyshoe from "../public/images/shoebg.jpeg"
-import Image from 'next/image'
-import OverlayTab from '@component/components/OverlayTab';
-import YourPlaylists from '@component/components/overlays/YourPlaylists';
+import Image from 'next/image';
 // import MainOverlay from '@component/components/overlays/MainOverlay'
 function Home({session}: any) {
   const router = useRouter()
@@ -100,7 +86,7 @@ function Home({session}: any) {
   )
 }
 
-export async function getServerSideProps(context: GetSessionParams | undefined) {
+export async function getServerSideProps(context: any) {
   const session = await getSession(context);
   if (!session) {
     return {

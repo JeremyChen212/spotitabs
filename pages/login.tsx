@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { getProviders, signIn } from "next-auth/react"
-export default function Login( { providers }) {
+import { getProviders, signIn } from "next-auth/react";
+export default function Login( { providers }: any) {
   const handleLogin = () => {
     signIn("spotify", { callbackUrl: "http://localhost:3000/" });
   };
@@ -14,7 +14,7 @@ export default function Login( { providers }) {
           height={96}
           objectFit="contain"
         />
-        {Object.values(providers).map((provider) => (
+        {Object.values(providers).map((provider: any) => (
           <div key={provider?.name}>
           <button
             className="flex px-12 py-2 text-lg text-white from-spotifygreen tracking-widest uppercase rounded-full focus:outline-none bg-spotifygreen hover:bg-opacity-50 transition-all"

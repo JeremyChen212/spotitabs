@@ -1,7 +1,6 @@
 import Image from "next/image";
-import {useSpotify} from '../../context/SpotifyContext'
+import { useSpotify } from '../../context/SpotifyContext';
 import { useState } from "react";
-import { IoBookmark, IoMenu, IoPerson, IoLibrary } from 'react-icons/io5'
 
 
 interface  IconProps{

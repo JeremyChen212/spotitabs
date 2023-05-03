@@ -62,7 +62,7 @@ import Navbar from '@component/components/Navbar';
 import Heading from '@component/components/Heading';
 import Image from 'next/image';
 import Toolbar from '@component/components/Toolbar';
-function Home({session}) {
+function Home({session}: any) {
   const router = useRouter()
   // const {status, data: session} = useSession();
   console.log(session)
@@ -82,12 +82,11 @@ function Home({session}) {
       <div className={`max-w-[1800px] min-h-[100vh] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
           <Navbar></Navbar>
           <Toolbar></Toolbar>
-          <div className='text-center flex flex-col h-fit mx-auto w-full m-auto w-fit'>
+          <div className='text-center flex flex-col h-fit mx-auto m-auto w-fit'>
             <Heading text={'Your Playlists'}></Heading>
             <PlaylistDashboard></PlaylistDashboard>
           </div>
       </div>
-      
     );
   } 
   return (

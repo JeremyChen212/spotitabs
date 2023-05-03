@@ -1,17 +1,16 @@
-import useSWR from 'swr';
-import { getSession } from 'next-auth/react';
+// import useSWR from 'swr';
+// import { getSession } from 'next-auth/react';
+// import { useSpotify } from './SpotifyContext';
 
-const fetcher = (...args) => fetch(...args).then(res => res.json())
-
-
-
-export default function usePlaylists () {
-    const session = getSession()
-    const { data, error, isLoading } = useSWR(`/api/playlists/`, fetcher)
-    console.log(data)
-    return {
-      user: data,
-      isLoading,
-      isError: error
-    }
-  }
+// export default function usePlaylists () {
+//     const session = getSession()
+//     const {playlists} = useSpotify();
+//     const { data, error, isLoading } = useSWR(`/api/playlists/`)
+//     console.log("FETCHING USER PLAYLISTS")
+//     console.log(data)
+//     return {
+//       user: data,
+//       isLoading,
+//       isError: error
+//     }
+// }

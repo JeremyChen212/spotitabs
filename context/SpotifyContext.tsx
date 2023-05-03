@@ -1,16 +1,12 @@
-import  { Children, createContext, useState, useContext } from 'react'
+import { createContext, useState, useContext } from 'react'
 import axios from 'axios'
 import { PlaylistType, SearchResults } from '../types/types'
-import { Dispatch, SetStateAction, useMemo } from "react"
-import { getUsersPlaylists } from '@component/lib/spotify'
-import {useSession} from 'next-auth/react'
+import { Dispatch, SetStateAction } from "react"
+import { useSession } from 'next-auth/react'
 import { useEffect } from 'react'
-import { customGet } from '@component/utils/customGet'
-import getSession from 'next-auth'
 
 // These are the props that context will take in
 interface ContextProps {
-  accessToken: string,
   playlists: PlaylistType[],
   fetchPlaylists: () => void
   searchResults : SearchResults[],
@@ -28,12 +24,11 @@ interface ContextProps {
   menuOpen: boolean,
   setMenuOpen: Dispatch<SetStateAction<boolean>>,
   getStartedPlaylists: any[],
-  setGetStartedPlaylists: () => void,
-  topArtists: [],
+  setGetStartedPlaylists: Dispatch<SetStateAction<any>>,
+  topArtists: any[],
   fetchTopArtists: () => void,
-  topGenres: [],
-  getTopGenres: () => void,
-  test: null
+  topGenres: any[],
+  getTopGenres: () => void
 }
 
 
@@ -52,36 +47,12 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   const [query, setQuery] = useState("");
   const [overlayTab, setOverlayTab] = useState("playlists")
   const [popupActive, setPopupActive] = useState(false)
-  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>([])
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [getStartedPlaylists, setGetStartedPlaylists] = useState<any[]>([])
-  const [topArtists, setTopArtists] = useState([])
-  const [topGenres, setTopGenres] = useState([])
-  useEffect(() => {
-    const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "2CtbFy5I7LxvXk3pqk77AO", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
+  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType[]>([])
+  const [menuOpen, setMenuOpen] = useState<boolean>(false)
+  const [getStartedPlaylists, setGetStartedPlaylists] = useState([])
+  const [topArtists, setTopArtists] = useState<any>([])
+  const [topGenres, setTopGenres] = useState<any>([])
   
-    const fetchGetStartedPlaylists = async () => {
-      try {
-        const responses = await Promise.all(playlistsIds.map(playlistId =>
-          axios({
-            method: 'get',
-            url: `https://api.spotify.com/v1/playlists/${playlistId}`,
-            headers: {
-              Authorization: `Bearer ${session.user.accessToken}`,
-            }
-          }).then(response => response.data)
-        ));
-        setGetStartedPlaylists(responses);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
-    if (session && typeof window !== 'undefined') {
-      fetchGetStartedPlaylists();
-    }
-  
-  }, [session]);
 
   function setSpinnerState(value: any) {
     setSpinner(value)
@@ -91,8 +62,7 @@ export default function SpotifyContextProvider ({children, test}: any)  {
     if (session) {
       const response = await fetch("/api/playlists");
       const data = await response.json();
-      const playlists = data.playlists;
-      setPlaylists(playlists);
+      setPlaylists(data.items);
       setSpinner(false)
     }
     console.log(playlists)
@@ -127,8 +97,8 @@ export default function SpotifyContextProvider ({children, test}: any)  {
         genresOfTopArtsts.push(topArtists[index].genres[secIndex])
       }
     }
-    const countOccurrences = (arr) =>
-    arr.reduce((acc, curr) => {
+    const countOccurrences = (arr: any) =>
+    arr.reduce(({acc, curr}: any) => {
       if (!acc[curr]) {
         acc[curr] = 1;
       } else {
@@ -171,8 +141,7 @@ export default function SpotifyContextProvider ({children, test}: any)  {
         topArtists,
         fetchTopArtists,
         topGenres, 
-        getTopGenres,
-        test
+        getTopGenres
       }}>
       {children}
     </SpotifyContext.Provider>

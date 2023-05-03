@@ -1,17 +1,8 @@
-import Search from "@component/pages/search"
-import SearchInput from "./SearchInput"
-import { IoHome } from 'react-icons/io5'
-import { IoBookmark, IoMenu, IoPerson, IoLibrary } from 'react-icons/io5'
-import { useSession, signIn } from 'next-auth/react';
-import styles from '../styles/Custom.module.scss'
-import { useEffect, useState } from "react"
+import { useSession } from 'next-auth/react';
+import { useState } from "react";
 import { useRouter } from 'next/router';
 import { useSpotify } from "@component/context/SpotifyContext";
-import { useWindowSize, useWindowPath } from '../lib/window'
-import Image from "next/image";
-import Profile from "./Profile";
-import Button from "./reusable/Button";
-import OverlayTab from './OverlayTab';
+import { useWindowSize } from '../lib/window';
 import Icon from "./reusable/Icon";
 
 
@@ -23,12 +14,12 @@ export default function Navbar() {
     const {overlayTab, setOverlayTab} = useSpotify()
     const {popupActive, setPopupActive} = useSpotify()
     const router = useRouter()
-    const handleClick = (path) => {
+    const handleClick = (path: any) => {
         setSelected(path)
         router.push("/" + path)
     }
     
-    function showTab(tab) {
+    function showTab(tab: any) {
         console.log("SHOWING TAB")
         setPopupActive(true)
         if(overlayTab === tab  && popupActive === true) {
@@ -39,7 +30,7 @@ export default function Navbar() {
         console.log(overlayTab)
     }
 
-    function checkActiveTab(tab) {
+    function checkActiveTab(tab: any) {
         console.log(router.asPath)
         if (router.asPath === "/" + tab) {
             return true
@@ -47,7 +38,7 @@ export default function Navbar() {
             return false
         }
     }
-    function checkPage(page) {
+    function checkPage(page: any) {
         console.log(router.pathname)
         if (page === router.pathname) {
             return true
@@ -60,9 +51,9 @@ export default function Navbar() {
             <div id="toolbar" className="flex gap-3 w-fit h-fit z-50 pointer-events-auto">
                 {/* <Icon active={checkPage("/playlist")}
                 icon={"/images/HomeIcon.svg"}></Icon> */}
-                <Icon popupActive={popupActive} active={checkActiveTab("explore")} onClickFunc={() => router.push("/explore")}  icon={"/images/SearchIcon.svg"}></Icon>
-                <Icon popupActive={popupActive} active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
-                <Icon popupActive={popupActive} active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
+                <Icon active={checkActiveTab("explore")} onClickFunc={() => router.push("/explore")}  icon={"/images/SearchIcon.svg"}></Icon>
+                <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
+                <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
             </div>
         </div>
         

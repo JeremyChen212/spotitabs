@@ -1,6 +1,5 @@
 import { useSpotify } from "../context/SpotifyContext";
-import { useState, useEffect } from "react";
-import {IoClose} from "react-icons/io5"
+import { IoClose } from "react-icons/io5";
 import Heading from "./Heading";
 import PlaylistDashboard from "./PlaylistDashboard";
 export default function OverlayTab() {
