@@ -8,6 +8,7 @@ import SavedOverlay from '../../../components/overlays/SavedOverlay.tsx';
 import { useSpotify } from '../../../context/SpotifyContext'
 import { useEffect } from "react";
 import MainOverlay from "../../../components/overlays/MainOverlay"
+import Image from "next/image.js";
 
 export default function PlaylistPlayer({playlist}) {
     const router = useRouter()
@@ -31,19 +32,17 @@ export default function PlaylistPlayer({playlist}) {
               <div className="flex flex-col p-6 gap-3">
                 {playlist.tracks.items.map((track, i) => (
                   <div key={i} className="flex gap-2 w-full overflow-hidden whitespace-nowrap overflow-ellipsis">
-                    <img src={track.track.album.images?.[0]?.url} className="w-14 rounded-sm"/>
+                    <Image alt={track.track.album.images?.[0]?.url} src={track.track.album.images?.[0]?.url} width={100} height={100} className="w-14 h-auto rounded-sm"/>
                     <div className="flex flex-col">
                       <h2 >
                         {track.track.name}
                       </h2>
-                      <p>
                         {track.track.artists.map((artist, i) => (
-                            <>
-                            {artist.name}
-                            {(i === 0) && (track.track.artists.length > 1) ? ', ' : ' '}
-                            </>
+                            <p key={artist}>
+                              {artist.name}
+                              {(i === 0) && (track.track.artists.length > 1) ? ', ' : ' '}
+                            </p>
                         ))}
-                      </p>
                     </div>
                     </div>
                 ))}

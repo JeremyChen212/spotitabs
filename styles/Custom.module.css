@@ -1,0 +1,67 @@
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.slideInLeft {
+  animation: 0.5s ease-out 0s 1 slideInFromLeft;
+}
+
+.selectedBtn {
+  background-color: #499081;
+}
+
+.cards {
+  display: flex;
+}
+
+.card {
+  gap: 5;
+  background: #010504;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.card .image {
+  max-width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.card h1 {
+  padding: 14px 30px;
+  margin-top: 18px;
+}
+
+.isLoading .image,
+.isLoading h1,
+.isLoading p {
+  background: rgba(37, 52, 49, 0.7960784314);
+  border-radius: 5px;
+  animation: 2s hintloading linear infinite;
+}
+.isLoading .image {
+  position: relative;
+  padding-top: 100%;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+@keyframes hintloading {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+.dropdown {
+  display: flex;
+}/*# sourceMappingURL=Custom.module.css.map */

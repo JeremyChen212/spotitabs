@@ -13,6 +13,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@headlessui/react": "^1.7.13",
+    "@next/bundle-analyzer": "^13.3.4",
     "@radix-ui/react-popover": "1.0.5",
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
@@ -23,6 +24,7 @@
     "eslint-config-next": "13.2.4",
     "framer-motion": "^10.10.0",
     "html-react-parser": "^3.0.16",
+    "memory-cache": "^0.2.0",
     "next": "13.2.4",
     "next-auth": "^4.20.1",
     "node-fetch": "^3.3.1",
@@ -35,10 +37,12 @@
     "sass": "^1.62.1",
     "spotify-web-api-js": "^1.5.2",
     "spotify-web-api-node": "^5.0.2",
+    "swr": "^2.1.5",
     "typescript": "5.0.2",
     "xhr2": "^0.2.1"
   },
   "devDependencies": {
+    "@types/memory-cache": "^0.2.2",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.0"

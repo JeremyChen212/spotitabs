@@ -72,18 +72,17 @@ import leafyshoe from "../public/images/shoebg.jpeg"
 import Image from 'next/image'
 import OverlayTab from '@component/components/OverlayTab';
 import YourPlaylists from '@component/components/overlays/YourPlaylists';
-import MainOverlay from '@component/components/overlays/MainOverlay'
+// import MainOverlay from '@component/components/overlays/MainOverlay'
 import Icon from '@component/components/reusable/Icon';
 import Toolbar from '@component/components/Toolbar'
 import PlaylistCard from '../components/reusable/PlaylistCard';
 import Searchbar from '@component/components/Searchbar';
 import GetStarted from '@component/components/ExplorePage/PlaylistSection';
-
-function Home({session}) {
+import { MySession } from '@component/types/types';
+function Home({session}: any) {
   const router = useRouter()
   // const {status, data: session} = useSession();
   console.log(session)
-  const { accessToken } = session
   const {currentPlaylist} = useSpotify();
   const {overlayTab, setOverlayTab} = useSpotify();
   const [commandDown, setCommandDown] = useState(false)

@@ -19,8 +19,8 @@ import leafyshoe from "../public/images/shoebg.jpeg"
 import Image from 'next/image'
 import OverlayTab from '@component/components/OverlayTab';
 import YourPlaylists from '@component/components/overlays/YourPlaylists';
-import MainOverlay from '@component/components/overlays/MainOverlay'
-function Home({session}) {
+// import MainOverlay from '@component/components/overlays/MainOverlay'
+function Home({session}: any) {
   const router = useRouter()
   // const {status, data: session} = useSession();
   console.log(session)
@@ -90,12 +90,12 @@ function Home({session}) {
       src='/public/Spotitabs_Logo.jpg'
       alt="spotify logo"
     />
-    <Button
+    {/* <Button
       size='lg' width="100%"
       onClick={handleLogin}
     >
       Login
-    </Button>
+    </Button> */}
   </div>
   )
 }

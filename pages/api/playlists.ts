@@ -3,11 +3,10 @@ import { getSession } from "next-auth/react";
 import { customGet } from "../../utils/customGet";
 
 
-const getPlaylists = async(session) => {
-    const accessToken = session.accessToken;
+const getPlaylists = async(session: any) => {
     const response = await fetch("https://api.spotify.com/v1/me/playlists?limit=50", {
         headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${session.user.accessToken}`,
         }
     });
 

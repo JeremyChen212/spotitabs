@@ -6,7 +6,7 @@ import SpotifyProvider from "next-auth/providers/spotify";
  * `accessToken` and `accessTokenExpires`. If an error occurs,
  * returns the old token and an error property
  */
-async function refreshAccessToken(token) {
+async function refreshAccessToken(token: any) {
   try {
     const url =
       "https://accounts.spotify.com/api/token?" +
@@ -29,13 +29,15 @@ async function refreshAccessToken(token) {
     if (!response.ok) {
       throw refreshedTokens;
     }
-
+    console.log("TOKEN REFRESHED")
+    console.log(refreshedTokens.access_token)
     return {
       ...token,
       accessToken: refreshedTokens.access_token,
       accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
       refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
     };
+
   } catch (error) {
     console.log(error);
 
@@ -49,28 +51,33 @@ async function refreshAccessToken(token) {
 export default NextAuth({
   providers: [
     SpotifyProvider({
-      clientId: process.env.SPOTIFY_CLIENT_ID,
-      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      authorization:
-        "https://accounts.spotify.com/authorize?scope=user-read-email,playlist-read-private,user-read-email,streaming,user-read-private,user-library-read,user-library-modify,user-read-playback-state,user-modify-playback-state,user-read-recently-played,user-follow-read",
+      clientId: process.env.SPOTIFY_CLIENT_ID as string,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        },
+      }
     }),
   ],
-
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account }: any) {
       // Initial sign in
       if (account && user) {
         console.log("INITIAL SIGN IN")
         return {
           ...token,
           accessToken: account.access_token,
-          accessTokenExpires: Date.now() + account.expires_in * 1000,
           refreshToken: account.refresh_token,
+          accessTokenExpires: account.expires_in * 1000,
           user,
         };
       }
       // Return previous token if the access token has not expired yet
-      if (Date.now() < token.accessTokenExpires) {
+      if (Date.now() < token.accessTokenExpires + 10000) {
         console.log("GETTING PREVIOUS TOKEN...")
         // console.log(token)
         return token;
@@ -80,10 +87,11 @@ export default NextAuth({
       console.log("TOKEN EXPIRED, REFRESHING...")
       return refreshAccessToken(token);
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       session.user = token.user;
-      session.accessToken = token.accessToken;
-      session.error = token.error;
+      session.user.accessToken = token.accessToken;
+      session.user.refreshToken - token.refreshToken;
+      session.user.username = token.username;
 
       return session;
     },

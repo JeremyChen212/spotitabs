@@ -6,7 +6,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export default async function (req, res) {
+export default async function handler(req, res) {
     console.log(req.body)
   const prompt = req.body;
   const completion = await openai.createCompletion({

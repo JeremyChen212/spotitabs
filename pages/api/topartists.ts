@@ -12,7 +12,7 @@ export default async function handler(
       return;
     }
   
-    const accessToken = session.accessToken;
+    const accessToken = session.user.accessToken;
   
     const response = await fetch('https://api.spotify.com/v1/me/top/artists?limit=100&offset=0',
      {

@@ -15,7 +15,7 @@ export default function Login( { providers }) {
           objectFit="contain"
         />
         {Object.values(providers).map((provider) => (
-          <div key={provider.name}>
+          <div key={provider?.name}>
           <button
             className="flex px-12 py-2 text-lg text-white from-spotifygreen tracking-widest uppercase rounded-full focus:outline-none bg-spotifygreen hover:bg-opacity-50 transition-all"
             onClick={() => handleLogin()}

@@ -9,7 +9,7 @@ import { getUsersPlaylists } from '../../lib/spotify'
 import PlaylistCard from "../reusable/PlaylistCard";
 import { SkeletonCard } from "../SkeletonCard";
 import Heading from '../Heading';
-function PlaylistSection({items, playlist, title, showAll}) {
+function PlaylistSection({items, playlist, title, showAll}: any) {
     const router = useRouter();
     const { status, data: session } = useSession()
     const spotifyApi = useSpotify()
@@ -36,13 +36,12 @@ function PlaylistSection({items, playlist, title, showAll}) {
                     <Link className="opacity-70 font-medium hover:underline" href={showAll}>Show all</Link>
                 )}
             </div>
-            
             <div className="grid justify-start grid-rows-[auto auto] grid-flow-col grid-rows-2 2xl:grid-cols-4 -ml-11 -mr-11 w-100vw  px-11 py-2 pb-4 overflow-x-scroll gap-6">
-                {items.slice(0, 8).map((playlist, index)=>(
+                {items.slice(0, 8).map((playlist: any, index: any)=>(
                     <PlaylistCard key={playlist.id} playlist={playlist}></PlaylistCard>
                 ))}
             </div>
-            
+            test
         </div>
         )
     } else {

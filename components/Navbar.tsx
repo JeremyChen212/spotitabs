@@ -17,18 +17,18 @@ import Hamburger from './reusable/Hamburger'
 
 export default function Navbar() {
     const windowSize = useWindowSize()
-    const [selected, setSelected] = useState()
+    const [selected, setSelected] = useState("")
     const mobileMenuOpen = useSpotify()
     const {data: session} = useSession()
     const {overlayTab, setOverlayTab} = useSpotify()
     const {popupActive, setPopupActive} = useSpotify()
     const router = useRouter()
-    const handleClick = (path) => {
+    const handleClick = (path: string) => {
         setSelected(path)
         router.push("/" + path)
     }
     
-    function showTab(tab) {
+    function showTab(tab: string) {
         console.log("SHOWING TAB")
         setPopupActive(true)
         if(overlayTab === tab  && popupActive === true) {
@@ -39,14 +39,14 @@ export default function Navbar() {
         console.log(overlayTab)
     }
 
-    function checkActiveTab(tab) {
+    function checkActiveTab(tab: string) {
         if (tab === overlayTab) {
             return true
         }else {
             return false
         }
     }
-    function checkPage(page) {
+    function checkPage(page: string) {
         console.log(router.pathname)
         if (page === router.pathname) {
             return true
@@ -61,7 +61,7 @@ export default function Navbar() {
     return (
         <>
         {windowSize.width > 600 ? (
-            <nav id="navbar" className="sticky top-0 flex h-[2rem] items-center justify-between w-full mx-auto my-5 gap-5">
+            <nav id="navbar" className="sticky z-50 top-0 flex h-[2rem] items-center justify-between w-full mx-auto my-5 gap-5">
                 {/* <Image
                     src="/images/Spotitabs_Logo_Single.png"
                     alt="spotify logo"
@@ -73,7 +73,7 @@ export default function Navbar() {
                 {/* <Button onClickFunc={() => {showTab("playlist")}} title={"My Playlists"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} />
                 <Button onClickFunc={() => {showTab("saved")}} title={"Saved"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} /> */}
                 <div className="flex gap-3  ">
-                <Icon  icon={"/images/LeftIcon.svg"} onClickFunc={() => router.back()}></Icon>
+                <Icon icon={"/images/LeftIcon.svg"} onClickFunc={() => router.back()} ></Icon>
                 <Icon icon={"/images/RightIcon.svg"} onClickFunc={() => window.history.forward()}></Icon>
                 </div>
                 {/* <div className="flex gap-3">

@@ -31,21 +31,7 @@ function Home({session}) {
   const {status: loading} = useSession();
 
   
-  
-  // useEffect(() => {
-  //   console.log(session)
-  //   // Redirect to login page if session is expired or missing tokens
-  //   if (!loading && (!session || !session.accessToken || !session.refreshToken)) {
-  //     router.push('/login');
-  //   }
-  // }, [session, loading, router]);
-    
-  // // Redirect to home page after logging in
-  // useEffect(() => {
-  //   if (!loading && session && session.accessToken && session.refreshToken) {
-  //     router.push('/');
-  //   }
-  // }, [session, loading, router]);
+
 
 
   if (session) {

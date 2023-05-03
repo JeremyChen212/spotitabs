@@ -1,23 +1,18 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-
+import Navbar from "./Navbar";
 interface IProps {
   children: any;
   title: string;
 }
 
-export default function Layout({children, title, styles, center}) {
+export default function Layout({children}: any) {
   const router = useRouter();
   return (
-    <div className={center ? "m-auto w-fit" : ""}>
-      <Head>
-        <title>{title}</title>
-      </Head>
-      <section
-        className={`w-full ${router.pathname === "/login" ? "" : "p-4"} ${styles}`}
-      >
-        {children}
-      </section>
+    <div className={"min-h-[100vh] m-auto  mx-6 items-start h-fit flex flex-col text-white"}>
+      <Navbar></Navbar>
+      
+      {children}
     </div>
   );
 }

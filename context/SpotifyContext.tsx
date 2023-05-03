@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 import { customGet } from '@component/utils/customGet'
 import getSession from 'next-auth'
 
-
 // These are the props that context will take in
 interface ContextProps {
   accessToken: string,
@@ -68,7 +67,7 @@ export default function SpotifyContextProvider ({children, test}: any)  {
             method: 'get',
             url: `https://api.spotify.com/v1/playlists/${playlistId}`,
             headers: {
-              Authorization: `Bearer ${session.accessToken}`,
+              Authorization: `Bearer ${session.user.accessToken}`,
             }
           }).then(response => response.data)
         ));
@@ -84,11 +83,11 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   
   }, [session]);
 
-  function setSpinnerState(value) {
+  function setSpinnerState(value: any) {
     setSpinner(value)
   }
   const fetchPlaylists = async() => {
-    console.log(session.accessToken)
+    // console.log(session.user.accessToken)
     if (session) {
       const response = await fetch("/api/playlists");
       const data = await response.json();
@@ -147,34 +146,6 @@ export default function SpotifyContextProvider ({children, test}: any)  {
     setTopGenres(top100)
   }
 
-  const fetchGetStartedPlaylists = async() => {
-    const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "2CtbFy5I7LxvXk3pqk77AO", "40OhlsVD7XNnIhkeWgztha", "1YiL6Vk1GWWbltklCI3rak", "37i9dQZF1EQmPV0vrce2QZ"]
-    try {
-      for (const playlistId of playlistsIds) {
-        axios({
-          method: 'get',
-          url: `https://api.spotify.com/v1/playlists/${playlistId}`,
-          headers: {
-            Authorization: `Bearer ${session.accessToken}`,
-          },
-          params: {
-            limit: 1,
-          },
-        })
-          .then((response) => {
-            console.log(response.data)
-             setGetStartedPlaylists((prevArray) => [...prevArray, response]);
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-      }
-    } catch(err) {
-      console.log(err)
-    }
-    console.log(getStartedPlaylists)    
-  }
-  console.log(test)
 
   return (
     <SpotifyContext.Provider 

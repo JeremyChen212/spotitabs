@@ -3,7 +3,18 @@ import {useSpotify} from '../../context/SpotifyContext'
 import { useState } from "react";
 import { IoBookmark, IoMenu, IoPerson, IoLibrary } from 'react-icons/io5'
 
-export default function Icon({icon, type, active, onClickFunc, myClass, imgClass}) {
+
+interface  IconProps{
+    icon:string,
+    type?:string,
+    active?: boolean,
+    onClickFunc: any,
+    myClass?: string,
+    imgClass?: string,
+}
+
+export default function Icon(Props: IconProps) {
+    const { icon, type= "img", active=false, onClickFunc=";", myClass="", imgClass=""} = Props;   // you can use let, however const is recommended
     const [count, setCount] = useState(0);
     const {popupActive, setPopupActive} = useSpotify();
     return (
