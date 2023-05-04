@@ -1,8 +1,8 @@
-import { IoPerson, IoExit, IoSettingsSharp } from 'react-icons/io5';
+import { IoPerson, IoChevronDown, IoExit, IoSettingsSharp } from 'react-icons/io5';
 import styles from '../styles/custom.module.scss';
 import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
-
+import { useEffect, useRef } from 'react';
 
 export function dropdownLink({icon, title}: any) {
     return (
@@ -14,8 +14,6 @@ export function dropdownLink({icon, title}: any) {
 }
 
 export default function Profile({session}: any) {
- 
-
     const handleProfileClick = () => {
         const dropdown = document.getElementById(styles.dropdown);
         dropdown?.classList.toggle("scale-100")
@@ -28,12 +26,23 @@ export default function Profile({session}: any) {
     const handleLogin = () => {
         signIn("spotify", { callbackUrl: "http://localhost:3000/" });
     };
+    useEffect(() => {
+        let dropdown = document.getElementById(styles.dropdown)
+        document.addEventListener("mousedown", (event) => {
+            // @ts-ignore: Object is possibly 'null'.
+            if (!dropdown.contains(event.target)) {
+                dropdown?.classList.remove("scale-100")
+            } 
+          });
+      }, []);
+
+
     if(session) {
         return (
             <div className="z-100 relative group inline-block h-fit ">
                 <button 
                 
-                    className="flex gap-2 z-40 curor-pointer items-center w-fit transition-all h-fit py-1 pr-4 max-lg:p-0   bg-[#337264]  hover:opacity-80 rounded-full focus:outline-nonebg-[#1d4e447b]"
+                    className="flex gap-2 z-40 curor-pointer items-center w-fit transition-all h-fit p-0 rounded-full focus:outline-nonebg-[#1d4e447b]"
                     onClick={handleProfileClick}
                     >
                     <div className="imagecn overflow-hidden w-10 h-10 rounded-full  border-2 border-bg1">
@@ -46,6 +55,9 @@ export default function Profile({session}: any) {
                     </div>
                     <span className="text-sm hidden font-bold tracking-wide">
                         {session?.user?.name}
+                    </span>
+                    <span>
+                        <IoChevronDown></IoChevronDown>
                     </span>
                 </button>
                 <ul 
