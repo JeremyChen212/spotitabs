@@ -28,7 +28,7 @@ interface ContextProps {
   menuOpen: boolean,
   setMenuOpen: Dispatch<SetStateAction<boolean>>,
   getStartedPlaylists: any[],
-  setGetStartedPlaylists: () => void,
+  fetchGetStartedPlaylists: () => void,
   topArtists: [],
   fetchTopArtists: () => void,
   topGenres: [],
@@ -57,31 +57,21 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   const [getStartedPlaylists, setGetStartedPlaylists] = useState<any[]>([])
   const [topArtists, setTopArtists] = useState([])
   const [topGenres, setTopGenres] = useState([])
-  useEffect(() => {
-    const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "2CtbFy5I7LxvXk3pqk77AO", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
-  
-    const fetchGetStartedPlaylists = async () => {
-      try {
-        const responses = await Promise.all(playlistsIds.map(playlistId =>
-          axios({
-            method: 'get',
-            url: `https://api.spotify.com/v1/playlists/${playlistId}`,
-            headers: {
-              Authorization: `Bearer ${session.user.accessToken}`,
-            }
-          }).then(response => response.data)
-        ));
-        setGetStartedPlaylists(responses);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
-    if (session && typeof window !== 'undefined') {
-      fetchGetStartedPlaylists();
+  const fetchGetStartedPlaylists = async() => {
+    const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
+    try {
+      const responses = await Promise.all(playlistsIds.map(playlistId =>
+        customGet(
+          `https://api.spotify.com/v1/playlists/${playlistId}?fields=description%2C+name%2C+id%2C+owner%2C+images`,
+          session
+        )
+      ));
+      setGetStartedPlaylists(responses);
+    } catch (error) {
+      console.log(error);
     }
-  
-  }, [session]);
+    console.log(getStartedPlaylists)    
+  }
 
   function setSpinnerState(value: any) {
     setSpinner(value)
@@ -89,10 +79,12 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   const fetchPlaylists = async() => {
     // console.log(session.user.accessToken)
     if (session) {
+      console.log('FETCHING PLAYLISTS')
       const response = await fetch("/api/playlists");
       const data = await response.json();
       const playlists = data.playlists;
       setPlaylists(playlists);
+      console.log(data.playlists)
       setSpinner(false)
     }
     console.log(playlists)
@@ -167,7 +159,7 @@ export default function SpotifyContextProvider ({children, test}: any)  {
         menuOpen,
         setMenuOpen,
         getStartedPlaylists,
-        setGetStartedPlaylists,
+        fetchGetStartedPlaylists,
         topArtists,
         fetchTopArtists,
         topGenres, 

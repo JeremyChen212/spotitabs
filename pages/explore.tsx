@@ -8,6 +8,7 @@ import Toolbar from '@component/components/Toolbar';
 import Searchbar from '@component/components/Searchbar';
 import PlaylistSection from '@component/components/ExplorePage/PlaylistSection';
 import { PlaylistType } from '../types/types';
+import useSWR from 'swr'
 
 async function getRecomendedPlaylistBasedOnGenre(topGenres: any) {
     const response = await fetch('/api/generate', {
@@ -27,7 +28,7 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
     console.log(session)
     const {currentPlaylist} = useSpotify();
     const {overlayTab, setOverlayTab} = useSpotify();
-    const {playlists, fetchPlaylists, topArtists, fetchTopArtists, topGenres, getTopGenres, getStartedPlaylists, setGetStartedPlaylists} = useSpotify();
+    const {playlists, fetchPlaylists, topArtists, fetchTopArtists, topGenres, getTopGenres, getStartedPlaylists, fetchGetStartedPlaylists} = useSpotify();
     
     const {status: loading} = useSession();
     useEffect(() => {
@@ -35,12 +36,13 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
         //     fetchTopArtists()
         //     console.log(topArtists.length)
         // }
-        console.log(myGlobalVar)
+        console.log(getStartedPlaylists)
         fetchPlaylists()
+        fetchGetStartedPlaylists()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     useEffect(()=>{
-        setGetStartedPlaylists(serverGetStartedPlaylists)
+        // setGetStartedPlaylists(serverGetStartedPlaylists)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getStartedPlaylists])
     useEffect (() => {
@@ -53,14 +55,14 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
     }, [])
   
   
-  if (session) {
+  if (playlists) {
     return (
         <>
           <Toolbar></Toolbar>
           <div className=' z-0 w-full'>
                 <Searchbar></Searchbar>
-                <PlaylistSection items={serverGetStartedPlaylists} title={"Get Started"} ></PlaylistSection>
-                <PlaylistSection items={userplaylists} title={"Your playlists"} showAll={"playlists"}></PlaylistSection>
+                <PlaylistSection items={getStartedPlaylists} title={"Get Started"} ></PlaylistSection>
+                <PlaylistSection items={playlists} title={"Your playlists"} showAll={"playlists"}></PlaylistSection>
             {/* <p>TASKS: 
                 <br /> Create a function to search chatgpt: "out of these genres what are the most chord and guitar heavy: [topGenres]". 
                <br /> Store that into a new usestate variable.
@@ -69,16 +71,28 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
           </div>
         </>
     );
-  } 
+  } else {
+    return (
+      <>
+        <Toolbar></Toolbar>
+        <div className=' z-0 w-full'>
+              <Searchbar></Searchbar>
+              loading
+              {/* <PlaylistSection items={serverGetStartedPlaylists} title={"Get Started"} ></PlaylistSection>
+              <PlaylistSection items={userplaylists} title={"Your playlists"} showAll={"playlists"}></PlaylistSection> */}
+        </div>
+      </>
+  );
+  }
 }
 
 export async function getServerSideProps(context: any) {
   // VARIABLES
   const { req, res } = context;
-  // res.setHeader(
-  //   'Cache-Control',
-  //   'public, s-maxage=10, stale-while-revalidate=59'
-  // )
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
   const session = await getSession(context);
   let serverGetStartedPlaylists:PlaylistType[] = [];
   let userplaylists:PlaylistType[] = [];
@@ -86,44 +100,44 @@ export async function getServerSideProps(context: any) {
     // Check if the data is already cached
   
   
-  // PROTECTED ROUTE
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  } 
-   const newReleases = await customGet(
-    "https://api.spotify.com/v1/browse/new-releases?country=IN&limit=25",
-    session
-  );
-  // FUNCTIONS TO GET DATA
-  // Make the API call if the data is not cached
-  console.log("fetching get started playlists")
-  if(session) {
-    try {
-      const responses = await Promise.all(playlistsIds.map(playlistId =>
-        customGet(
-          `https://api.spotify.com/v1/playlists/${playlistId}?fields=description%2C+name%2C+id%2C+owner%2C+images`,
-          session
-        )
-      ));
-      serverGetStartedPlaylists = responses;
-    } catch (error) {
-      console.log(error);
-    }
-    try {
-      const response = await customGet(
-        `https://api.spotify.com/v1/me/playlists?limit=8`,
-        session
-      );
-      userplaylists = response.items
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // // PROTECTED ROUTE
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/login",
+  //       permanent: false,
+  //     },
+  //   };
+  // } 
+  //  const newReleases = await customGet(
+  //   "https://api.spotify.com/v1/browse/new-releases?country=IN&limit=25",
+  //   session
+  // );
+  // // FUNCTIONS TO GET DATA
+  // // Make the API call if the data is not cached
+  // console.log("fetching get started playlists")
+  // if(session) {
+  //   try {
+  //     const responses = await Promise.all(playlistsIds.map(playlistId =>
+  //       customGet(
+  //         `https://api.spotify.com/v1/playlists/${playlistId}?fields=description%2C+name%2C+id%2C+owner%2C+images`,
+  //         session
+  //       )
+  //     ));
+  //     serverGetStartedPlaylists = responses;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   try {
+  //     const response = await customGet(
+  //       `https://api.spotify.com/v1/me/playlists?limit=8`,
+  //       session
+  //     );
+  //     userplaylists = response.items
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return {
     props: {
