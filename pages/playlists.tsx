@@ -80,8 +80,6 @@ function Home({session}: any) {
   if (session) {
     return (
       <div className={`max-w-[1800px] min-h-[100vh] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
-          <Navbar></Navbar>
-          <Toolbar></Toolbar>
           <div className='text-center flex flex-col h-fit mx-auto m-auto w-fit'>
             <Heading text={'Your Playlists'}></Heading>
             <PlaylistDashboard></PlaylistDashboard>

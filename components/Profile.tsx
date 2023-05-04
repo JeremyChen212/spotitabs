@@ -30,7 +30,7 @@ export default function Profile({session}: any) {
     };
     if(session) {
         return (
-            <div className="z-100 relative group inline-block h-full ">
+            <div className="z-100 relative group inline-block h-fit ">
                 <button 
                 
                     className="flex gap-2 z-40 curor-pointer items-center w-fit transition-all h-fit py-1 pr-4 max-lg:p-0   bg-[#337264]  hover:opacity-80 rounded-full focus:outline-nonebg-[#1d4e447b]"

@@ -57,7 +57,7 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
     return (
         <>
           <Toolbar></Toolbar>
-          <div className='px-5 z-0 w-full'>
+          <div className=' z-0 w-full'>
                 <Searchbar></Searchbar>
                 <PlaylistSection items={serverGetStartedPlaylists} title={"Get Started"} ></PlaylistSection>
                 <PlaylistSection items={userplaylists} title={"Your playlists"} showAll={"playlists"}></PlaylistSection>
@@ -75,10 +75,10 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
 export async function getServerSideProps(context: any) {
   // VARIABLES
   const { req, res } = context;
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+  // res.setHeader(
+  //   'Cache-Control',
+  //   'public, s-maxage=10, stale-while-revalidate=59'
+  // )
   const session = await getSession(context);
   let serverGetStartedPlaylists:PlaylistType[] = [];
   let userplaylists:PlaylistType[] = [];

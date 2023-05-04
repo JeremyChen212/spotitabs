@@ -29,12 +29,11 @@ export default function Icon(Props: IconProps) {
                     {'<' + icon + "></" + icon + ">"}
                 </div>
             ) : (
-                <Image className={`${imgClass} `}
+                <Image className={`${imgClass} object-fit-contain h-full w-auto`}
                 src={icon}
                 alt={icon}
-                width={22}
-                height={22}
-                objectFit="contain"
+                width={"22"}
+                height={"22"}
                 /> 
             )}
            

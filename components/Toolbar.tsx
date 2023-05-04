@@ -47,13 +47,13 @@ export default function Navbar() {
         }
     }
     return (
-        <div className="absolute top-0 z-50 pointer-events-none left-[50%] translate-x-[-50%] flex h-[2rem] items-center justify-between w-full  ml-28 my-5 gap-5">
-            <div id="toolbar" className="flex gap-3 w-fit h-fit z-50 pointer-events-auto">
+        <div className="absolute top-0 z-50 pointer-events-none left-[50%] translate-x-[-50%] flex h-[1.5rem] items-center justify-between w-full  ml-28 my-5 gap-5">
+            <div id="toolbar" className="flex gap-3 w-fit h-full z-50 pointer-events-auto">
                 {/* <Icon active={checkPage("/playlist")}
                 icon={"/images/HomeIcon.svg"}></Icon> */}
-                <Icon active={checkActiveTab("explore")} onClickFunc={() => router.push("/explore")}  icon={"/images/SearchIcon.svg"}></Icon>
+                {/* <Icon active={checkActiveTab("explore")} onClickFunc={() => router.push("/explore")}  icon={"/images/SearchIcon.svg"}></Icon>
                 <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
-                <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
+                <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon> */}
             </div>
         </div>
         

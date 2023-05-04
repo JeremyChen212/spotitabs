@@ -31,8 +31,10 @@ export default function Navbar() {
         console.log(overlayTab)
     }
 
-    function checkActiveTab(tab: string) {
-        if (tab === overlayTab) {
+   
+    function checkActiveTab(tab: any) {
+        console.log(router.asPath)
+        if (router.asPath === "/" + tab) {
             return true
         }else {
             return false
@@ -61,20 +63,20 @@ export default function Navbar() {
                     height={96}
                     objectFit="contain"
                     /> */}
-                <div className="flex gap-5 z-[-1]">
+                <div className="flex bg-[#454343] px-6 py-2 rounded-full gap-5 z-[-1]">
                 {/* <Button onClickFunc={() => {showTab("playlist")}} title={"My Playlists"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} />
                 <Button onClickFunc={() => {showTab("saved")}} title={"Saved"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} /> */}
-                <div className="flex gap-3  ">
+                <div className="flex gap-4">
                 <Icon icon={"/images/LeftIcon.svg"} onClickFunc={() => router.back()} ></Icon>
                 <Icon icon={"/images/RightIcon.svg"} onClickFunc={() => window.history.forward()}></Icon>
                 </div>
-                {/* <div className="flex gap-3">
-                    <Icon active={checkActiveTab("search")}
-                   icon={"/images/HomeIcon.svg"}></Icon>
-                    <Icon popupActive={popupActive} active={checkActiveTab("search")} onClickFunc={() => showTab("search")}  icon={"/images/SearchIcon.svg"}></Icon>
-                    <Icon popupActive={popupActive} active={checkActiveTab("playlists")} onClickFunc={() => showTab("playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
-                    <Icon popupActive={popupActive} active={checkActiveTab("saved")} onClickFunc={() => showTab("saved")} icon={"/images/SaveIcon.svg"}></Icon>
-                </div> */}
+                <div className="flex gap-3">
+                    {/* <Icon active={checkActiveTab("search")}
+                   icon={"/images/HomeIcon.svg"}></Icon> */}
+                      <Icon active={checkActiveTab("explore")} onClickFunc={() => router.push("/explore")}  icon={"/images/SearchIcon.svg"}></Icon>
+                    <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
+                    <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
+                </div>
                 
                 </div>
                 <Profile session={session}/>

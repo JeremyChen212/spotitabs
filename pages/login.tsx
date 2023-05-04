@@ -7,12 +7,12 @@ export default function Login( { providers }: any) {
 
   return (
       <div className="flex flex-col items-center justify-center w-screen h-screen gap-20 bg-[background1]">
-        <Image
+        <Image className="object-fit w-[30rem] h-auto"
           src="/images/Spotitabs_Logo.png"
           alt="spotify logo"
           width={320}
           height={96}
-          objectFit="contain"
+          priority
         />
         {Object.values(providers).map((provider: any) => (
           <div key={provider?.name}>
