@@ -88,7 +88,7 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   }
   const getTopGenres = async() => {
     console.log(topArtists)
-    const genresOfTopArtsts = [];
+    const genresOfTopArtsts : string[] = [];
     // GET GENRES OF TOP ARTISTS
     for(let index = 0; index < topArtists.length; index++) {
       console.log(topArtists[index])
@@ -97,8 +97,8 @@ export default function SpotifyContextProvider ({children, test}: any)  {
         genresOfTopArtsts.push(topArtists[index].genres[secIndex])
       }
     }
-    const countOccurrences = (arr: any) =>
-    arr.reduce(({acc, curr}: any) => {
+    const countOccurrences = (arr) =>
+    arr.reduce((acc, curr) => {
       if (!acc[curr]) {
         acc[curr] = 1;
       } else {

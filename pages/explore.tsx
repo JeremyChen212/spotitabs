@@ -59,7 +59,7 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
           <Toolbar></Toolbar>
           <div className='px-5 z-0 w-full'>
                 <Searchbar></Searchbar>
-                <PlaylistSection items={serverGetStartedPlaylists} title={"Get Started"} showAll={""}></PlaylistSection>
+                <PlaylistSection items={serverGetStartedPlaylists} title={"Get Started"} ></PlaylistSection>
                 <PlaylistSection items={userplaylists} title={"Your playlists"} showAll={"playlists"}></PlaylistSection>
             {/* <p>TASKS: 
                 <br /> Create a function to search chatgpt: "out of these genres what are the most chord and guitar heavy: [topGenres]". 

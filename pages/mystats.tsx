@@ -1,56 +1,3 @@
-// import {useSession, signIn, signOut, } from 'next-auth/react';
-// import { getSession, GetSessionParams } from 'next-auth/react'
-// import { useRouter } from 'next/router';
-// import { Container, Center, Button } from '@chakra-ui/react'
-// import * as Popover from '@radix-ui/react-popover';
-// import SpotitabsLogo from '/public/Spotitabs_Logo.jpg'
-// import PlaylistDashboard from '../components/PlaylistDashboard';
-// import { getUsersPlaylists } from '../lib/spotify'
-// import { GetServerSideProps } from "next";
-// import { useEffect } from 'react';
-// import { useSpotify } from '../context/SpotifyContext'
-// import { customGet } from '@component/utils/customGet';
-// import axios from 'axios';
-// import SearchInput from '@component/components/SearchInput';
-// import Loader from '../components/Loader'
-// import Navbar from '@component/components/Navbar';
-// import Heading from '@component/components/Heading';
-// import leafyshoe from "../public/images/shoebg.jpeg"
-// import Image from 'next/image'
-
-
-// function Home({session}) {
-//   const router = useRouter()
-//   // const {status, data: session} = useSession();
- 
-  
-//     return (
-//       <div className={`mx-8 items-center flex flex-col gap-5 text-white`}>
-//         <Navbar></Navbar>
-//         <Heading className={"z-10"} text={"My Playlists"} />
-//       </div>
-//     );
-// }
-
-// export async function getServerSideProps(context: GetSessionParams | undefined) {
-//   const session = await getSession(context);
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     };
-//   }
-//   return {
-//     props: {
-//       session,
-//     },
-//   };
-// }
-
-// export default Home
-
 import { useSession } from 'next-auth/react';
 import { getSession, GetSessionParams } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -59,10 +6,10 @@ import { Button } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useSpotify } from '../context/SpotifyContext';
 import Image from 'next/image';
+import axios from 'axios';
 
-function Home({session}: any) {
+function Home({session, serverTopArtists}: any) {
   const router = useRouter()
-  const { accessToken } = session
   const {currentPlaylist} = useSpotify();
   const {topArtists, fetchTopArtists, topGenres, getTopGenres} = useSpotify();
 
@@ -120,8 +67,9 @@ useEffect (() => {
   )
 }
 
-export async function getServerSideProps(context: GetSessionParams | undefined) {
+export async function getServerSideProps(context: any) {
   const session = await getSession(context);
+  let serverTopArtists : any[] = []
   if (!session) {
     return {
       redirect: {
@@ -130,10 +78,25 @@ export async function getServerSideProps(context: GetSessionParams | undefined) 
       },
     };
   } 
+
+
+  if(session) {
+    try {
+      const resp = await axios.get("/api/topartists")
+      const data = resp.data
+      console.log(serverTopArtists)
+      serverTopArtists = data.topArtists
+    } catch (err) { 
+      console.log(err)
+    }
+  }
+
+  
   
   return {
     props: {
       session,
+      serverTopArtists
     },
   };
 }

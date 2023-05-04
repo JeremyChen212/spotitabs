@@ -10,28 +10,27 @@ import { useEffect } from "react";
 // import MainOverlay from "../../../components/overlays/MainOverlay"
 import Image from "next/image.js";
 
-export default function PlaylistPlayer({playlist}: any) {
+export default function PlaylistPlayer({playlist, serverPlaylist}: any) {
     const router = useRouter()
     const { pid } = router.query
     const {overlayTab, setOverlayTab} = useSpotify();
     const {popupActive, setPopupActive} = useSpotify();
-    console.log(playlist.tracks.items[0])
+    console.log(playlist)
     useEffect(() => {
       setOverlayTab("")
       setPopupActive(false)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
-      <div className={`max-w-[1800px] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
+      <>
         {/* <MainOverlay></MainOverlay> */}
-        <Navbar></Navbar>
         <div className="flex w-full gap-5">
           <div className="bg-bg2 rounded-md overflow-hidden max-w-md w-[50rem]">
               <h1 className="py-6 text-white text-xl w-full text-center inline-block">
                   {playlist.name}
               </h1>
               <div className="flex flex-col p-6 gap-3">
-                {playlist.tracks.items.map(({track, i}: any) => (
+                {serverPlaylist.tracks.items.map(({track, i}: any) => (
                   <div key={i} className="flex gap-2 w-full overflow-hidden whitespace-nowrap overflow-ellipsis">
                     <Image alt={track.track.album.images?.[0]?.url} src={track.track.album.images?.[0]?.url} width={100} height={100} className="w-14 h-auto rounded-sm"/>
                     <div className="flex flex-col">
@@ -47,6 +46,7 @@ export default function PlaylistPlayer({playlist}: any) {
                     </div>
                     </div>
                 ))}
+                ese
               </div>
           </div>
           <div className="bg-bg2 rounded-md overflow-hidden w-full">
@@ -57,7 +57,7 @@ export default function PlaylistPlayer({playlist}: any) {
         </div>
         {/* <YourPlaylists></YourPlaylists> */}
         {/* <SavedOverlay></SavedOverlay> */}
-      </div>
+        </>
     )
 }
 
@@ -74,14 +74,21 @@ export async function getServerSideProps(context: any) {
     }
     console.log(context.params.pid)
     const playlistId = context.params.pid;
-    const playlist = await customGet(
-      `https://api.spotify.com/v1/playlists/${playlistId}`,
-      session
-    );
+    let serverPlaylist;
+    try {
+      const response = await customGet(
+        `https://api.spotify.com/v1/playlists/${playlistId}`,
+        session
+      );
+      serverPlaylist = response.items
+      console.log(serverPlaylist)
+    } catch (error) {
+      console.log(error);
+    }
     return {
       props: {
         session,
-        playlist
+        serverPlaylist
       },
     };
   }
