@@ -35,9 +35,7 @@ export default function App({ Component, pageProps, myGlobalVar, test }: AppProp
       <SpotifyContextProvider session={pageProps.session} value={{
       test: mytest, // specify your test value here
     }}>
-      <Layout>
         <Component {...pageProps} />
-      </Layout>
       </SpotifyContextProvider>
     </SessionProvider>
     

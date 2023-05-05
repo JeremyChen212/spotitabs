@@ -3,7 +3,11 @@ import { useRouter } from "next/router";
 import { useSpotify } from "../context/SpotifyContext";
 import { useSession } from "next-auth/react";
 import { SkeletonCard } from "./SkeletonCard";
-
+import Image from "next/image";
+type ImageProps = {
+    src: string | null;
+  }
+  
 function PlaylistDashboard() {
     const router = useRouter();
     const { data: session } = useSession();
@@ -42,8 +46,21 @@ function PlaylistDashboard() {
                     //     <h1 className="absolute w-[100%] text-center bg-[#000000cd] text-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 py-3" >{playlist.name}</h1>
                     // </div>
                     // </Link>
-                    <div key={playlist.id} >
-                        <h1>{playlist.name}</h1>
+                    <div key={playlist.id} className="h-[10rem]" >
+                        {!playlist?.images?.[0]?.url ? (
+                            <div>
+                                
+                            </div>
+                        ) : (
+                            <Image 
+                            unoptimized={true}
+                            src={playlist?.images?.[0]?.url} 
+                            width={112} height={112}  
+                            alt="Song Image" 
+                            className="h-full w-full object-cover" priority/> 
+                        )}
+
+                                               <h1 className="text-lg">{playlist.name}</h1>
                     </div>
                 ))}
             </div>

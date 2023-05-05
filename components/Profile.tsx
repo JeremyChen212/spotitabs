@@ -16,7 +16,13 @@ export function dropdownLink({icon, title}: any) {
 export default function Profile({session}: any) {
     const handleProfileClick = () => {
         const dropdown = document.getElementById(styles.dropdown);
-        dropdown?.classList.toggle("scale-100")
+        dropdown?.classList.toggle("scale-100");
+        document.addEventListener("mousedown", (event) => {
+            // @ts-ignore: Object is possibly 'null'.
+            if(!dropdown.contains(event.target as Node)) {
+                dropdown?.classList.remove("scale-100")
+        }
+        });
     }
     const handleMouseEvent = (e: any) => {
         e.persist();
@@ -27,13 +33,7 @@ export default function Profile({session}: any) {
         signIn("spotify", { callbackUrl: "http://localhost:3000/" });
     };
     useEffect(() => {
-        let dropdown = document.getElementById(styles.dropdown)
-        document.addEventListener("mousedown", (event) => {
-            // @ts-ignore: Object is possibly 'null'.
-            if (!dropdown.contains(event.target)) {
-                dropdown?.classList.remove("scale-100")
-            } 
-          });
+        
       }, []);
 
 

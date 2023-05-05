@@ -70,6 +70,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import Head from 'next/head';
+import Layout from '@component/components/Layout';
 function Home({session}: any) {
   const router = useRouter()
   // const {status, data: session} = useSession();
@@ -87,21 +88,25 @@ function Home({session}: any) {
 
   if (session) {
     return (
-      <>
+      <Layout>
       <Head>
           <title>Explore | Spotitabs</title>
           <meta name='description' content='Find guitar tabs and chords for your favorite songs and playlists on Spotify. Our search tool allows you to easily find and learn guitar chords for any track or playlist. Start playing your favorite tunes today with our comprehensive library of chords and tabs. Search by song title, artist name, or browse our extensive selection of tunes made for you. Join our community of guitar enthusiasts and take your playing to the next level with our easy-to-use guitar tab and chord search tool.' />
         </Head>
         <div className='text-center flex flex-col h-fit mx-auto m-auto w-fit'>
           <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1>
-                  
-          <div className="flex text-2xl">
-          <FontAwesomeIcon icon={faSort}/>  
+          <div className="flex text-2xl justify-between mb-8">
+            <span className='flex gap-2 items-center'>
+              <FontAwesomeIcon className="h-fit" icon={faSort}/>  
+              <p className='text-lg'>
+                Most Recent
+              </p>
+            </span>
           <FontAwesomeIcon icon={faSearch}/>  
           </div>
           <PlaylistDashboard></PlaylistDashboard>
         </div>
-      </>
+      </Layout>
     );
   } 
   return (
