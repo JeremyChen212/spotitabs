@@ -3,7 +3,11 @@ import type { AppProps } from 'next/app';
 import { SessionProvider } from "next-auth/react";
 import SpotifyContextProvider from '@component/context/SpotifyContext';
 import Layout from '@component/components/Layout';
-
+import "@fortawesome/fontawesome-svg-core/styles.css"; 
+import { config } from "@fortawesome/fontawesome-svg-core";
+// Tell Font Awesome to skip adding the CSS automatically 
+// since it's already imported above
+config.autoAddCss = false; 
 
 interface CustomAppProps {
   myGlobalVar: string,

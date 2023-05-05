@@ -65,7 +65,8 @@ import Image from 'next/image';
 import Toolbar from '@component/components/Toolbar';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFilterCircleDollar
+  faSort,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
 import Head from 'next/head';
@@ -93,6 +94,11 @@ function Home({session}: any) {
         </Head>
         <div className='text-center flex flex-col h-fit mx-auto m-auto w-fit'>
           <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1>
+                  
+          <div className="flex text-2xl">
+          <FontAwesomeIcon icon={faSort}/>  
+          <FontAwesomeIcon icon={faSearch}/>  
+          </div>
           <PlaylistDashboard></PlaylistDashboard>
         </div>
       </>
