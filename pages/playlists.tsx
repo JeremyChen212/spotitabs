@@ -57,11 +57,18 @@ import { useRouter } from 'next/router';
 import { Button } from '@chakra-ui/react';
 import PlaylistDashboard from '../components/PlaylistDashboard';
 import { useEffect, useState } from 'react';
+import { IoFilter, IoFilterOutline } from 'react-icons/io5';
 import { useSpotify } from '../context/SpotifyContext';
 import Navbar from '@component/components/Navbar';
 import Heading from '@component/components/Heading';
 import Image from 'next/image';
 import Toolbar from '@component/components/Toolbar';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFilterCircleDollar
+} from "@fortawesome/free-solid-svg-icons";
+
+import Head from 'next/head';
 function Home({session}: any) {
   const router = useRouter()
   // const {status, data: session} = useSession();
@@ -79,12 +86,16 @@ function Home({session}: any) {
 
   if (session) {
     return (
-      <div className={`max-w-[1800px] min-h-[100vh] m-auto  mx-6 items-start h-fit flex flex-col text-white`}>
-          <div className='text-center flex flex-col h-fit mx-auto m-auto w-fit'>
-            <Heading text={'Your Playlists'}></Heading>
-            <PlaylistDashboard></PlaylistDashboard>
-          </div>
-      </div>
+      <>
+      <Head>
+          <title>Explore | Spotitabs</title>
+          <meta name='description' content='Find guitar tabs and chords for your favorite songs and playlists on Spotify. Our search tool allows you to easily find and learn guitar chords for any track or playlist. Start playing your favorite tunes today with our comprehensive library of chords and tabs. Search by song title, artist name, or browse our extensive selection of tunes made for you. Join our community of guitar enthusiasts and take your playing to the next level with our easy-to-use guitar tab and chord search tool.' />
+        </Head>
+        <div className='text-center flex flex-col h-fit mx-auto m-auto w-fit'>
+          <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1>
+          <PlaylistDashboard></PlaylistDashboard>
+        </div>
+      </>
     );
   } 
   return (

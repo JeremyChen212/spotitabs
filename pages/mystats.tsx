@@ -102,10 +102,10 @@ useEffect (() => {
                         ))}
                     </div>
                     <div>
-                        {/* <h1 className="text-[1.5rem] underline mb-4">Top Genres ({topGenres.length})</h1>
+                        <h1 className="text-[1.5rem] underline mb-4">Top Genres ({topGenres.length})</h1>
                         {topGenres.map((genre, index) => (
                             <h1 key={genre}>{genre}</h1>
-                        ))} */}
+                        ))}
                     </div>
                 </div>
           </div>

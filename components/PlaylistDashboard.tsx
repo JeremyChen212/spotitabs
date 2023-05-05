@@ -33,7 +33,7 @@ function PlaylistDashboard() {
             <>
             <div 
             // className={`grid transition-all grid-cols-1 gap-[1.5rem] xl:grid-cols-4 max-w-[50rem] lg:grid-cols-3 md:grid-cols-2 xl`}
-            className="flex flex-col px-5 h-[13rem] items-start gap-4 overflow-x-scroll w-fit m-auto">
+            className="flex flex-col px-5  items-center gap-4 overflow-x-scroll text-center  w-fit m-auto">
                 {playlists.map((playlist, index) => (
                     //         <Link key={playlist.id} href={`/playlist/${playlist.id}`}>
                     // <Link key={playlists.name} href={`/playlist/${playlist.id}`} >
@@ -44,7 +44,6 @@ function PlaylistDashboard() {
                     // </Link>
                     <div key={playlist.id} >
                         <h1>{playlist.name}</h1>
-                        {/* <Card playlist={playlist} /> */}
                     </div>
                 ))}
             </div>

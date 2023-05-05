@@ -25,7 +25,7 @@ export default function PlaylistSection({items, title, showAll}: any) {
     //         </div>
     //     )
     //   }
-    if(items.length = 0) {
+    if(items.length > 0) {
         return (
             <div className="w-full h-fit relative pb-10">
                 <div className="flex items-center justify-between">
