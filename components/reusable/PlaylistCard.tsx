@@ -24,7 +24,7 @@ const PlaylistCard = ({ playlist }: any) => {
           onLoadingComplete={handleLoadComplete}
           unoptimized={true}
           loader={()=>playlist?.images?.[0]?.url}
-          src={playlist?.images?.[0]?.url} width={"10"} height={"10"}  alt="Song Image" className="h-full  w-full object-cover" priority/>
+          src={playlist?.images?.[0]?.url} width={10} height={10}  alt="Song Image" className="h-full  w-full object-cover" priority/>
        </div> 
        <div className="w-full max-w-10 flex-1">
          <h2 className="text-lg font-semibold mb-2 w-full line-clamp-2 text-ellipse">{playlist.name}</h2>
