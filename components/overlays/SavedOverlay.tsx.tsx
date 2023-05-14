@@ -1,4 +1,4 @@
-import Heading from "../Heading";
+import Heading from "../reusable/Heading";
 import PlaylistDashboard from "../PlaylistDashboard";
 import { useSpotify } from "../../context/SpotifyContext";
 import { useRouter } from "next/router";

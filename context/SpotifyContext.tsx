@@ -57,22 +57,26 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   const [getStartedPlaylists, setGetStartedPlaylists] = useState<any[]>([])
   const [topArtists, setTopArtists] = useState([])
   const [topGenres, setTopGenres] = useState([])
+  
   const fetchGetStartedPlaylists = async() => {
-    const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
-    try {
-      const responses = await Promise.all(playlistsIds.map(playlistId =>
-        customGet(
-          `https://api.spotify.com/v1/playlists/${playlistId}?fields=description%2C+name%2C+id%2C+owner%2C+images`,
-          session
-        )
-      ));
-      setGetStartedPlaylists(responses);
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(getStartedPlaylists)    
+    // const playlistsIds = ["43Nvl9B8fErDqqPSx1OdW0", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
+    // // const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
+    // try {
+    //   const responses = await Promise.all(playlistsIds.map(playlistId =>
+    //     customGet(
+    //       `https://api.spotify.com/v1/playlists/${playlistId}?fields=description%2C+name%2C+id%2C+owner%2C+images`,
+    //       session
+    //     )
+    //   ));
+    //   setGetStartedPlaylists(responses);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    const response = await fetch('/api/GetStartedPlaylists')
+    const data = await response.json();
+    console.log(data);
+    setGetStartedPlaylists(data)
   }
-
   function setSpinnerState(value: any) {
     setSpinner(value)
   }

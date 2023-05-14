@@ -60,7 +60,7 @@ import { useEffect, useState } from 'react';
 import { IoFilter, IoFilterOutline } from 'react-icons/io5';
 import { useSpotify } from '../context/SpotifyContext';
 import Navbar from '@component/components/Navbar';
-import Heading from '@component/components/Heading';
+import Heading from '@component/components/reusable/Heading';
 import Image from 'next/image';
 import Toolbar from '@component/components/Toolbar';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -95,13 +95,15 @@ function Home({session}: any) {
         </Head>
         <div className='text-center flex flex-col h-fit mx-auto m-auto w-fit'>
           <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1>
-          <div className="flex text-2xl justify-between mb-8">
-            <span className='flex gap-2 items-center'>
+          <div className="flex text-xl  justify-between mb-8">
+            <span className='flex gap-2 cursor-pointer items-center'>
               <FontAwesomeIcon className="h-fit" icon={faSort}/>  
-              <p className='text-lg'>
+              <p className='text-sm'>
                 Most Recent
               </p>
             </span>
+            <div id='dropdown'>
+            </div>
           <FontAwesomeIcon icon={faSearch}/>  
           </div>
           <PlaylistDashboard></PlaylistDashboard>

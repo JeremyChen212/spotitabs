@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { Button } from '@chakra-ui/react';
 import PlaylistDashboard from '../components/PlaylistDashboard';
 import Navbar from '@component/components/Navbar';
-import Heading from '@component/components/Heading';
+import Heading from '@component/components/reusable/Heading';
 import Image from 'next/image';
 
 

@@ -14,8 +14,7 @@ export default function Login( { providers }: any) {
           height={96}
           priority
         />
-        {Object.values(providers).map((provider: any) => (
-          <div key={provider?.name}>
+          <div >
           <button
             className="flex px-12 py-2 text-lg text-white from-spotifygreen tracking-widest uppercase rounded-full focus:outline-none bg-spotifygreen hover:bg-opacity-50 transition-all"
             onClick={() => handleLogin()}
@@ -23,7 +22,6 @@ export default function Login( { providers }: any) {
             Login
           </button>
           </div>
-        ))}
         
       </div>
   );

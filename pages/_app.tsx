@@ -1,4 +1,4 @@
-import '@component/styles/globals.css';
+import '@component/styles/globals.scss';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from "next-auth/react";
 import SpotifyContextProvider from '@component/context/SpotifyContext';

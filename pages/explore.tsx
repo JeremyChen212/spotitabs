@@ -6,11 +6,13 @@ import { useSpotify } from '../context/SpotifyContext';
 import { customGet } from '@component/utils/customGet';
 import Toolbar from '@component/components/Toolbar';
 import Searchbar from '@component/components/Searchbar';
+import GetStartedSection from '@component/components/ExplorePage/GetStartedSection';
 import PlaylistSection from '@component/components/ExplorePage/PlaylistSection';
 import { PlaylistType } from '../types/types';
 import useSWR from 'swr'
 import Head from 'next/head'
 import Layout from '@component/components/Layout';
+import SplineObject1 from '@component/components/SplineObject1';
 
 async function getRecomendedPlaylistBasedOnGenre(topGenres: any) {
     const response = await fetch('/api/generate', {
@@ -55,8 +57,6 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
         console.log(userplaylists)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-  
-  
   if (playlists) {
     return (
         <Layout>
@@ -67,7 +67,7 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
           <Toolbar></Toolbar>
           <div className='z-0 w-full'>
                 <Searchbar></Searchbar>
-                <PlaylistSection items={getStartedPlaylists} title={"Get Started"} ></PlaylistSection>
+                <GetStartedSection bigCard={true} items={getStartedPlaylists} title={"Get Started"} ></GetStartedSection>
                 <PlaylistSection items={playlists} title={"Your playlists"} showAll={"playlists"}></PlaylistSection>
             {/* <p>TASKS: 
                 <br /> Create a function to search chatgpt: "out of these genres what are the most chord and guitar heavy: [topGenres]". 
@@ -102,48 +102,6 @@ export async function getServerSideProps(context: any) {
   const session = await getSession(context);
   let serverGetStartedPlaylists:PlaylistType[] = [];
   let userplaylists:PlaylistType[] = [];
-  const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
-    // Check if the data is already cached
-  
-  
-  // // PROTECTED ROUTE
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: "/login",
-  //       permanent: false,
-  //     },
-  //   };
-  // } 
-  //  const newReleases = await customGet(
-  //   "https://api.spotify.com/v1/browse/new-releases?country=IN&limit=25",
-  //   session
-  // );
-  // // FUNCTIONS TO GET DATA
-  // // Make the API call if the data is not cached
-  // console.log("fetching get started playlists")
-  // if(session) {
-  //   try {
-  //     const responses = await Promise.all(playlistsIds.map(playlistId =>
-  //       customGet(
-  //         `https://api.spotify.com/v1/playlists/${playlistId}?fields=description%2C+name%2C+id%2C+owner%2C+images`,
-  //         session
-  //       )
-  //     ));
-  //     serverGetStartedPlaylists = responses;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   try {
-  //     const response = await customGet(
-  //       `https://api.spotify.com/v1/me/playlists?limit=8`,
-  //       session
-  //     );
-  //     userplaylists = response.items
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return {
     props: {

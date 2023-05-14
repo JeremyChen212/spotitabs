@@ -58,7 +58,7 @@ import { Button } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useSpotify } from '../context/SpotifyContext';
 import Navbar from '@component/components/Navbar';
-import Heading from '@component/components/Heading';
+import Heading from '@component/components/reusable/Heading';
 import Image from 'next/image';
 // import MainOverlay from '@component/components/overlays/MainOverlay'
 import Toolbar from '@component/components/Toolbar';

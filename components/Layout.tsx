@@ -8,7 +8,7 @@ interface IProps {
 export default function Layout({children}: any) {
   const router = useRouter();
   return (
-    <div className={"min-h-[100vh] m-auto  mx-6 items-start h-fit flex flex-col text-white"}>
+    <div className={"min-h-[100vh] p-2 m-auto  mx-6 items-start h-fit flex flex-col text-white"}>
       <Navbar></Navbar>
       
       {children}

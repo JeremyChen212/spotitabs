@@ -46,10 +46,9 @@ function PlaylistDashboard() {
                     //     <h1 className="absolute w-[100%] text-center bg-[#000000cd] text-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 py-3" >{playlist.name}</h1>
                     // </div>
                     // </Link>
-                    <div key={playlist.id} className="h-[10rem]" >
+                    <div key={playlist.id} className="gap-4 items-start grid grid-cols-8" >
                         {!playlist?.images?.[0]?.url ? (
                             <div>
-                                
                             </div>
                         ) : (
                             <Image 
@@ -57,10 +56,10 @@ function PlaylistDashboard() {
                             src={playlist?.images?.[0]?.url} 
                             width={112} height={112}  
                             alt="Song Image" 
-                            className="h-full w-full object-cover" priority/> 
+                            className="h-auto col-span-1 w-full object-cover" priority/> 
                         )}
 
-                                               <h1 className="text-lg">{playlist.name}</h1>
+                            <h1 className="text-lg justify-self-start col-span-4">{playlist.name}</h1>
                     </div>
                 ))}
             </div>

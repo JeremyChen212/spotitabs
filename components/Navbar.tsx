@@ -55,7 +55,7 @@ export default function Navbar() {
     return (
         <>
         {windowSize.width > 600 ? (
-            <nav id="navbar" className="sticky z-50 top-0 flex h-[2rem] items-center justify-between w-full mx-auto my-5 gap-5">
+            <nav id="navbar" className="relative z-50 top-0 flex h-[2rem] items-center justify-between w-full mx-auto my-5 gap-5">
                 {/* <Image
                     src="/images/Spotitabs_Logo_Single.png"
                     alt="spotify logo"
@@ -63,7 +63,7 @@ export default function Navbar() {
                     height={96}
                     objectFit="contain"
                     /> */}
-                <div className="flex bg-[#454343] px-6 py-2 rounded-full gap-5 z-[-1]">
+                <div className="flex bg-[var(--bg-3-color)] px-6 py-2 rounded-full gap-5 z-[-1]">
                 {/* <Button onClickFunc={() => {showTab("playlist")}} title={"My Playlists"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} />
                 <Button onClickFunc={() => {showTab("saved")}} title={"Saved"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} /> */}
                 <div className="flex gap-4">
@@ -79,6 +79,11 @@ export default function Navbar() {
                 </div>
                 
                 </div>
+                {/* <div className='flex gap-2 items-center absolute left-[50%] opacity-80 translate-x-[-50%] '>
+                    <hr className="w-4 rounded-full border" />
+                    <h3>Explore</h3>
+                    <hr className="w-4 rounded-full border" />
+                </div> */}
                 <Profile session={session}/>
                 {/*               
 
