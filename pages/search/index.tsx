@@ -32,7 +32,7 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
     console.log(session)
     const {currentPlaylist} = useSpotify();
     const {overlayTab, setOverlayTab} = useSpotify();
-    const {playlists, fetchPlaylists, topArtists, fetchTopArtists, topGenres, getTopGenres, getStartedPlaylists, fetchGetStartedPlaylists} = useSpotify();
+    const {setSearchQuery, playlists, fetchPlaylists, topArtists, fetchTopArtists, topGenres, getTopGenres, getStartedPlaylists, fetchGetStartedPlaylists} = useSpotify();
     
     const {status: loading} = useSession();
     useEffect(() => {
@@ -43,6 +43,7 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
         console.log(getStartedPlaylists)
         fetchPlaylists()
         fetchGetStartedPlaylists()
+        setSearchQuery("")
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     useEffect(()=>{

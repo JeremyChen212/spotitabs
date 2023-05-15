@@ -33,7 +33,9 @@ interface ContextProps {
   fetchTopArtists: () => void,
   topGenres: [],
   getTopGenres: () => void,
-  test: null
+  test: null,
+  searchQuery: string,
+  setSearchQuery: Dispatch<SetStateAction<string>>
 }
 
 
@@ -57,7 +59,7 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   const [getStartedPlaylists, setGetStartedPlaylists] = useState<any[]>([])
   const [topArtists, setTopArtists] = useState([])
   const [topGenres, setTopGenres] = useState([])
-  
+  const [searchQuery, setSearchQuery] = useState("");
   const fetchGetStartedPlaylists = async() => {
     // const playlistsIds = ["43Nvl9B8fErDqqPSx1OdW0", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
     // // const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
@@ -148,6 +150,8 @@ export default function SpotifyContextProvider ({children, test}: any)  {
       value={{
         playlists, 
         fetchPlaylists,
+        searchQuery,
+        setSearchQuery,
         searchResults,
         fetchSearchResults,
         spinner,
