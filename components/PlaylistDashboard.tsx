@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSpotify } from "../context/SpotifyContext";
 import { useSession } from "next-auth/react";
@@ -11,13 +11,14 @@ type ImageProps = {
   
 function PlaylistDashboard() {
     const router = useRouter();
+    
     const { data: session } = useSession();
     const { playlists, fetchPlaylists } = useSpotify();
     // const [playlists, setPlaylists] = useState();
     const spotifyApi = useSpotify()
     const { spinner } = useSpotify()
     const skeletonCount = 20
-
+  
     function toggleSort(sortBy) {
         switch(sortBy) {
             case 0:

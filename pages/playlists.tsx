@@ -71,6 +71,7 @@ import {
 
 import Head from 'next/head';
 import Layout from '@component/components/Layout';
+import Searchbar from '@component/components/Searchbar';
 function Home({session}: any) {
   const router = useRouter()
   // const {status, data: session} = useSession();
@@ -81,7 +82,16 @@ function Home({session}: any) {
   const [jDown, setJDown] = useState(false)
   const {status: loading} = useSession();
 
-  
+  const [searchBarBoolean, setSearchBarBoolean] = useState(false)
+  useEffect(()=>{
+      document.addEventListener("keypress", function(e) {
+          if(e.metaKey && e.key == "k") {
+            e.preventDefault();
+            console.log("CNTRL K PRESSED")
+              setSearchBarBoolean(true)
+          }
+      })
+  })
   
 
 
@@ -104,7 +114,8 @@ function Home({session}: any) {
             </span>
             <div id='dropdown'>
             </div>
-          <FontAwesomeIcon icon={faSearch}/>  
+          {/* <FontAwesomeIcon icon={faSearch}/>  */}
+          <Searchbar myClass={`w-0 hidden ${searchBarBoolean && "flex"}`}></Searchbar> 
           </div>
           <PlaylistDashboard></PlaylistDashboard>
         </div>
