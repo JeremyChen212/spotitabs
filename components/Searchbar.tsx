@@ -8,10 +8,10 @@ export default function Searchbar() {
     const {popupActive, setPopupActive} = useSpotify()
     const [searchQuery, setSearchQuery] = useState("")
     return (
-        <div className="w-full animated-border-3 my-4 rounded-md relative">
-                <IoSearch className="text-[white] right-0 mr-4 text-xl absolute pointer-events-none top-[50%] translate-y-[-50%]"></IoSearch>
+        <div className="w-full bg-[#FFFFFF] my-4 rounded-md relative">
+                <IoSearch className="text-[#17191A] left-0 ml-4 stroke-[1rem] text-xl absolute pointer-events-none top-[50%] translate-y-[-50%]"></IoSearch>
                 <input id="searchInput" type="text" onChange={e => setSearchQuery(e.target.value)} value={searchQuery} 
-                className="outline-none bg-[#ffffff00] text-[white] w-full p-3 pl-4" placeholder="Type a song"/>
+                className="outline-none bg-[#ffffff00] text-[#17191A] w-full p-3 pl-12" placeholder="Find a song, artist, album, or playlist"/>
                 {/* <hr className="opacity-20 z-3"/> */}
         </div>
     )

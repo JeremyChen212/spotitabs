@@ -18,7 +18,7 @@ const PlaylistCard = ({ playlist }: any) => {
 
   return (
     <>
-     <Link href={`/playlist/${playlist.id}`} className="flex flex-col relative cursor-pointer hover:scale-[1.01] transition-all p-4 rounded-lg h-fit overflow-hidden w-full gap-4">
+     <Link href={`/playlist/${playlist.id}`} className="flex flex-col relative cursor-pointer  hover:scale-[1.01] transition-all rounded-lg h-fit overflow-hidden w-full gap-4">
       <div className={`w-full animated-border-2 rounded-lg overflow-hidden`}>
           <Image 
             onLoadingComplete={handleLoadComplete}
