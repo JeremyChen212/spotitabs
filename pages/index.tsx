@@ -257,7 +257,7 @@ export async function getServerSideProps(context: any) {
   }  else {
     return {
       redirect: {
-        destination: "/explore",
+        destination: "/search",
         permanent: false,
       },
     };

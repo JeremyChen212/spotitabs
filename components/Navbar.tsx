@@ -30,11 +30,12 @@ export default function Navbar() {
         setOverlayTab(tab)
         console.log(overlayTab)
     }
-
+    console.log(router.basePath)
    
     function checkActiveTab(tab: any) {
-        console.log(router.asPath)
-        if (router.asPath === "/" + tab) {
+        const path = router.asPath.split('/')[1]; // Extract the first part of the path
+        console.log(path)
+        if (path === tab) {
             return true
         }else {
             return false
