@@ -66,6 +66,7 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
         </Head>
           <Toolbar></Toolbar>
           <div className='z-0 w-full'>
+              {/* <h1 className="text-center text-[4rem] font-normal py-4">EXPLORE</h1> */}
                 <Searchbar></Searchbar>
                 <GetStartedSection bigCard={true} items={getStartedPlaylists} title={"Get Started"} ></GetStartedSection>
                 <PlaylistSection items={playlists} title={"Your playlists"} showAll={"playlists"}></PlaylistSection>

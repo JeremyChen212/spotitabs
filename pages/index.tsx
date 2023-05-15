@@ -62,7 +62,7 @@ import Heading from '@component/components/reusable/Heading';
 import Image from 'next/image';
 // import MainOverlay from '@component/components/overlays/MainOverlay'
 import Toolbar from '@component/components/Toolbar';
-import PlaylistCard from '../components/reusable/PlaylistCard';
+import PlaylistCard from '../components/ExplorePage/PlaylistCard';
 import Searchbar from '@component/components/Searchbar';
 import GetStarted from '@component/components/ExplorePage/PlaylistSection';
 function Home({session}: any) {

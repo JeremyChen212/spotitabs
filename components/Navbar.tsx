@@ -19,7 +19,7 @@ export default function Navbar() {
         setSelected(path)
         router.push("/" + path)
     }
-    
+    const newPath = router.pathname.replace(/\//g, "").toUpperCase();
     function showTab(tab: string) {
         console.log("SHOWING TAB")
         setPopupActive(true)
@@ -79,11 +79,11 @@ export default function Navbar() {
                 </div>
                 
                 </div>
-                {/* <div className='flex gap-2 items-center absolute left-[50%] opacity-80 translate-x-[-50%] '>
+                <div className='flex gap-2 items-center absolute left-[50%] opacity-80 translate-x-[-50%] '>
                     <hr className="w-4 rounded-full border" />
-                    <h3>Explore</h3>
+                    <h3>{newPath}</h3>
                     <hr className="w-4 rounded-full border" />
-                </div> */}
+                </div>
                 <Profile session={session}/>
                 {/*               
 

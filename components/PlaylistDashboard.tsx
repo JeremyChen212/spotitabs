@@ -6,7 +6,7 @@ import { SkeletonCard } from "./SkeletonCard";
 import Image from "next/image";
 type ImageProps = {
     src: string | null;
-  }
+}
   
 function PlaylistDashboard() {
     const router = useRouter();

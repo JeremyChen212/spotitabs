@@ -2,12 +2,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSpotify } from "../../context/SpotifyContext";
 import { useSession } from "next-auth/react";
-import PlaylistCard from "../reusable/PlaylistCard";
+import PlaylistCard from "./PlaylistCard";
 import Heading from '../reusable/Heading';
-import SkeletonCard from '../reusable/SkeletonCard';
+import SkeletonCard from './SkeletonCard';
 import { Application } from '@splinetool/runtime';
 import { useEffect } from "react";
-import BigCard from '../reusable/BigCard'
+import BigCard from './BigCard'
 
 export default function PlaylistSection({items, title, showAll, bigCard}: any) {
     const router = useRouter();

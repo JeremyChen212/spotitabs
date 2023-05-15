@@ -27,7 +27,7 @@ const PlaylistCard = ({ playlist }: any) => {
             src={playlist?.images?.[0]?.url} width={112} height={112}  alt="Song Image" className="h-full w-full object-cover" priority/>
         </div> 
           <div className="w-full flex-1">
-            <h2 className="text-lg font-semibold mb-[0.15rem] w-full line-clamp-1 text-ellipse">{playlist.name}</h2>
+            <h2 className="text-lg font-medium mb-[0.15rem] w-full line-clamp-1 text-ellipse">{playlist.name}</h2>
             {playlist?.description ? (
                 <div className="text-[#A9A9A9]  w-full max-w-full pointer-events-none line-clamp-1 text-ellipse">
                   {playlistDescription}

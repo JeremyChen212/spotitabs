@@ -93,8 +93,8 @@ function Home({session}: any) {
           <title>Explore | Spotitabs</title>
           <meta name='description' content='Find guitar tabs and chords for your favorite songs and playlists on Spotify. Our search tool allows you to easily find and learn guitar chords for any track or playlist. Start playing your favorite tunes today with our comprehensive library of chords and tabs. Search by song title, artist name, or browse our extensive selection of tunes made for you. Join our community of guitar enthusiasts and take your playing to the next level with our easy-to-use guitar tab and chord search tool.' />
         </Head>
-        <div className='text-center flex flex-col h-fit mx-auto m-auto w-fit'>
-          <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1>
+        <div className='text-center my-8 flex flex-col h-fit mx-auto m-auto w-fit'>
+          {/* <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1> */}
           <div className="flex text-xl  justify-between mb-8">
             <span className='flex gap-2 cursor-pointer items-center'>
               <FontAwesomeIcon className="h-fit" icon={faSort}/>  
