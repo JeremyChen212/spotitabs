@@ -11,7 +11,7 @@ export default function Searchbar({myClass}: any) {
     const [searchQuery, setSearchQuery] = useState("")
     function handleSearch(event) {
         event.preventDefault();
-        router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+        router.push(`/search/${encodeURIComponent(searchQuery)}`);
     }
     return (
         <form onSubmit={(e)=>handleSearch(e)} className={`${myClass} w-full bg-[var(--bg-2-color)] text-[white] my-4 rounded-md relative`}>

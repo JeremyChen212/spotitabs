@@ -73,7 +73,7 @@ export default function Navbar() {
                 <div className="flex gap-3">
                     {/* <Icon active={checkActiveTab("search")}
                    icon={"/images/HomeIcon.svg"}></Icon> */}
-                      <Icon active={checkActiveTab("explore")} onClickFunc={() => router.push("/explore")}  icon={"/images/SearchIcon.svg"}></Icon>
+                      <Icon active={checkActiveTab("search")} onClickFunc={() => router.push("/search")}  icon={"/images/SearchIcon.svg"}></Icon>
                     <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
                     <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
                 </div>
@@ -81,7 +81,7 @@ export default function Navbar() {
                 </div>
                 <div className='flex gap-2 items-center absolute left-[50%] opacity-80 translate-x-[-50%] '>
                     <hr className="w-4 rounded-full border" />
-                    <h3>{newPath}</h3>
+                    <h3>{router.pathname.includes('/search/') ? `Search results for ${router.query.pid}` : newPath}</h3>
                     <hr className="w-4 rounded-full border" />
                 </div>
                 <Profile session={session}/>
