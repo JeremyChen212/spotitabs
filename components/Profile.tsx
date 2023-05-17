@@ -1,5 +1,5 @@
 import { IoPerson, IoChevronDown, IoExit, IoSettingsSharp } from 'react-icons/io5';
-import styles from '../styles/custom.module.scss';
+import styles from '../styles/Custom.module.scss';
 import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
