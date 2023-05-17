@@ -52,7 +52,6 @@ function Home({session}: any) {
   const router = useRouter()
   // const {status, data: session} = useSession();
   console.log(session)
-  const {currentPlaylist} = useSpotify();
   const {overlayTab, setOverlayTab} = useSpotify();
   const [commandDown, setCommandDown] = useState(false)
   const [jDown, setJDown] = useState(false)

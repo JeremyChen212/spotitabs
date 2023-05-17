@@ -44,7 +44,7 @@ function Home({session}: any) {
             />
           </div> */}
         <Navbar></Navbar>
-        <Heading className={"z-10"} text={"My Playlists"} />
+        <Heading className={"z-10"}  size={"lg"} text={"My Playlists"} />
         <PlaylistDashboard ></PlaylistDashboard>
       </div>
     );

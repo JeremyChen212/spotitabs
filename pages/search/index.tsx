@@ -30,7 +30,6 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
     const router = useRouter()
     // const {status, data: session} = useSession();
     console.log(session)
-    const {currentPlaylist} = useSpotify();
     const {overlayTab, setOverlayTab} = useSpotify();
     const {setSearchQuery, playlists, fetchPlaylists, topArtists, fetchTopArtists, topGenres, getTopGenres, getStartedPlaylists, fetchGetStartedPlaylists} = useSpotify();
     

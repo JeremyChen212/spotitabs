@@ -30,7 +30,7 @@ export default function Profile({session}: any) {
         dropdown?.classList.remove("scale-100")
       };
     const handleLogin = () => {
-        signIn("spotify", { callbackUrl: "http://localhost:3000/" });
+        signIn("spotify", { callbackUrl: "https://spotitabs.vercel.app/" });
     };
     useEffect(() => {
         

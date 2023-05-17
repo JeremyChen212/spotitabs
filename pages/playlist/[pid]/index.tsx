@@ -2,7 +2,6 @@ import { useRouter } from "next/router"
 import { customGet } from "@component/utils/customGet";
 import { getSession } from 'next-auth/react';
 import Navbar from "@component/components/Navbar";
-import OverlayTab from "@component/components/OverlayTab";
 import YourPlaylists from "@component/components/overlays/YourPlaylists";
 import SavedOverlay from '../../../components/overlays/SavedOverlay.tsx';
 import { useSpotify } from '../../../context/SpotifyContext'

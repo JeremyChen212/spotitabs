@@ -69,7 +69,7 @@ function Home({session}: any) {
   const router = useRouter()
   // const {status, data: session} = useSession();
   console.log(session)
-  const {currentPlaylist} = useSpotify();
+  // const {currentPlaylist} = useSpotify();
   const {overlayTab, setOverlayTab} = useSpotify();
   const [commandDown, setCommandDown] = useState(false)
   const [jDown, setJDown] = useState(false)
@@ -138,7 +138,7 @@ function Home({session}: any) {
           <div className='px-5 w-full'>
             <Searchbar></Searchbar>
             <div>
-              <Heading text={"Get Started"}></Heading>
+              <Heading text={"Get Started"} size={"lg"}></Heading>
               <PlaylistCard playlistImage={'https://mosaic.scdn.co/640/ab67616d0000b273795e7069de7cb188b7c821b4ab67616d0000b2738940ac99f49e44f59e6f7fb3ab67616d0000b2738b52c6b9bc4e43d873869699ab67616d0000b273aa95a399fd30fbb4f6f59fca'}
               playlistTitle={"R&B Mix"} artistPreview={"Jordan Ward, Bruno Major, and more"}></PlaylistCard>
             </div>

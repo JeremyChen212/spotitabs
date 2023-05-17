@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders, getSession, signIn } from "next-auth/react";
 export default function Login( { providers }: any) {
   const handleLogin = () => {
-    signIn("spotify", { callbackUrl: "http://localhost:3000/" });
+    signIn("spotify", { callbackUrl: "https://spotitabs.vercel.app/" });
   };
 
   return (
@@ -27,7 +27,16 @@ export default function Login( { providers }: any) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context)  {
+  const session = await getSession(context);
+    if (session) {
+      return {
+        redirect: {
+          destination: "/search",
+          permanent: false,
+        },
+      };
+    } 
   const providers = await getProviders();
   return {
     props: {

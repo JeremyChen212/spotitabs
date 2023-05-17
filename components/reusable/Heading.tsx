@@ -1,6 +1,7 @@
 interface IProps {
     className?: string;
     text: string;
+    size: string;
   }
   
 

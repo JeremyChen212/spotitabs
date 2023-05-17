@@ -24,7 +24,7 @@ export default function PlaylistSection({items, title, showAll, bigCard}: any) {
         return (
             <div className="w-full h-fit relative pb-4">
             <div className="flex items-center justify-between">
-                <Heading text={title}></Heading>
+                <Heading text={title} size={"lg"}></Heading>
                 {showAll !== undefined && (
                     <Link className="opacity-70 font-medium hover:underline" href={showAll}>Show all</Link>
                 )}
@@ -50,7 +50,7 @@ export default function PlaylistSection({items, title, showAll, bigCard}: any) {
         return (
             <div className="w-full h-fit relative pb-4">
             <div className="flex items-center justify-between">
-                <Heading text={title}></Heading>
+                <Heading text={title} size={"lg"}></Heading>
                 {showAll !== undefined && (
                     <Link className="opacity-70 font-medium hover:underline" href={showAll}>Show all</Link>
                 )}

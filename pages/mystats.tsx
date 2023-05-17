@@ -63,7 +63,6 @@ import Image from 'next/image';
 function Home({session}: any) {
   const router = useRouter()
   const { accessToken } = session
-  const {currentPlaylist} = useSpotify();
   const {topArtists, fetchTopArtists, topGenres, getTopGenres} = useSpotify();
 
   const {status: loading} = useSession();

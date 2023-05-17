@@ -11,7 +11,6 @@ function Home({session}: any) {
   // const {status, data: session} = useSession();
   console.log(session)
   const { accessToken } = session
-  const {currentPlaylist} = useSpotify();
   const {overlayTab, setOverlayTab} = useSpotify();
   useEffect(() => {
     // setOverlayTab("playlists")
