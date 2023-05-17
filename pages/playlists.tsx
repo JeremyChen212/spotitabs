@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import { getSession, GetSessionParams } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import  Button from '@component/components/reusable/Button';
+import  Button from '@component/components/reusable/Chip';
 import PlaylistDashboard from '../components/PlaylistDashboard';
 import { useEffect, useState } from 'react';
 import { IoFilter, IoFilterOutline } from 'react-icons/io5';
@@ -20,11 +20,12 @@ import Head from 'next/head';
 import Layout from '@component/components/Layout';
 import Searchbar from '@component/components/Searchbar';
 import SongCard from '@component/components/reusable/SongCard';
+import Chip from '@component/components/reusable/Chip';
 
 function PlaylistsView(sortedPlaylists: any) {
   console.log(sortedPlaylists)
   return (
-    <div className="grid flex-col grid-cols-2 pt-2 xl:grid-cols-8 md:grid-cols-4 items-center gap-12 overflow-hidden text-center  w-fit m-auto">
+    <div className="grid flex-col grid-cols-2 pt-2 xl:grid-cols-8 md:grid-cols-4 items-center gap-12 overflow-hidden text-center  w-fit">
         {sortedPlaylists.sortedPlaylists.map((playlist, index) => (
             <PlaylistCard key={index} playlist={playlist}></PlaylistCard>
         ))}
@@ -33,9 +34,9 @@ function PlaylistsView(sortedPlaylists: any) {
 }
 function SongsView(songs: any) {
   const songsArray = songs.songs
-  console.log(songsArray[0].track)
+  // console.log(songsArray[0].track)
   return (
-    <div className="flex flex-col w-full gap-12 overflow-x-scroll items-between justify-between m-auto">
+    <div className="flex flex-col w-full gap-4 overflow-x-scroll items-between justify-between">
         {songsArray.map((song, index) => (
           <>
           <SongCard song={song?.track} key={index}></SongCard>
@@ -63,17 +64,23 @@ function Home({session}: any) {
   const [searchBarBoolean, setSearchBarBoolean] = useState("recent")
   const [isOpen, setIsOpen] = useState(false);
   const [sortBy, setSortBy] = useState("recent")
-  const [libraryView, setLibraryView] = useState("playlists")
+  const [viewChip, setViewChip] = useState("playlists")
   let organizedPlaylists = playlists
 
-
+  function checkActiveChip(chip: any) {
+    console.log(chip)
+    if (chip === viewChip) {
+        return true
+    }else {
+        return false
+    }
+  }
+  function changeViewChip(chip: any) {
+    setViewChip(chip)
+  }
   const changeSortBy = () => {
     const newSortOrder = sortBy === 'alphabetical' ? 'recent' : 'alphabetical';
     setSortBy(newSortOrder);
-  }
-  const changeView = () => {
-    const newLibraryView = libraryView === 'songs' ? 'playlists' : 'songs';
-    setSortBy(newLibraryView);
   }
   const sortedPlaylists = [...playlists].sort((a, b) => {
     if (sortBy === 'alphabetical') {
@@ -105,9 +112,9 @@ function Home({session}: any) {
           <meta name='description' content='Find guitar tabs and chords for your favorite songs and playlists on Spotify. Our search tool allows you to easily find and learn guitar chords for any track or playlist. Start playing your favorite tunes today with our comprehensive library of chords and tabs. Search by song title, artist name, or browse our extensive selection of tunes made for you. Join our community of guitar enthusiasts and take your playing to the next level with our easy-to-use guitar tab and chord search tool.' />
         </Head>
         <Searchbar placeholderText={"Search your playlists"}></Searchbar>
-        <div className='text-center my-8 flex flex-col h-fit mx-auto m-auto w-fit'>
+        <div className='text-center flex flex-col h-fit mx-auto m-auto w-full'>
           {/* <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1> */}
-          <div className="flex text-xl  justify-between mb-8">
+          <div className="flex text-xl items-center mb-4 justify-between">
             <div className='text-sm relative'>
                 <span onClick={changeSortBy} className='flex gap-2 cursor-pointer pr-5 select-none items-center'>
                   <FontAwesomeIcon className="h-fit" icon={faSort}/>  
@@ -122,11 +129,17 @@ function Home({session}: any) {
                 </span>
             </div>
           {/* <FontAwesomeIcon icon={faSearch}/>  */}
-          <Button size={"sm"} selected={true}>Playlists</Button>
+          <div className="flex gap-4">
+            <Chip size={"sm"} onClickFunc={()=>changeViewChip("playlists")} selected={checkActiveChip('playlists')}>Playlists</Chip>
+            <Chip size={"sm"} onClickFunc={()=>changeViewChip("songs")} selected={checkActiveChip('songs')}>Songs</Chip>
+          </div>
           <Searchbar myClass={`w-0 hidden ${searchBarBoolean && "flex"}`}></Searchbar> 
           </div>
-          <PlaylistsView sortedPlaylists={sortedPlaylists}></PlaylistsView>
-          <SongsView songs={recentlyPlayedSongs}></SongsView>
+          {viewChip === "playlists" ? (
+            <PlaylistsView sortedPlaylists={sortedPlaylists}></PlaylistsView>
+          ) : (
+            <SongsView songs={recentlyPlayedSongs}></SongsView>
+          )}
         </div>
       </Layout>
     );
