@@ -11,16 +11,16 @@ const SongCard = ({ song }) => {
 
 //   const { name, artist, album, duration, coverImage } = song;
   return (
-    <div className="grid max-sm:grid-cols-8 grid-cols-12 bg-[var(--bg-2-color)] cursor-pointer p-2 px-4 rounded-lg items-center text-start w-full justify-between">
-        <div className="flex col-span-6 items-center text-start space-x-4">
+    <div className="grid h-fit max-sm:grid-cols-8 grid-cols-12 hover:bg-[var(--bg-2-color)] cursor-pointer p-2 rounded-lg items-center text-start w-full justify-between">
+        <div className="flex h-fit col-span-6 items-center text-start space-x-4">
         <Image 
                 unoptimized={true}
                 loader={()=>song?.images?.[0]?.url}
-                src={song?.album?.images?.[0]?.url} width={112} height={112}  alt="Song Image" className="shadow-md w-16 h-16 rounded-md" 
+                src={song?.album?.images?.[0]?.url} width={80} height={80}  alt="Song Image" className="shadow-md w-14 h-14 rounded-md" 
                 priority/>
-        <div>
-            <h3 className="text-lg font-bold">{song.name}</h3>
-            <p className="text-sm text-gray-500">
+        <div className="h-full gap-1 flex flex-col justify-between">
+            <h3 className="text-lg font-normal line-clamp-1 text-ellipse">{song.name}</h3>
+            <p className="text-sm text-gray-500 line-clamp-1 text-ellipse">
                 {song.artists.map((artist, index) => (
                     <React.Fragment key={index}>
                         { (index ? ', ' : '' ) } 
@@ -31,7 +31,7 @@ const SongCard = ({ song }) => {
         </div>
     </div>
     <p className="text-sm max-sm:hidden col-span-4 text-gray-500">{song?.album?.name}</p>
-    <p className="text-sm justify-self-end col-span-2 text-gray-500">{duration}</p>
+    <p className="text-sm justify-self-end col-span-2 text-gray-500 w-12">{duration}</p>
     </div>
   );
 };

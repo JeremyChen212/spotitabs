@@ -115,18 +115,25 @@ function Home({session}: any) {
         <div className='text-center flex flex-col h-fit mx-auto m-auto w-full'>
           {/* <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1> */}
           <div className="flex text-xl items-center mb-4 justify-between">
-            <div className='text-sm relative'>
-                <span onClick={changeSortBy} className='flex gap-2 cursor-pointer pr-5 select-none items-center'>
+            <div className=' relative'>
+              {viewChip === "playlists" ? (
+                <span onClick={changeSortBy} className='text-[1rem] flex gap-2 cursor-pointer pr-5 select-none items-center'>
                   <FontAwesomeIcon className="h-fit" icon={faSort}/>  
                   {sortBy === "alphabetical" ? (
-                    <p  className='text-sm'>
+                    <p  className=''>
                     Alphabetical
                     </p>                ) : (
-                    <p className='text-sm'>
+                    <p className=''>
                     Recents
                     </p>                
                   )}
                 </span>
+              ) : (
+                <span className='flex text-[1.2rem font-bold gap-2 pr-5 select-none items-center'>
+                  Recently Played
+                </span>
+              )}
+                
             </div>
           {/* <FontAwesomeIcon icon={faSearch}/>  */}
           <div className="flex gap-4">
