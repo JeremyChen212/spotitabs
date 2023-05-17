@@ -35,7 +35,9 @@ interface ContextProps {
   getTopGenres: () => void,
   test: null,
   searchQuery: string,
-  setSearchQuery: Dispatch<SetStateAction<string>>
+  setSearchQuery: Dispatch<SetStateAction<string>>,
+  recentlyPlayedSongs: [],
+  fetchRecentlyPlayedSongs: () => void
 }
 
 
@@ -60,6 +62,7 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   const [topArtists, setTopArtists] = useState([])
   const [topGenres, setTopGenres] = useState([])
   const [searchQuery, setSearchQuery] = useState("");
+  const [recentlyPlayedSongs, setRecentlyPlayedSongs] = useState<any[]>([])
   const fetchGetStartedPlaylists = async() => {
     // const playlistsIds = ["43Nvl9B8fErDqqPSx1OdW0", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
     // // const playlistsIds = ["4s6bQ5K4OC4abHOnS4yNVT", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
@@ -113,6 +116,11 @@ export default function SpotifyContextProvider ({children, test}: any)  {
     } catch (err) { 
       console.log(err)
     }
+  }
+  const fetchRecentlyPlayedSongs = async() => {
+    const resp = await customGet("https://api.spotify.com/v1/me/player/recently-played", session)
+    setRecentlyPlayedSongs(resp)
+    console.log(resp)
   }
   const getTopGenres = async() => {
     console.log(topArtists)
@@ -173,7 +181,8 @@ export default function SpotifyContextProvider ({children, test}: any)  {
         topGenres, 
         getTopGenres,
         test,
-        
+        recentlyPlayedSongs,
+        fetchRecentlyPlayedSongs
       }}>
       {children}
     </SpotifyContext.Provider>

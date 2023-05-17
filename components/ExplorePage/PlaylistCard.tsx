@@ -5,7 +5,6 @@ import { useState } from "react";
 
 const PlaylistCard = ({ playlist }: any) => {
   // Get all the <a> tags on the page
-  var parse = require('html-react-parser');
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
