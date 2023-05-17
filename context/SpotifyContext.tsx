@@ -119,7 +119,7 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   }
   const fetchRecentlyPlayedSongs = async() => {
     const resp = await customGet("https://api.spotify.com/v1/me/player/recently-played", session)
-    setRecentlyPlayedSongs(resp)
+    setRecentlyPlayedSongs(resp.items)
     console.log(resp)
   }
   const getTopGenres = async() => {

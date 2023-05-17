@@ -19,11 +19,12 @@ import PlaylistCard from '@component/components/ExplorePage/PlaylistCard';
 import Head from 'next/head';
 import Layout from '@component/components/Layout';
 import Searchbar from '@component/components/Searchbar';
+import SongCard from '@component/components/reusable/SongCard';
 
 function PlaylistsView(sortedPlaylists: any) {
   console.log(sortedPlaylists)
   return (
-    <div className="grid flex-col grid-cols-2 xl:grid-cols-8 md:grid-cols-4 items-center gap-12 overflow-x-scroll text-center  w-fit m-auto">
+    <div className="grid flex-col grid-cols-2 pt-2 xl:grid-cols-8 md:grid-cols-4 items-center gap-12 overflow-hidden text-center  w-fit m-auto">
         {sortedPlaylists.sortedPlaylists.map((playlist, index) => (
             <PlaylistCard key={index} playlist={playlist}></PlaylistCard>
         ))}
@@ -31,11 +32,14 @@ function PlaylistsView(sortedPlaylists: any) {
   )
 }
 function SongsView(songs: any) {
-  console.log(songs)
+  const songsArray = songs.songs
+  console.log(songsArray[0].track)
   return (
-    <div className="grid flex-col grid-cols-2 xl:grid-cols-8 md:grid-cols-4 items-center gap-12 overflow-x-scroll text-center  w-fit m-auto">
-        {songs.recentlyPlayedSongs.map((song, index) => (
-          {song}
+    <div className="flex flex-col w-full gap-12 overflow-x-scroll items-between justify-between m-auto">
+        {songsArray.map((song, index) => (
+          <>
+          <SongCard song={song?.track} key={index}></SongCard>
+          </>
         ))}
     </div>
   )
@@ -81,9 +85,7 @@ function Home({session}: any) {
 
 
   useEffect(() => {
-    if(recentlyPlayedSongs.length > 0) { 
       fetchRecentlyPlayedSongs()
-    }
     console.log(recentlyPlayedSongs)
     console.log(status)
     fetchPlaylists()
@@ -124,7 +126,7 @@ function Home({session}: any) {
           <Searchbar myClass={`w-0 hidden ${searchBarBoolean && "flex"}`}></Searchbar> 
           </div>
           <PlaylistsView sortedPlaylists={sortedPlaylists}></PlaylistsView>
-          {/* <SongsView> */}
+          <SongsView songs={recentlyPlayedSongs}></SongsView>
         </div>
       </Layout>
     );
