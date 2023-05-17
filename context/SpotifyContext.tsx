@@ -172,7 +172,8 @@ export default function SpotifyContextProvider ({children, test}: any)  {
         fetchTopArtists,
         topGenres, 
         getTopGenres,
-        test
+        test,
+        
       }}>
       {children}
     </SpotifyContext.Provider>

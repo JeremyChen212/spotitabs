@@ -1,56 +1,3 @@
-// import {useSession, signIn, signOut, } from 'next-auth/react';
-// import { getSession, GetSessionParams } from 'next-auth/react'
-// import { useRouter } from 'next/router';
-// import { Container, Center, Button } from '@chakra-ui/react'
-// import * as Popover from '@radix-ui/react-popover';
-// import SpotitabsLogo from '/public/Spotitabs_Logo.jpg'
-// import PlaylistDashboard from '../components/PlaylistDashboard';
-// import { getUsersPlaylists } from '../lib/spotify'
-// import { GetServerSideProps } from "next";
-// import { useEffect } from 'react';
-// import { useSpotify } from '../context/SpotifyContext'
-// import { customGet } from '@component/utils/customGet';
-// import axios from 'axios';
-// import SearchInput from '@component/components/SearchInput';
-// import Loader from '../components/Loader'
-// import Navbar from '@component/components/Navbar';
-// import Heading from '@component/components/Heading';
-// import leafyshoe from "../public/images/shoebg.jpeg"
-// import Image from 'next/image'
-
-
-// function Home({session}) {
-//   const router = useRouter()
-//   // const {status, data: session} = useSession();
- 
-  
-//     return (
-//       <div className={`mx-8 items-center flex flex-col gap-5 text-white`}>
-//         <Navbar></Navbar>
-//         <Heading className={"z-10"} text={"My Playlists"} />
-//       </div>
-//     );
-// }
-
-// export async function getServerSideProps(context: GetSessionParams | undefined) {
-//   const session = await getSession(context);
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     };
-//   }
-//   return {
-//     props: {
-//       session,
-//     },
-//   };
-// }
-
-// export default Home
-
 import { useSession } from 'next-auth/react';
 import { getSession, GetSessionParams } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -68,10 +15,11 @@ import {
   faSort,
   faSearch
 } from "@fortawesome/free-solid-svg-icons";
-
+import PlaylistCard from '@component/components/ExplorePage/PlaylistCard';
 import Head from 'next/head';
 import Layout from '@component/components/Layout';
 import Searchbar from '@component/components/Searchbar';
+
 function Home({session}: any) {
   const router = useRouter()
   // const {status, data: session} = useSession();
@@ -81,17 +29,49 @@ function Home({session}: any) {
   const [commandDown, setCommandDown] = useState(false)
   const [jDown, setJDown] = useState(false)
   const {status: loading} = useSession();
+    
+  const { playlists, fetchPlaylists } = useSpotify();
+  // const [playlists, setPlaylists] = useState();
+  const spotifyApi = useSpotify()
+  const { spinner } = useSpotify()
+  const skeletonCount = 20
+  const [searchBarBoolean, setSearchBarBoolean] = useState("recent")
+  const [isOpen, setIsOpen] = useState(false);
+  const [sortBy, setSortBy] = useState("recent")
+  let organizedPlaylists = playlists
 
-  const [searchBarBoolean, setSearchBarBoolean] = useState(false)
+  // const handleDropdownClick = () => {
+  //   const dropdown = document.getElementById("sort-by-dropdown");
+  //   if(sortBy === "az") {
+  //     console.log("AZAZAZ")
+  //     setSortBy("recent")
+  //     organizedPlaylists = playlists.sort((a, b) => a.name.localeCompare(b.name))
+  //   } else {
+  //     setSortBy("az")
+  //     organizedPlaylists = playlists
+  //   }
+  // }
+  const changeSortBy = () => {
+    const newSortOrder = sortBy === 'alphabetical' ? 'recent' : 'alphabetical';
+    setSortBy(newSortOrder);
+  }
+  const sortedPlaylists = [...playlists].sort((a, b) => {
+    if (sortBy === 'alphabetical') {
+      return a.name.localeCompare(b.name);
+    } else {
+      return 0;
+    }
+  });
+
+
+  useEffect(() => {
+      console.log(spinner)
+      console.log(status)
+      fetchPlaylists()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(()=>{
-      document.addEventListener("keypress", function(e) {
-          if(e.metaKey && e.key == "k") {
-            e.preventDefault();
-            console.log("CNTRL K PRESSED")
-              setSearchBarBoolean(true)
-          }
-      })
-  })
+  }, [])
   
 
 
@@ -106,18 +86,38 @@ function Home({session}: any) {
         <div className='text-center my-8 flex flex-col h-fit mx-auto m-auto w-fit'>
           {/* <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1> */}
           <div className="flex text-xl  justify-between mb-8">
-            <span className='flex gap-2 cursor-pointer items-center'>
-              <FontAwesomeIcon className="h-fit" icon={faSort}/>  
-              <p className='text-sm'>
-                Most Recent
-              </p>
-            </span>
-            <div id='dropdown'>
+            <div className='text-sm relative'>
+                <span onClick={changeSortBy} className='flex gap-2 cursor-pointer pr-5 select-none items-center'>
+                  <FontAwesomeIcon className="h-fit" icon={faSort}/>  
+                  {sortBy === "alphabetical" ? (
+                    <p  className='text-sm'>
+                    Alphabetical
+                    </p>                ) : (
+                    <p className='text-sm'>
+                    Recents
+                    </p>                
+                  )}
+                </span>
+              {/* <div  id='sort-by-dropdown' className='bg-[var(--bg-3-color)] top-8 z-50 px-4 py-4 absolute left-0 origin-top-left scale-0 rounded-lg'>
+                {sortBy === "az" ? (
+                  <div>Alphabetically</div>
+                ) : (
+                  <div>Alphabetically</div>
+                )}
+              </div> */}
             </div>
           {/* <FontAwesomeIcon icon={faSearch}/>  */}
           <Searchbar myClass={`w-0 hidden ${searchBarBoolean && "flex"}`}></Searchbar> 
           </div>
-          <PlaylistDashboard></PlaylistDashboard>
+          <>
+            <div 
+            // className={`grid transition-all grid-cols-1 gap-[1.5rem] xl:grid-cols-4 max-w-[50rem] lg:grid-cols-3 md:grid-cols-2 xl`}
+            className="grid flex-col grid-cols-2 xl:grid-cols-8 md:grid-cols-4 items-center gap-12 overflow-x-scroll text-center  w-fit m-auto">
+                {sortedPlaylists.map((playlist, index) => (
+                    <PlaylistCard key={index} playlist={playlist}></PlaylistCard>
+                ))}
+            </div>
+            </> 
         </div>
       </Layout>
     );
