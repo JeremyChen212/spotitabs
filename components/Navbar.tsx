@@ -56,7 +56,7 @@ export default function Navbar() {
     return (
         <>
         {windowSize.width > 600 ? (
-            <nav id="navbar" className="relative z-50 top-0 flex h-[2rem] items-center justify-center w-full mx-auto my-5 gap-5">
+            <nav id="navbar" className="relative z-50 top-0 flex h-[2rem] w-fit mx-auto my-5 gap-5">
                 {/* <Image
                     src="/images/Spotitabs_Logo_Single.png"
                     alt="spotify logo"

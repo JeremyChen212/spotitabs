@@ -94,6 +94,7 @@
 html,
 body {
   max-width: 100vw;
+  overflow-y: overlay;
   overflow-x: hidden;
   background-color: #1C1E23;
   min-height: 100vh;
@@ -476,14 +477,14 @@ html {
   left: 8.4px;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: all 0.5s linear;
+  transition: all 0.2s linear;
 }
 
 .active .search-icon::after {
   content: '';
   height: 6px;
   width: 6px;
-  transition: all 0.5s linear;
+  transition: all 0.2s linear;
 }
 
 /* .animated-border-1::after {

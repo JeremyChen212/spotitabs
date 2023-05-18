@@ -67,7 +67,7 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
           <title>Search | Spotitabs</title>
           <meta name='description' content='Find guitar tabs and chords for your favorite songs and playlists on Spotify. Our search tool allows you to easily find and learn guitar chords for any track or playlist. Start playing your favorite tunes today with our comprehensive library of chords and tabs. Search by song title, artist name, or browse our extensive selection of tunes made for you. Join our community of guitar enthusiasts and take your playing to the next level with our easy-to-use guitar tab and chord search tool.' />
         </Head>
-          <Toolbar></Toolbar>
+
           <div className='z-0 w-full'>
               {/* <h1 className="text-center text-[4rem] font-normal py-4">EXPLORE</h1> */}
                 <Searchbar searchFunc={handleSearch}></Searchbar>
