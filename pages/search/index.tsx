@@ -32,7 +32,10 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
     console.log(session)
     const {overlayTab, setOverlayTab} = useSpotify();
     const {setSearchQuery, playlists, fetchPlaylists, topArtists, fetchTopArtists, topGenres, getTopGenres, getStartedPlaylists, fetchGetStartedPlaylists} = useSpotify();
-    
+    function handleSearch(searchQuery) {
+      // setSearchQuery(event.target.value)
+      router.push(`/search/${searchQuery}`)
+    }
     const {status: loading} = useSession();
     useEffect(() => {
         // if (topArtists.length === 0) {
@@ -61,13 +64,13 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
     return (
         <Layout>
         <Head>
-          <title>Explore | Spotitabs</title>
+          <title>Search | Spotitabs</title>
           <meta name='description' content='Find guitar tabs and chords for your favorite songs and playlists on Spotify. Our search tool allows you to easily find and learn guitar chords for any track or playlist. Start playing your favorite tunes today with our comprehensive library of chords and tabs. Search by song title, artist name, or browse our extensive selection of tunes made for you. Join our community of guitar enthusiasts and take your playing to the next level with our easy-to-use guitar tab and chord search tool.' />
         </Head>
           <Toolbar></Toolbar>
           <div className='z-0 w-full'>
               {/* <h1 className="text-center text-[4rem] font-normal py-4">EXPLORE</h1> */}
-                <Searchbar></Searchbar>
+                <Searchbar searchFunc={handleSearch}></Searchbar>
                 <GetStartedSection bigCard={true} items={getStartedPlaylists} title={"Get Started"} ></GetStartedSection>
                 <PlaylistSection items={playlists} title={"Your playlists"} showAll={"playlists"}></PlaylistSection>
             {/* <p>TASKS: 
@@ -95,20 +98,18 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
 
 export async function getServerSideProps(context: any) {
   // VARIABLES
-  const { req, res } = context;
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+  // const { req, res } = context;
+  // res.setHeader(
+  //   'Cache-Control',
+  //   'public, s-maxage=10, stale-while-revalidate=59'
+  // )
   const session = await getSession(context);
-  let serverGetStartedPlaylists:PlaylistType[] = [];
-  let userplaylists:PlaylistType[] = [];
+  // let serverGetStartedPlaylists:PlaylistType[] = [];
+  // let userplaylists:PlaylistType[] = [];
 
   return {
     props: {
       session,
-      serverGetStartedPlaylists,
-      userplaylists
     },
     
   };

@@ -56,7 +56,7 @@ export default function Navbar() {
     return (
         <>
         {windowSize.width > 600 ? (
-            <nav id="navbar" className="relative z-50 top-0 flex h-[2rem] items-center justify-between w-full mx-auto my-5 gap-5">
+            <nav id="navbar" className="relative z-50 top-0 flex h-[2rem] items-center justify-center w-full mx-auto my-5 gap-5">
                 {/* <Image
                     src="/images/Spotitabs_Logo_Single.png"
                     alt="spotify logo"
@@ -64,28 +64,28 @@ export default function Navbar() {
                     height={96}
                     objectFit="contain"
                     /> */}
-                <div className="flex bg-[var(--bg-3-color)] px-6 py-2 rounded-full gap-5 z-[-1]">
+                <div className="flex items-center bg-[#232121] h-11 px-6 py-3 rounded-full gap-5 z-[-1]">
                 {/* <Button onClickFunc={() => {showTab("playlist")}} title={"My Playlists"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} />
                 <Button onClickFunc={() => {showTab("saved")}} title={"Saved"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} /> */}
-                <div className="flex gap-4">
-                <Icon icon={"/images/LeftIcon.svg"} onClickFunc={() => router.back()} ></Icon>
-                <Icon icon={"/images/RightIcon.svg"} onClickFunc={() => window.history.forward()}></Icon>
+                <div className="flex gap-2 h-4 items-center">
+                    <Icon icon={"/images/LeftIcon.svg"}  onClickFunc={() => router.back()} ></Icon>
+                    <Icon icon={"/images/RightIcon.svg"}   onClickFunc={() => window.history.forward()}></Icon>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-3 h-full">
                     {/* <Icon active={checkActiveTab("search")}
                    icon={"/images/HomeIcon.svg"}></Icon> */}
-                      <Icon active={checkActiveTab("search")} onClickFunc={() => router.push("/search")}  icon={"/images/SearchIcon.svg"}></Icon>
+                      <Icon active={checkActiveTab("search")} myClass={'search-icon'} onClickFunc={() => router.push("/search")}  icon={"/images/SearchIcon.svg"}></Icon>
                     <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
                     <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
+                    <Profile session={session}/>
                 </div>
-                
                 </div>
-                <div className='flex gap-2 items-center absolute left-[50%] opacity-80 translate-x-[-50%] '>
+                {/* <div className='flex gap-2 items-center absolute left-[50%] opacity-80 translate-x-[-50%] '>
                     <hr className="w-4 rounded-full border" />
                     <h3>{router.pathname.includes('/search/') ? `Search results for ${router.query.pid}` : newPath}</h3>
                     <hr className="w-4 rounded-full border" />
                 </div>
-                <Profile session={session}/>
+                <Profile session={session}/> */}
                 {/*               
 
                   

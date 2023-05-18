@@ -39,13 +39,12 @@ export default function Profile({session}: any) {
 
     if(session) {
         return (
-            <div className="z-100 relative group inline-block h-fit ">
+            <div className="z-100 relative group flex items-center h-full ">
                 <button 
-                
-                    className="flex gap-2 z-40 curor-pointer items-center w-fit transition-all h-fit p-0 rounded-full focus:outline-nonebg-[#1d4e447b]"
+                    className="flex gap-2 z-40 curor-pointer  items-center w-fit transition-all h-7 p-0 rounded-full focus:outline-nonebg-[#1d4e447b]"
                     onClick={handleProfileClick}
                     >
-                    <div className="imagecn overflow-hidden w-10 h-10 rounded-full  border-2 border-bg1">
+                    <div className="imagecn overflow-hidden h-full rounded-full  border-2 border-bg1">
                         {session?.user?.image === undefined ? (
                             <IoPerson className="text-2xl m-auto" height="1em" width="1em"/>
                         ): 
@@ -57,7 +56,7 @@ export default function Profile({session}: any) {
                         {session?.user?.name}
                     </span>
                     <span>
-                        <IoChevronDown></IoChevronDown>
+                        {/* <IoChevronDown></IoChevronDown> */}
                     </span>
                 </button>
                 <ul 

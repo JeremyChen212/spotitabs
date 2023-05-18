@@ -1,6 +1,11 @@
-<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="10" height="10" rx="2" fill="white"/>
 <rect x="12" width="10" height="10" rx="2" fill="white"/>
 <rect x="12" y="12" width="10" height="10" rx="2" fill="white"/>
 <rect y="12" width="10" height="10" rx="2" fill="white"/>
+</svg> -->
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.4889 3.80063V15.4786H15.5111V5.16641L13.4889 3.80063ZM12.6123 0.178213C11.9231 -0.287238 11 0.213256 11 1.05236V16.9494C11 17.5296 11.4643 18 12.037 18H16.963C17.5357 18 18 17.5296 18 16.9494V4.37924C18 4.02797 17.8267 3.69994 17.5382 3.50509L12.6123 0.178213Z" fill="white" fill-opacity="1"/>
+<rect x="5.625" width="3.375" height="18" rx="1" fill="white" fill-opacity="1"/>
+<rect width="3.375" height="18" rx="1" fill="white" fill-opacity="1"/>
 </svg>
