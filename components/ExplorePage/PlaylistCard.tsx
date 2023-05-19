@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 
-const PlaylistCard = ({ playlist }: any) => {
+const PlaylistCard = ({ playlist, hidden }: any) => {
   // Get all the <a> tags on the page
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -17,13 +17,26 @@ const PlaylistCard = ({ playlist }: any) => {
 
   return (
     <>
-     <Link href={`/playlist/${playlist.id}`} className="flex flex-col relative cursor-pointer  hover:scale-[1.01] transition-all rounded-lg h-fit overflow-hidden w-full gap-4">
-      <div className={`w-full animated-border-2 rounded-lg overflow-hidden`}>
+     <Link href={`/playlist/${playlist.id}`} className={`${hidden && "lg:max-xl:hidden"} flex flex-col relative cursor-pointer  hover:scale-[1.01] transition-all rounded-lg h-full overflow-hidden w-full gap-4`}>
+      <div className={`w-full animated-border-2 h-full rounded-lg overflow-hidden`}>
+        {playlist.images.length > 0 ? (
           <Image 
             onLoadingComplete={handleLoadComplete}
             unoptimized={true}
             loader={()=>playlist?.images?.[0]?.url}
-            src={playlist?.images?.[0]?.url} width={112} height={112}  alt="Song Image" className="h-full w-full object-cover" priority/>
+            src={playlist?.images?.[0]?.url} width={112} height={112}  alt="Song Image" className="h-full w-fit  object-cover" 
+          priority/>
+        ) : (
+          <div className="bg-[rgb(35,33,33)] w-full h-full">
+            <Image 
+            onLoadingComplete={handleLoadComplete}
+            unoptimized={true}
+            loader={()=>"/Icons/music-player-fill.svg"}
+            src={"/Icons/music-player-fill.svg"} width={112} height={112}  alt="Song Image" className="w-[40%] h-fit absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] m-auto object-cover" 
+          priority/>
+          </div>
+        )}
+          
         </div> 
           <div className="w-full flex-1">
             <h2 className="text-lg font-medium mb-[0.15rem] w-full line-clamp-1 text-ellipse">{playlist.name}</h2>
