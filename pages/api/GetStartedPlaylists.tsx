@@ -12,7 +12,7 @@ export default function handler(req, res) {
             name: "Neo Soul",
             image: "/images/3d-Icons/YellowSwirl.webp",
             color: "#CAFFAA",
-            colorName: "yellow"
+            colorName: "green"
           },
         {
           id: "37i9dQZF1EIfOLbgZeBGUI",
@@ -34,14 +34,14 @@ export default function handler(req, res) {
             name: "Folk",
             image: "/images/3d-Icons/Circle.webp",
             color: "#FE6F6F",
-            colorName: "orange"
+            colorName: "orangeyellow"
         },
         {
             id: "37i9dQZF1EQmPV0vrce2QZ",
             name: "Country",
             image: "/images/3d-Icons/Diamond.webp",
             color: "#FEAB6F",
-            colorName: "orangeyellow"
+            colorName: "orange"
         },
       ]
   

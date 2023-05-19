@@ -26,13 +26,15 @@ import { customGet } from '@component/utils/customGet';
 function PlaylistsView(sortedPlaylists: any) {
   console.log(sortedPlaylists)
   return (
-    <div className="grid flex-col grid-cols-2 pt-2 xl:grid-cols-8 md:grid-cols-4 items-center gap-12 overflow-hidden text-center  w-fit">
+    <div className="grid flex-col grid-cols-2 pt-2 xl:grid-cols-6 md:grid-cols-4 items-center gap-12 overflow-hidden text-center  w-fit">
         {sortedPlaylists.sortedPlaylists.map((playlist, index) => (
             <PlaylistCard key={index} playlist={playlist}></PlaylistCard>
         ))}
     </div>
   )
 }
+
+
 function SongsView(songs: any) {
   const songsArray = songs.songs
   // console.log(songsArray[0].track)
@@ -119,35 +121,36 @@ function Home({session}: any) {
           <title>Explore | Spotitabs</title>
           <meta name='description' content='Find guitar tabs and chords for your favorite songs and playlists on Spotify. Our search tool allows you to easily find and learn guitar chords for any track or playlist. Start playing your favorite tunes today with our comprehensive library of chords and tabs. Search by song title, artist name, or browse our extensive selection of tunes made for you. Join our community of guitar enthusiasts and take your playing to the next level with our easy-to-use guitar tab and chord search tool.' />
         </Head>
-        <Searchbar searchFunc={playlistSearch} placeholderText={"Search your playlists"}></Searchbar>
-        <div className='text-center flex flex-col h-fit mx-auto m-auto w-full'>
+        {/* <Searchbar searchFunc={playlistSearch} placeholderText={"Search your playlists"}></Searchbar> */}
+        <div className='text-center flex flex-col h-fit max-w-[1200px] mx-auto m-auto w-full'>
           {/* <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1> */}
-          <div className="flex text-xl items-center mb-4 justify-between">
-            <div className=' relative'>
+          <div className="flex relative text-xl items-center mt-4 mb-4 justify-between">
+            <div className="flex gap-4">
+              <Chip size={"sm"} onClickFunc={()=>changeViewChip("playlists")} selected={checkActiveChip('playlists')}>Playlists</Chip>
+              <Chip size={"sm"} onClickFunc={()=>changeViewChip("songs")} selected={checkActiveChip('songs')}>Recent Songs</Chip>
+            </div>
+            <div className='flex items-center relative gap-10 text-[1.2rem]'>
               {viewChip === "playlists" ? (
-                <span onClick={changeSortBy} className='text-[1rem] flex gap-2 cursor-pointer pr-5 select-none items-center'>
+                <>
+                <FontAwesomeIcon className="h-fit" icon={faSearch}/>  
+                <span onClick={changeSortBy} className='flex gap-2 cursor-pointer pr-5 select-none items-center'>
                   <FontAwesomeIcon className="h-fit" icon={faSort}/>  
                   {sortBy === "alphabetical" ? (
-                    <p  className=''>
+                    <p  className='text-[0.9rem]'>
                     Alphabetical
                     </p>                ) : (
-                    <p className=''>
+                    <p className='text-[0.9rem]'>
                     Recents
                     </p>                
                   )}
                 </span>
+                </>
               ) : (
-                <span className='flex text-[1.2rem font-bold gap-2 pr-5 select-none items-center'>
-                  Recently Played
-                </span>
+                <></>
               )}
-                
             </div>
           {/* <FontAwesomeIcon icon={faSearch}/>  */}
-          <div className="flex gap-4">
-            <Chip size={"sm"} onClickFunc={()=>changeViewChip("playlists")} selected={checkActiveChip('playlists')}>Playlists</Chip>
-            <Chip size={"sm"} onClickFunc={()=>changeViewChip("songs")} selected={checkActiveChip('songs')}>Songs</Chip>
-          </div>
+          
           <Searchbar myClass={`w-0 hidden ${searchBarBoolean && "flex"}`}></Searchbar> 
           </div>
           {viewChip === "playlists" ? (

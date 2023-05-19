@@ -9,9 +9,9 @@ export default function Searchbar({myClass, searchFunc}: any) {
     const searchInput = useRef(null)
     const {popupActive, setPopupActive, searchQuery, setSearchQuery} = useSpotify()
     function handleSearch(e) {
+        searchFunc(e.target.value)
         setSearchQuery(e.target.value)
-        // searchFunc(searchQuery)
-        router.push(`/search/${e.target.value}`)
+        // router.push(`/search/${e.target.value}`)
     }
     useEffect(()=>{
     })

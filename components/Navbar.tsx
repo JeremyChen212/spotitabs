@@ -105,10 +105,10 @@ export default function Navbar() {
             </nav>
         ) : (
             <nav id="navbar" className="sticky top-0 flex h-[2rem] items-center justify-between w-full max-w-[1500px] mx-auto my-5 gap-5">
-                <div className="flex gap-5 z-[-1]">
-                <div className="flex gap-3  ">
-                    <Icon  icon={"/images/LeftIcon.svg"} onClickFunc={() => router.back()}></Icon>
-                    <Icon icon={"/images/RightIcon.svg"} onClickFunc={() => window.history.forward()}></Icon>
+                <div className="flex items-center h-11 py-3 rounded-full gap-5 z-[-1]">
+                <div className="flex gap-2 h-4 items-center">
+                    <Icon icon={"/images/LeftIcon.svg"}  onClickFunc={() => router.back()} ></Icon>
+                    <Icon icon={"/images/RightIcon.svg"}   onClickFunc={() => window.history.forward()}></Icon>
                 </div>
                 </div>
                 <Hamburger></Hamburger>
