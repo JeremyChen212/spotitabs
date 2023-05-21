@@ -26,7 +26,7 @@ import { customGet } from '@component/utils/customGet';
 function PlaylistsView(sortedPlaylists: any) {
   console.log(sortedPlaylists)
   return (
-    <div className="grid flex-col grid-cols-2 pt-2 xl:grid-cols-6 md:grid-cols-4 items-center gap-12 overflow-hidden text-center  w-fit">
+    <div className="grid flex-col grid-cols-2 pt-2 xl:grid-cols-6 md:grid-cols-4 items-center gap-12 overflow-hidden text-center  w-full">
         {sortedPlaylists.sortedPlaylists.map((playlist, index) => (
             <PlaylistCard key={index} playlist={playlist}></PlaylistCard>
         ))}
@@ -124,7 +124,7 @@ function Home({session}: any) {
         {/* <Searchbar searchFunc={playlistSearch} placeholderText={"Search your playlists"}></Searchbar> */}
         <div className='text-center flex flex-col h-fit max-w-[1200px] mx-auto m-auto w-full'>
           {/* <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1> */}
-          <div className="flex relative text-xl items-center mt-4 mb-4 justify-between">
+          <div className="flex relative text-xl items-center mb-4 justify-between">
             <div className="flex gap-4">
               <Chip size={"sm"} onClickFunc={()=>changeViewChip("playlists")} selected={checkActiveChip('playlists')}>Playlists</Chip>
               <Chip size={"sm"} onClickFunc={()=>changeViewChip("songs")} selected={checkActiveChip('songs')}>Recent Songs</Chip>
@@ -133,7 +133,7 @@ function Home({session}: any) {
               {viewChip === "playlists" ? (
                 <>
                 <FontAwesomeIcon className="h-fit" icon={faSearch}/>  
-                <span onClick={changeSortBy} className='flex gap-2 cursor-pointer pr-5 select-none items-center'>
+                <span onClick={changeSortBy} className='flex gap-2 cursor-pointer select-none items-center'>
                   <FontAwesomeIcon className="h-fit" icon={faSort}/>  
                   {sortBy === "alphabetical" ? (
                     <p  className='text-[0.9rem]'>

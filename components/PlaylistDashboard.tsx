@@ -46,7 +46,7 @@ function PlaylistDashboard() {
             <>
             <div 
             // className={`grid transition-all grid-cols-1 gap-[1.5rem] xl:grid-cols-4 max-w-[50rem] lg:grid-cols-3 md:grid-cols-2 xl`}
-            className="grid flex-col grid-cols-2 xl:grid-cols-6 md:grid-cols-4 items-center gap-12 overflow-x-scroll text-center  w-fit m-auto">
+            className="grid flex-col grid-cols-2 xl:grid-cols-6 md:grid-cols-4 items-center gap-12 overflow-x-scroll text-center  w-full m-auto">
                 {organizedPlaylists.map((playlist, index) => (
                     //         <Link key={playlist.id} href={`/playlist/${playlist.id}`}>
                     // <Link key={playlists.name} href={`/playlist/${playlist.id}`} >

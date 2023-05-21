@@ -10,11 +10,12 @@ import Hamburger from './reusable/Hamburger';
 export default function Navbar() {
     const windowSize = useWindowSize()
     const [selected, setSelected] = useState("")
-    const mobileMenuOpen = useSpotify()
+    const [mobileNav, setMobileNav] = useState(false)
     const {data: session} = useSession()
     const {overlayTab, setOverlayTab} = useSpotify()
     const {popupActive, setPopupActive} = useSpotify()
     const router = useRouter()
+    const {setMenuOpen, menuOpen} = useSpotify()
     const handleClick = (path: string) => {
         setSelected(path)
         router.push("/" + path)
@@ -31,7 +32,7 @@ export default function Navbar() {
         console.log(overlayTab)
     }
     console.log(router.basePath)
-   
+    
     function checkActiveTab(tab: any) {
         const path = router.asPath.split('/')[1]; // Extract the first part of the path
         console.log(path)
@@ -49,14 +50,20 @@ export default function Navbar() {
             return false
         }
     }
-    useEffect(()=>{
-
-    }, [overlayTab])
+    useEffect(() => {
+        console.log(menuOpen)
+        if(menuOpen) {
+            console.log(menuOpen)
+            document.querySelector('html')?.classList.add("mobile")
+        } else {
+            document.querySelector('html')?.classList.remove("mobile")
+        }
+      }, [menuOpen, windowSize]);
       
     return (
         <>
-        {windowSize.width > 600 ? (
-            <nav id="navbar" className="relative z-50 top-0 flex h-[2rem] w-fit mx-auto my-5 gap-5">
+        {windowSize.width > 640 ? (
+            <nav id="navbar" className="fixed z-50 top-0 flex h-[2rem] w-fit mx-auto my-5 gap-5">
                 {/* <Image
                     src="/images/Spotitabs_Logo_Single.png"
                     alt="spotify logo"
@@ -64,7 +71,7 @@ export default function Navbar() {
                     height={96}
                     objectFit="contain"
                     /> */}
-                <div className="flex items-center bg-[#232121] h-11 px-6 py-3 rounded-full gap-5 z-[-1]">
+                <div className="flex items-center bg-[#232121] h-11 left-[50%] translate-x-[-50%] fixed px-6 py-3 shadow- rounded-full gap-5 z-[-1]">
                 {/* <Button onClickFunc={() => {showTab("playlist")}} title={"My Playlists"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} />
                 <Button onClickFunc={() => {showTab("saved")}} title={"Saved"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} /> */}
                 <div className="flex gap-2 h-4 items-center">
@@ -104,15 +111,21 @@ export default function Navbar() {
                 {/* <SearchInput></SearchInput> */}
             </nav>
         ) : (
-            <nav id="navbar" className="sticky top-0 flex h-[2rem] items-center justify-between w-full max-w-[1500px] mx-auto my-5 gap-5">
-                <div className="flex items-center h-11 py-3 rounded-full gap-5 z-[-1]">
-                <div className="flex gap-2 h-4 items-center">
-                    <Icon icon={"/images/LeftIcon.svg"}  onClickFunc={() => router.back()} ></Icon>
-                    <Icon icon={"/images/RightIcon.svg"}   onClickFunc={() => window.history.forward()}></Icon>
-                </div>
-                </div>
+            <>
+            <nav id="navbar" className="fixed group cursor-pointer z-30 bottom-4 left-[50%] translate-x-[-50%] flex h-fit w-fit max-w-[1500px] mx-auto gap-5">
                 <Hamburger></Hamburger>
             </nav>
+            <div id='menu-overlay' className={`z-20 ${menuOpen ? "flex" : "hidden"}  origin-top-right absolute left-0 top-0 w-[100vw] h-[100vh]`}>
+                <div className="flex gap-3 h-[2rem]">
+                    {/* <Icon active={checkActiveTab("search")}
+                   icon={"/images/HomeIcon.svg"}></Icon> */}
+                    <Icon active={checkActiveTab("search")} myClass={'search-icon'} onClickFunc={() => router.push("/search")}  icon={"/images/SearchIcon.svg"}></Icon>
+                    <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
+                    <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
+                    <Profile session={session}/>
+                </div>
+            </div>
+            </>
         )
         }
         </>
