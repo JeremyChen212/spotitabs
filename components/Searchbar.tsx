@@ -16,7 +16,7 @@ export default function Searchbar({myClass, searchFunc}: any) {
     useEffect(()=>{
     })
     return (
-        <form onSubmit={(event)=>event?.preventDefault()} className={`${myClass} w-full bg-[var(--bg-2-color)] text-[white] my-4 rounded-md relative`}>
+        <form onSubmit={(event)=>event?.preventDefault()} className={`${myClass} w-full bg-[var(--bg-2-color)] text-[white] mb-4 rounded-md relative`}>
                 <IoSearch className="text-[#ffffff6a] left-0 ml-4 stroke-[1rem] text-xl absolute pointer-events-none top-[50%] translate-y-[-50%]"></IoSearch>
 
                 <input id="searchInput" type="text" onChange={(e) => handleSearch(e)} value={searchQuery}

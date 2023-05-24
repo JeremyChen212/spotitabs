@@ -4,7 +4,7 @@ import { customGet } from "../../utils/customGet";
 
 
 const getPlaylists = async(session: any) => {
-    const response = await fetch("https://api.spotify.com/v1/me/playlists?limit=50&fields=items(name,images,owner,description)", {
+    const response = await fetch("https://api.spotify.com/v1/me/playlists?limit=50&fields=items(id,name,images,owner,description)", {
         headers: {
         Authorization: `Bearer ${session.user.accessToken}`,
         }

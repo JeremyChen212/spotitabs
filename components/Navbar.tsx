@@ -59,7 +59,11 @@ export default function Navbar() {
             document.querySelector('html')?.classList.remove("mobile")
         }
       }, [menuOpen, windowSize]);
-      
+      useEffect(() => {
+        if (menuOpen) {
+          setMenuOpen(!menuOpen);
+        }
+      }, [router.asPath]);
     return (
         <>
         {windowSize.width > 640 ? (
@@ -81,7 +85,7 @@ export default function Navbar() {
                 <div className="flex gap-3 h-full">
                     {/* <Icon active={checkActiveTab("search")}
                    icon={"/images/HomeIcon.svg"}></Icon> */}
-                      <Icon active={checkActiveTab("search")} myClass={'search-icon'} onClickFunc={() => router.push("/search")}  icon={"/images/SearchIcon.svg"}></Icon>
+                    <Icon active={checkActiveTab("search")} myClass={'search-icon'} onClickFunc={() => router.push("/search")}  icon={"/images/SearchIcon.svg"}></Icon>
                     <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
                     <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
                     <Profile session={session}/>
@@ -112,18 +116,26 @@ export default function Navbar() {
             </nav>
         ) : (
             <>
-            <nav id="navbar" className="fixed group cursor-pointer z-30 bottom-4 left-[50%] translate-x-[-50%] flex h-fit w-fit max-w-[1500px] mx-auto gap-5">
+            <nav id="navbar" className="fixed z-30 bottom-4 left-[50%] translate-x-[-50%] flex h-fit w-fit max-w-[1500px] mx-auto gap-5">
+               
                 <Hamburger></Hamburger>
             </nav>
-            <div id='menu-overlay' className={`z-20 ${menuOpen ? "flex" : "hidden"}  origin-top-right absolute left-0 top-0 w-[100vw] h-[100vh]`}>
-                <div className="flex gap-3 h-[2rem]">
-                    {/* <Icon active={checkActiveTab("search")}
-                   icon={"/images/HomeIcon.svg"}></Icon> */}
-                    <Icon active={checkActiveTab("search")} myClass={'search-icon'} onClickFunc={() => router.push("/search")}  icon={"/images/SearchIcon.svg"}></Icon>
-                    <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
-                    <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
-                    <Profile session={session}/>
+            <div id='menu-overlay' >
+                <div className={`transition-[inherit] duration-200 z-10 fixed shadow-xl translate-x-[-50%]  left-[50%] bg-[#292C35] ${menuOpen ? "w-[130vw] bottom-0 h-[100vh] rounded-t-full" : "opacity-0 rounded-full h-16 w-16 bottom-4"}`}>
+                    <ul className='h-fit z-40 absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] flex gap-4 flex-col w-fit  m-auto'>
+                            <li className=" h-6">
+                                <Icon text={"SEARCH"} active={checkActiveTab("search")} myClass={'search-icon'} onClickFunc={() => router.push("/search")}  icon={"/images/SearchIcon.svg"}></Icon>
+                            </li>
+                            <li className="  h-6">
+                                <Icon text={"YOUR LIBRARY"}  active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
+                            </li>
+                            <li className=" h-6">
+                                <Icon  text={"SAVED"}  active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
+                            </li>
+                            {/* <h3 className="text-xl col-span-1">Search</h3> */}
+                    </ul>
                 </div>
+                
             </div>
             </>
         )

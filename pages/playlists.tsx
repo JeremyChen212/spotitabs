@@ -26,12 +26,32 @@ import { customGet } from '@component/utils/customGet';
 function PlaylistsView(sortedPlaylists: any) {
   console.log(sortedPlaylists)
   return (
-    <div className="grid flex-col grid-cols-2 pt-2 xl:grid-cols-6 md:grid-cols-4 items-center gap-12 overflow-hidden text-center  w-full">
+    <div className="grid flex-col grid-cols-1 pt-2 xl:grid-cols-6 sm:grid-cols-2 md:grid-cols-4 items-center sm:gap-12 gap-6 overflow-visible text-center  w-full">
         {sortedPlaylists.sortedPlaylists.map((playlist, index) => (
-            <PlaylistCard key={index} playlist={playlist}></PlaylistCard>
+            <PlaylistCard key={playlist.id} playlist={playlist}></PlaylistCard>
         ))}
     </div>
   )
+}
+
+function scrollToPlaylist(letter: any, sortedPlaylists: any) {
+
+  const playlistCards = document.getElementsByClassName("playlistCard")
+  console.log(playlistCards)
+
+  for (let i = 0; i < sortedPlaylists.length; i++) {
+    console.log(sortedPlaylists[i])
+    const id = sortedPlaylists[i].id
+    const title = document.getElementById(id)?.getElementsByTagName('h2')[0].innerHTML
+    console.log(id)
+    console.log(title)
+    // const title = playlistCards?[i].name.trim();
+    if (title.charAt(0).toUpperCase() === letter) {
+      console.log(playlistCards[i])
+      playlistCards[i].scrollIntoView({ behavior: 'smooth' });
+      break;
+    }
+  }
 }
 
 
@@ -98,7 +118,7 @@ function Home({session}: any) {
       sortedPlaylists = response.items
     }
   }
-  
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 
   useEffect(() => {
@@ -122,9 +142,19 @@ function Home({session}: any) {
           <meta name='description' content='Find guitar tabs and chords for your favorite songs and playlists on Spotify. Our search tool allows you to easily find and learn guitar chords for any track or playlist. Start playing your favorite tunes today with our comprehensive library of chords and tabs. Search by song title, artist name, or browse our extensive selection of tunes made for you. Join our community of guitar enthusiasts and take your playing to the next level with our easy-to-use guitar tab and chord search tool.' />
         </Head>
         {/* <Searchbar searchFunc={playlistSearch} placeholderText={"Search your playlists"}></Searchbar> */}
-        <div className='text-center flex flex-col h-fit max-w-[1200px] mx-auto m-auto w-full'>
+        {/* <div className="fixed top-40 flex flex-col gap-4 left-4 z-30">
+          {letters.map((letter, index) => (
+              <div key={index} className="cursor-pointer left-0 top-0" onClick={()=>scrollToPlaylist(`${letter}`, sortedPlaylists)}>
+                {letter}
+              </div>
+          ))}
+        </div> */}
+   
+        
+        <div className='text-center flex flex-col h-fit pb-40 max-w-[1200px] mx-auto m-auto w-full'>
           {/* <h1 className="text-center text-[4rem] mb-10">YOUR PLAYLISTS</h1> */}
           <div className="flex relative text-xl items-center mb-4 justify-between">
+           
             <div className="flex gap-4">
               <Chip size={"sm"} onClickFunc={()=>changeViewChip("playlists")} selected={checkActiveChip('playlists')}>Playlists</Chip>
               <Chip size={"sm"} onClickFunc={()=>changeViewChip("songs")} selected={checkActiveChip('songs')}>Recent Songs</Chip>

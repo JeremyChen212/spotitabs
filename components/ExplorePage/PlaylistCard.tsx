@@ -17,7 +17,7 @@ const PlaylistCard = ({ playlist, hidden }: any) => {
 
   return (
     <>
-     <Link href={`/playlist/${playlist.id}`} className={`${hidden && "lg:max-xl:hidden"} flex flex-col relative cursor-pointer  hover:scale-[1.01] transition-all rounded-lg h-full overflow-hidden w-full gap-4`}>
+     <Link id={playlist.id} href={`/playlist/${playlist.id}`} className={`playlistCard ${hidden && "lg:max-xl:hidden"}  grid grid-cols-4 sm:flex sm:flex-col relative cursor-pointer  hover:scale-[1.01] transition-all rounded-lg h-full overflow-hidden w-full gap-4`}>
       <div className={`w-full animated-border-2 h-full rounded-lg overflow-hidden`}>
         {playlist.images.length > 0 ? (
           <Image 
@@ -27,7 +27,7 @@ const PlaylistCard = ({ playlist, hidden }: any) => {
             src={playlist?.images?.[0]?.url} width={112} height={112}  alt="Song Image" className="h-full w-fit  object-cover" 
           priority/>
         ) : (
-          <div className="bg-[rgb(35,33,33)] w-full h-full">
+          <div className="bg-[rgb(35,33,33)] col-span-1 w-full h-full">
             <Image 
             onLoadingComplete={handleLoadComplete}
             unoptimized={true}
@@ -38,7 +38,7 @@ const PlaylistCard = ({ playlist, hidden }: any) => {
         )}
           
         </div> 
-          <div className="w-full flex-1">
+          <div className="w-full flex-1 text-start sm:text-center col-span-3">
             <h2 className="text-lg font-medium mb-[0.15rem] w-full line-clamp-1 text-ellipse">{playlist.name}</h2>
             {playlist?.description ? (
                 <div className="text-[#A9A9A9]  w-full max-w-full pointer-events-none line-clamp-1 text-ellipse">

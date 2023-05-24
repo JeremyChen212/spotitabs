@@ -10,7 +10,7 @@ export default async function handler(
   const session = await getSession({ req });
 
   const searchResults = await customGet(
-    `https://api.spotify.com/v1/search?q=${query}&market=from_token&type=album,track,artist,playlist&limit=50`,
+    `https://api.spotify.com/v1/search?q=${query}&market=from_token&type=album,track,artist,playlist&limit=100`,
     session
   );
   res.status(200).json(searchResults);

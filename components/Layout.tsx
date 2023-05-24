@@ -31,7 +31,7 @@ export default function Layout({children}: any) {
             transition={{ type: 'linear', delay: 0.2 }} // Set the transition to linear
             className="w-full"
           >
-            <div className="sm:mt-[3.5rem] pt-4">
+            <div className="sm:mt-[4rem] pt-6">
               {children}
             </div>
           </motion.main>

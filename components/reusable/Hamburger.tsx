@@ -16,12 +16,9 @@ export default function Icon() {
     return (
             // <div className="flex cursor-pointer bg-[#232121] p-5">
             <>
-            {/* w-[130vw] h-[120vh] -top-[60vh] */}
-            <label htmlFor="hamburger" className={`group transition-[cubic-bezier(0.8, 0, 1, 1)] ease-in duration-5 w-fit h-fit p-5 pointer-events-auto cursor-pointer active:scale-90rounded-full `}
+            <label htmlFor="hamburger" className={`group transition-[cubic-bezier(0.8, 0, 1, 1)] ease-in duration-5 z-40 w-fit h-fit bg-[#292C35] p-5 pointer-events-auto cursor-pointer active:scale-90rounded-full rounded-full`}
                 >
-                <div className={`transition-[inherit] absolute shadow-xl rounded-full translate-x-[-50%]  left-[50%] bg-[#292C35]  ${menuOpen ? "" : "h-full w-full translate-y-[-50%] top-[50%] "}`}></div>
                 <div className=" w-7 h-7 group-hover:opacity-80 opacity-50  relative">
-                    
                     <input id='hamburger' type="checkbox" checked={menuOpen} onChange={handleChange} className="sr-only peer"/>
                     {/* <div className=' w-14 h-14 bg-[#181818] rounded-full top-[50%] left-[50%]'></div> */}
                     <div className='transition-[inherit] peer-checked:hidden absolute top-0 left-0 group-hover:left-[-50%] group-hover:opacity-0 rounded-full w-[0.4rem] h-[0.4rem] border-[white] border-[0.1rem]'></div>
