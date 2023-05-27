@@ -1,6 +1,6 @@
 import  { Children, createContext, useState, useContext } from 'react'
 import axios from 'axios'
-import { PlaylistType, SearchResults } from '../types/types'
+import { PlaylistType, SearchResults, Track } from '../types/types'
 import { Dispatch, SetStateAction, useMemo } from "react"
 import { getUsersPlaylists } from '@component/lib/spotify'
 import {useSession} from 'next-auth/react'
@@ -36,7 +36,9 @@ interface ContextProps {
   searchQuery: string,
   setSearchQuery: Dispatch<SetStateAction<string>>,
   recentlyPlayedSongs: any[],
-  fetchRecentlyPlayedSongs: () => void
+  fetchRecentlyPlayedSongs: () => void,
+  currentSong: Track[],
+  setCurrentSong: Dispatch<SetStateAction<Track[]>>,
 }
 
 
@@ -61,6 +63,7 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   const [topArtists, setTopArtists] = useState([])
   const [topGenres, setTopGenres] = useState([])
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentSong, setCurrentSong] = useState<Track[]>([])
   const [recentlyPlayedSongs, setRecentlyPlayedSongs] = useState<any[]>([])
   const fetchGetStartedPlaylists = async() => {
     // const playlistsIds = ["43Nvl9B8fErDqqPSx1OdW0", "0xVhalpT6uPz4z7x8q11X5", "37i9dQZF1EIefLxrHQP8p4", "37i9dQZF1DXd9rSDyQguIk", "37i9dQZF1DZ06evO0QpvRZ", "23SAT4gA6YG4rif1aWGO1q", "4oCpIPPOlpzT8sUEgErt3O", "37i9dQZF1EQp62d3Dl7ECY" ];
@@ -180,7 +183,9 @@ export default function SpotifyContextProvider ({children, test}: any)  {
         getTopGenres,
         test,
         recentlyPlayedSongs,
-        fetchRecentlyPlayedSongs
+        fetchRecentlyPlayedSongs,
+        currentSong,
+        setCurrentSong
       }}>
       {children}
     </SpotifyContext.Provider>

@@ -19,8 +19,7 @@ export default function Layout({children}: any) {
 
   // {window.width}
   return (
-    <div className={`min-h-[100vh] w-full box-border items-start h-fit grid grid-rows-[max-content] text-white`}>
-      <div className="px-8"> 
+    <div className={`min-h-[100vh] px-6 w-full box-border items-start h-fit grid grid-rows-[max-content] text-white`}>
         <Navbar></Navbar>
         <AnimatePresence>
           <motion.main
@@ -29,14 +28,13 @@ export default function Layout({children}: any) {
             animate="enter" // Animated state to variants.enter
             exit="exit" // Exit state (used later) to variants.exit
             transition={{ type: 'linear', delay: 0.2 }} // Set the transition to linear
-            className="w-full"
+            className="w-full min-h-[100vh] flex h-full flex-col"
           >
-            <div className="sm:mt-[4rem] pt-6">
+            <div className="sm:mt-[4rem] flex flex-col h-full pt-6">
               {children}
             </div>
           </motion.main>
         </AnimatePresence>
         </div>
-    </div>
   );
 }

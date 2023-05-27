@@ -11,12 +11,21 @@ export const colors = {
     '--bg2': '#1F1C1C',
     '--bg3': '#302C2C'
   },
+  darkblue: {
+    '--primary': '#A698F9',
+    '--secondary': '#3D3D3D',
+    '--text': "#717890",
+    '--accent': "#A5A4A4",
+    '--bg1': '#1A1C22',
+    '--bg2': '#23262E',
+    '--bg3': '#242733'
+  },
   light: {
     '--primary': '#A4FDD3',
     '--secondary': '#3D3D3D',
     '--text': "#E4E4E4",
     '--accent': "#A5A4A4",
-    '--bg1': '#161414',
+    '--bg1': '#13111A',
     '--bg2': '#1F1C1C',
     '--bg3': '#302C2C'
   }
@@ -24,7 +33,7 @@ export const colors = {
 
 
 const themes = Object.keys(colors);
-const fallback = themes[0];
+const fallback = themes[1];
 
 const getTheme = () => {
   if (typeof window !== 'undefined') {

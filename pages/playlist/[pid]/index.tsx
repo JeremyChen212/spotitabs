@@ -15,8 +15,11 @@ export default function PlaylistPlayer({playlist, serverPlaylist}: any) {
     const router = useRouter()
     const { pid } = router.query
     const {overlayTab, setOverlayTab} = useSpotify();
-    const {popupActive, setPopupActive} = useSpotify();
+    const {popupActive, setPopupActive, currentSong, setCurrentSong} = useSpotify();
     console.log(playlist)
+    useEffect(() => {
+
+    })
     useEffect(() => {
       setOverlayTab("")
       setPopupActive(false)
@@ -26,18 +29,19 @@ export default function PlaylistPlayer({playlist, serverPlaylist}: any) {
     return (
       <>
         {/* <MainOverlay></MainOverlay> */}
-        <div className="flex w-full gap-5 text-white ">
-          <div className="bg-[#1F1C1C] p-4 rounded-md overflow-hidden max-w-md w-[50rem]">
-              <h1 className="py-6 text-xl w-full text-center inline-block">
+        <div className="flex w-full mb-6 flex-[1 1 auto] h-full gap-5 text-white ">
+          <div className="bg-[var(--bg2)] p-4 rounded-md overflow-hidden max-w-md w-[50rem]">
+              <h1 className="py-6 text-xl line-clamp-1 text-ellipse  w-full text-center inline-block">
                   {serverPlaylist.name}
               </h1>
                 {serverPlaylist.tracks.items.map((item, index) => (
                   <SongCard song={item.track} key={index} />
                 ))}
           </div>
-          <div className="bg-bg2 rounded-md overflow-hidden w-full">
+          <div className="h-full border-[1px] border-[var(--bg2)]"></div>
+          <div className="rounded-md overflow-hidden w-full">
               <h1 className="bg-bg3 py-6 text-bg2 text-xl w-full text-center inline-block mb-5">
-                  Song name
+                  
               </h1>
           </div>
         </div>

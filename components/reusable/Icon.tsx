@@ -36,7 +36,7 @@ export default function Icon(Props: IconProps) {
         <button 
             onClick={
                 onClickFunc
-            } className={`${myClass}  ${active ? "opacity-100" : "opacity-50 hover:opacity-80 "} items-center relative h-full w-fit flex ${text && "gap-4"} cursor-pointer active:scale-90 `}
+            } className={`${myClass}  ${active ? "opacity-100 text-[var(--primary)]" : "opacity-50 hover:opacity-80 "} items-center relative h-full w-fit flex ${text && "gap-4"} cursor-pointer active:scale-90 `}
           >
             {type === "icon" ? (
                 <div>

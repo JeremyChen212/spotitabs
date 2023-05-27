@@ -3,14 +3,8 @@ import { useTheme } from "../../context/ThemeContext"
 import { themes, getTheme, setTheme } from '../../context/Themes';
 
 export default function Chip({children, selected, size, styles, onClickFunc}: any) {
-    const [currentTheme, nextTheme] = useState(getTheme());
-
-    useEffect(() => {
-        setTheme(currentTheme);
-    }, [currentTheme]);
-
+    
     const selectedClass = selected ? "bg-[var(--primary)] text-[var(--bg1)] border-[var(--primary)] " : "hover:opacity-80 bg-[var(--bg3)]"
-    console.log(currentTheme)
     console.log(selectedClass)
     
     return (

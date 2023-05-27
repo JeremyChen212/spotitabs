@@ -75,19 +75,19 @@ export default function Navbar() {
                     height={96}
                     objectFit="contain"
                     /> */}
-                <div className="flex items-center bg-[#232121] h-11 left-[50%] translate-x-[-50%] fixed px-6 py-3 shadow- rounded-full gap-5 z-[-1]">
+                <div className="flex items-center bg-[var(--bg2)] h-11 left-[50%] translate-x-[-50%] fixed px-6 py-3 shadow-2xl rounded-full gap-5 z-[-1]">
                 {/* <Button onClickFunc={() => {showTab("playlist")}} title={"My Playlists"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} />
                 <Button onClickFunc={() => {showTab("saved")}} title={"Saved"} styles={`${router.pathname == "/library" ? "bg-[#489181]" : ""}`} /> */}
                 <div className="flex gap-2 h-4 items-center">
-                    <Icon icon={"/images/LeftIcon.svg"}  onClickFunc={() => router.back()} ></Icon>
-                    <Icon icon={"/images/RightIcon.svg"}   onClickFunc={() => window.history.forward()}></Icon>
+                    <Icon icon={"/Icons/LeftIcon.svg"}  onClickFunc={() => router.back()} ></Icon>
+                    <Icon icon={"/Icons/RightIcon.svg"}   onClickFunc={() => window.history.forward()}></Icon>
                 </div>
                 <div className="flex gap-3 h-full">
                     {/* <Icon active={checkActiveTab("search")}
                    icon={"/images/HomeIcon.svg"}></Icon> */}
-                    <Icon active={checkActiveTab("search")} myClass={'search-icon'} onClickFunc={() => router.push("/search")}  icon={"/images/SearchIcon.svg"}></Icon>
-                    <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/images/PlaylistsIcon.svg"}></Icon>
-                    <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/images/SaveIcon.svg"}></Icon>
+                    <Icon active={checkActiveTab("search")} myClass={'search-icon'} onClickFunc={() => router.push("/search")}  icon={"/Icons/SearchIcon.svg"}></Icon>
+                    <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/Icons/PlaylistsIcon.svg"}></Icon>
+                    <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/Icons/SaveIcon.svg"}></Icon>
                     <Profile session={session}/>
                 </div>
                 </div>
