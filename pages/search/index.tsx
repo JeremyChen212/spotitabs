@@ -62,7 +62,7 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
     }, [])
   if (playlists) {
     return (
-        <Layout>
+        <>
         <Head>
           <title>Search | Spotitabs</title>
           <meta name='description' content='Find guitar tabs and chords for your favorite songs and playlists on Spotify. Our search tool allows you to easily find and learn guitar chords for any track or playlist. Start playing your favorite tunes today with our comprehensive library of chords and tabs. Search by song title, artist name, or browse our extensive selection of tunes made for you. Join our community of guitar enthusiasts and take your playing to the next level with our easy-to-use guitar tab and chord search tool.' />
@@ -79,7 +79,7 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
                <br />  Then randomly pick one of those and search spotify for a playlist for that (EG: search spotify for "indie soul" + guitar) and get top playlist.
                <br /> Display that in for you section</p> */}
           </div>
-        </Layout>
+        </>
     );
   } else {
     return (

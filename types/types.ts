@@ -71,7 +71,14 @@ export interface PlaylistType {
   type?: string;
   total?: number;
 }
-
+export interface ThemeType {
+  primary?: string,
+  secondary?: string,
+  text?: string,
+  accent?: string,
+  bg1: string,
+  bg2: string
+}
 export interface SearchResults {
   albums?: {
     items: Album[];

@@ -7,6 +7,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { ThemeProvider } from '../context/ThemeContext';
+
 // Tell Font Awesome to skip adding the CSS automatically 
 // since it's already imported above
 config.autoAddCss = false; 
@@ -39,7 +41,11 @@ export default function App({ Component, pageProps, myGlobalVar, test }: AppProp
       <SpotifyContextProvider session={pageProps.session} value={{
       test: mytest, // specify your test value here
     }}>
+      <ThemeProvider>
+        <Layout>
           <Component {...pageProps} />
+        </Layout>
+        </ThemeProvider>
       </SpotifyContextProvider>
     </SessionProvider>
     

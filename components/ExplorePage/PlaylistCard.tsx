@@ -17,8 +17,8 @@ const PlaylistCard = ({ playlist, hidden }: any) => {
 
   return (
     <>
-     <Link id={playlist.id} href={`/playlist/${playlist.id}`} className={`playlistCard ${hidden && "lg:max-xl:hidden"}  grid grid-cols-4 sm:flex sm:flex-col relative cursor-pointer  hover:scale-[1.01] transition-all rounded-lg h-full overflow-hidden w-full gap-4`}>
-      <div className={`w-full animated-border-2 h-full rounded-lg overflow-hidden`}>
+     <Link id={playlist.id} href={`/playlist/${playlist.id}`} className={`playlistCard ${hidden && "lg:max-xl:hidden"}  flex sm:flex-col relative cursor-pointer  hover:scale-[1.01] transition-all rounded-lg sm:h-full h-24 overflow-hidden w-full gap-4`}>
+      <div className={`w-fit animated-border-2 h-full rounded-lg overflow-hidden`}>
         {playlist.images.length > 0 ? (
           <Image 
             onLoadingComplete={handleLoadComplete}
