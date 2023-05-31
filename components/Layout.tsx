@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Navbar from "./Navbar";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useWindowSize } from "@component/lib/window";
+import { useEffect, useState } from "react";
 
 interface IProps {
   children: any;
@@ -16,7 +17,15 @@ export default function Layout({children}: any) {
   const router = useRouter();
   const { asPath } = useRouter();
   const windowSize = useWindowSize()
-
+  useEffect(()=>{
+    console.log(router.pathname)
+    if(router.pathname === "/playlist/[pid]") {
+      document.body.style.overflowY = "hidden"
+    } else {
+      document.body.style.overflowY = "overlay"
+      console.log("overlay")
+    }
+  }, [])
   // {window.width}
   return (
     <div className={`min-h-[100vh] px-6 w-full box-border items-start h-fit grid grid-rows-[max-content] text-white`}>

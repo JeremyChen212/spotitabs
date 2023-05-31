@@ -8,19 +8,22 @@ import { useSpotify } from '../../../context/SpotifyContext'
 import { useEffect } from "react";
 // import MainOverlay from "../../../components/overlays/MainOverlay"
 import Image from "next/image.js";
-import SongCard from "@component/components/reusable/SongCard.tsx";
+import SongCard from "@component/components/reusable/SongCard";
 import Head from "next/head.js";
-
+import PlaylistSidebar from '@component/components/MainPage/PlaylistSidebar';
+import { IoArrowForward } from 'react-icons/io5';
+import MiddleSection from "@component/components/MainPage/MiddleSection";
 export default function PlaylistPlayer({playlist, serverPlaylist}: any) {
     const router = useRouter()
     const { pid } = router.query
     const {overlayTab, setOverlayTab} = useSpotify();
     const {popupActive, setPopupActive, currentSong, setCurrentSong} = useSpotify();
-    console.log(playlist)
+    console.log(serverPlaylist)
     useEffect(() => {
 
     })
     useEffect(() => {
+      document.body.style.overflowY = "hidden"
       setOverlayTab("")
       setPopupActive(false)
       console.log(serverPlaylist.tracks.items[0].track.album.images[0])
@@ -28,26 +31,12 @@ export default function PlaylistPlayer({playlist, serverPlaylist}: any) {
     }, [])
     return (
       <>
-        {/* <MainOverlay></MainOverlay> */}
-        <div className="flex w-full mb-6 flex-[1 1 auto] h-full gap-5 text-white ">
-          <div className="bg-[var(--bg2)] p-4 rounded-md overflow-hidden max-w-md w-[50rem]">
-              <h1 className="py-6 text-xl line-clamp-1 text-ellipse  w-full text-center inline-block">
-                  {serverPlaylist.name}
-              </h1>
-                {serverPlaylist.tracks.items.map((item, index) => (
-                  <SongCard song={item.track} key={index} />
-                ))}
-          </div>
+        <div className={`absolute flex left-6 right-6 bottom-6 top-[6rem] gap-2 text-white`}>
+          <PlaylistSidebar playlist={serverPlaylist}></PlaylistSidebar>
           <div className="h-full border-[1px] border-[var(--bg2)]"></div>
-          <div className="rounded-md overflow-hidden w-full">
-              <h1 className="bg-bg3 py-6 text-bg2 text-xl w-full text-center inline-block mb-5">
-                  
-              </h1>
-          </div>
+          <MiddleSection song={currentSong}></MiddleSection>
         </div>
-        {/* <YourPlaylists></YourPlaylists> */}
-        {/* <SavedOverlay></SavedOverlay> */}
-        </>
+      </>
     )
 }
 
