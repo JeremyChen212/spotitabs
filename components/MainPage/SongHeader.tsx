@@ -3,12 +3,12 @@ import { useWindowSize } from "@component/lib/window"
 import { getSession } from "next-auth/react"
 import Image from "next/image"
 import { useRouter } from "next/router"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import { IoBookmarkOutline, IoEllipsisHorizontalSharp } from "react-icons/io5"
 export default function SongHeader({currentSong}) {
     const windowSize = useWindowSize()
-    
-    if(windowSize.width > 800) {
+    console.log(currentSong.artists)
+    if(windowSize.width > 800 && currentSong !== undefined) {
     return (
             <div className="bg-[var(--bg2)] rounded-md  p-6 ">
                 <div className="flex h-fit justify-between items-center text-start space-x-4">
@@ -21,13 +21,22 @@ export default function SongHeader({currentSong}) {
                         <div className="IMAGE-PLACEHOLDER rounded-md w-14 h-14 bg-[var(--text)]">
                         <Image 
                             unoptimized={true}
-                            loader={()=>currentSong?.album?.images?.[0].url}
+                            loader={()=>"https://dummyimage.com/400x400/000/fff"}
                             src={currentSong?.album?.images?.[0].url} width={80} height={80}  alt="Song Image" className="shadow-md w-14 h-14 rounded-md" 
                             priority/>
                         </div>
                         <div className="h-14 gap-1 flex flex-col justify-around">
-                            <h1 className="text-lg leading-[2px]">{currentSong.name}</h1>
-                            <p className='text-sm opacity-70 leading-[2px]'>By <a className="underline cursor-pointer">Artist</a> </p>
+                            <h1 className="text-lg leading-sm line-clamp-1 text-ellipsis">{currentSong.name}</h1>
+                            <p className='text-sm opacity-70 leading-sm'>By &#160;
+                                {currentSong.artists !== undefined && currentSong.artists.map((artist, index) => (
+                                    <React.Fragment key={index}>
+                                        { (index ? ', ' : '' ) } 
+                                        <a href="" className="underline cursor-pointer">
+                                        {artist.name}
+                                        </a>
+                                    </React.Fragment>
+                                ))}
+                                </p>
                         </div>
                     </div>
                     <div className="TOOLS flex gap-2">
