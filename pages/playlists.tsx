@@ -47,7 +47,7 @@ function scrollToPlaylist(letter: any, sortedPlaylists: any) {
     console.log(id)
     console.log(title)
     // const title = playlistCards?[i].name.trim();
-    if (title.charAt(0).toUpperCase() === letter) {
+    if (title?.charAt(0).toUpperCase() === letter) {
       console.log(playlistCards[i])
       playlistCards[i].scrollIntoView({ behavior: 'smooth' });
       break;
@@ -124,7 +124,7 @@ function Home({session}: any) {
 
 
   useEffect(() => {
-      fetchRecentlyPlayedSongs()
+    fetchRecentlyPlayedSongs()
     console.log(recentlyPlayedSongs)
     console.log(status)
     fetchPlaylists()

@@ -7,7 +7,7 @@ export default function handler(req, res) {
             color: "#bec9ffaa",
             colorName: "blue"
           },
-        {
+        { 
             id: "0r5ojPhjqGVq21oQR13UJy",
             name: "Neo Soul",
             image: "/images/3d-Icons/YellowSwirl.webp",

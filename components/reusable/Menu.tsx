@@ -4,7 +4,7 @@ import { useState } from "react";
 
 
 
-export default function Menu() {
+export default function Menu(Props) {
     const { icon, type= "img", active=false, onClickFunc=";", myClass="", imgClass=""} = Props;   // you can use let, however const is recommended
     const [count, setCount] = useState(0);
     const {popupActive, setPopupActive} = useSpotify();

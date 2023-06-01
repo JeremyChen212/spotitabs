@@ -52,10 +52,10 @@ const saveTheme = (theme = fallback) => {
 };
 const setColorScheme = (theme = fallback) => {
   if (typeof window !== 'undefined') {
-  Object.entries(colors[theme]).map(([color, value]) => {
+  Object.entries(colors[theme]).map(([color, value]: any) => {
     document.documentElement.style.setProperty(color, value);
   });
-console.log(colors[theme])
+console.log(colors[theme])  
 
 } 
 };

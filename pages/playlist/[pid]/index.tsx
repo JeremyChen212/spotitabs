@@ -14,14 +14,22 @@ import PlaylistSidebar from '@component/components/MainPage/PlaylistSidebar';
 import { IoArrowForward } from 'react-icons/io5';
 import MiddleSection from "@component/components/MainPage/MiddleSection";
 export default function PlaylistPlayer({playlist, serverPlaylist}: any) {
-    const router = useRouter()
+    const router = useRouter();
     const { pid } = router.query
     const {overlayTab, setOverlayTab} = useSpotify();
-    const {popupActive, setPopupActive, currentSong, setCurrentSong} = useSpotify();
-    console.log(serverPlaylist)
-    useEffect(() => {
+    const {popupActive, setPopupActive, currentSong, setCurrentSongId, currentSongId, fetchCurrentSong} = useSpotify();
+    useEffect(()=>{
+        setCurrentSongId(router.query.song_id)
+        console.log(currentSong)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [router.query.song_id])
+    useEffect(()=>{
+        if(currentSongId !== undefined) {
+            fetchCurrentSong()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentSongId])
 
-    })
     useEffect(() => {
       document.body.style.overflowY = "hidden"
       setOverlayTab("")
@@ -34,7 +42,7 @@ export default function PlaylistPlayer({playlist, serverPlaylist}: any) {
         <div className={`absolute flex left-6 right-6 bottom-6 top-[6rem] gap-2 text-white`}>
           <PlaylistSidebar playlist={serverPlaylist}></PlaylistSidebar>
           <div className="h-full border-[1px] border-[var(--bg2)]"></div>
-          <MiddleSection song={currentSong}></MiddleSection>
+          <MiddleSection currentSong={currentSong}></MiddleSection>
         </div>
       </>
     )

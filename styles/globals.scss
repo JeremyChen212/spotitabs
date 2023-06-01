@@ -548,7 +548,13 @@ html {
   width: 6px;
   transition: all 0.2s linear;
 }
+::-webkit-scrollbar {
+  width: 12px;
+}
 
+::-webkit-scrollbar-track {
+  color: white;
+}
 /* .animated-border-1::after {
   content: '';
   margin-top: -1rem;

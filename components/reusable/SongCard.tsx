@@ -1,6 +1,8 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 const SongCard = ({ song }) => {
+    const router = useRouter();
     const formatDuration = (durationMs) => {
     const minutes = Math.floor(durationMs / 60000);
     const seconds = Math.floor((durationMs % 60000) / 1000);
@@ -14,15 +16,25 @@ const SongCard = ({ song }) => {
             setDimensions({width: ref.current.offsetWidth})
         }
       }, [])
+    function onClickFunc() {
+      if(router.pathname === "/playlist/[pid]") {
+        router.query.song_id = song.id
+        const url = {
+          pathname: router.pathname,
+          query: { ...router.query }
+        }
+        router.push(url, undefined, {shallow: true})
+      }
+    }
 //   const { name, artist, album, duration, coverImage } = song;
   return (
-    <div ref={ref} className={`grid h-fit max-sm:grid-cols-8 ${dimensions.width < 500 ? "grid-cols-8" : "grid-cols-12"}  grid-cols-12 hover:bg-[var(--bg2)] cursor-pointer p-2 rounded-lg items-center text-start w-full justify-between`}>
+    <div ref={ref} onClick={()=>onClickFunc()} className={`grid h-fit max-sm:grid-cols-8 ${dimensions.width < 500 ? "grid-cols-8" : "grid-cols-12"}  grid-cols-12 hover:bg-[var(--bg2)] cursor-pointer p-2 rounded-lg items-center text-start w-full justify-between`}>
         <div className="flex h-fit col-span-6 items-center text-start space-x-4">
         <Image 
-                unoptimized={true}
-                loader={()=>song?.images?.[0]?.url}
-                src={song?.album?.images?.[0]?.url} width={80} height={80}  alt="Song Image" className="shadow-md w-14 h-14 rounded-md" 
-                priority/>
+          unoptimized={true}
+          loader={()=>song?.images?.[0]?.url}
+          src={song?.album?.images?.[0]?.url} width={80} height={80}  alt="Song Image" className="shadow-md w-14 h-14 rounded-md" 
+          priority/>
         <div className="h-full gap-1 flex flex-col justify-between">
             <h3 className="text-lg font-normal line-clamp-1 text-ellipse">{song.name}</h3>
             <p className="text-sm text-gray-500 line-clamp-1 text-ellipse">

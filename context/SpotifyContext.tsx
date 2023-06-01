@@ -38,7 +38,9 @@ interface ContextProps {
   recentlyPlayedSongs: any[],
   fetchRecentlyPlayedSongs: () => void,
   currentSong: Track[],
-  setCurrentSong: Dispatch<SetStateAction<Track[]>>,
+  currentSongId: number,
+  setCurrentSongId: Dispatch<SetStateAction<any>>,
+  fetchCurrentSong: () => void,
 }
 
 
@@ -63,6 +65,7 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   const [topArtists, setTopArtists] = useState([])
   const [topGenres, setTopGenres] = useState([])
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentSongId, setCurrentSongId] = useState<any>()
   const [currentSong, setCurrentSong] = useState<Track[]>([])
   const [recentlyPlayedSongs, setRecentlyPlayedSongs] = useState<any[]>([])
   const fetchGetStartedPlaylists = async() => {
@@ -86,6 +89,15 @@ export default function SpotifyContextProvider ({children, test}: any)  {
   }
   function setSpinnerState(value: any) {
     setSpinner(value)
+  }
+  const fetchCurrentSong = async() => {
+    try {
+      const resp = await customGet(`https://api.spotify.com/v1/tracks/${currentSongId}`, session)
+      console.log(resp as Track[])
+      setCurrentSong(resp as Track[])
+    } catch (err) {
+      console.log(err)
+    }
   }
   const fetchPlaylists = async() => {
     // console.log(session.user.accessToken)
@@ -185,7 +197,9 @@ export default function SpotifyContextProvider ({children, test}: any)  {
         recentlyPlayedSongs,
         fetchRecentlyPlayedSongs,
         currentSong,
-        setCurrentSong
+        setCurrentSongId,
+        currentSongId,
+        fetchCurrentSong
       }}>
       {children}
     </SpotifyContext.Provider>

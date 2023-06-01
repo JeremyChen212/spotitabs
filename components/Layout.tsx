@@ -25,7 +25,7 @@ export default function Layout({children}: any) {
       document.body.style.overflowY = "overlay"
       console.log("overlay")
     }
-  }, [])
+  }, [router.pathname])
   // {window.width}
   return (
     <div className={`min-h-[100vh] px-6 w-full box-border items-start h-fit grid grid-rows-[max-content] text-white`}>
