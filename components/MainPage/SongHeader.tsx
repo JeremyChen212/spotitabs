@@ -3,11 +3,17 @@ import { useWindowSize } from "@component/lib/window"
 import { getSession } from "next-auth/react"
 import Image from "next/image"
 import { useRouter } from "next/router"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { IoBookmarkOutline, IoEllipsisHorizontalSharp } from "react-icons/io5"
 export default function SongHeader({currentSong}) {
     const windowSize = useWindowSize()
+    const [isLoading, setIsLoading] = useState(true);
+
     console.log(currentSong.artists)
+    const handleImageLoad = () => {
+        setIsLoading(false);
+        console.log("is loading false")
+    };
     if(windowSize.width > 800 && currentSong !== undefined) {
     return (
             <div className="bg-[var(--bg2)] rounded-md  p-6 ">
@@ -21,9 +27,14 @@ export default function SongHeader({currentSong}) {
                         <div className="IMAGE-PLACEHOLDER rounded-md w-14 h-14 bg-[var(--text)]">
                         <Image 
                             unoptimized={true}
+                            placeholder='blur'
+                            blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                             loader={()=>"https://dummyimage.com/400x400/000/fff"}
-                            src={currentSong?.album?.images?.[0].url} width={80} height={80}  alt="Song Image" className="shadow-md w-14 h-14 rounded-md" 
-                            priority/>
+                            src={currentSong?.album?.images?.[0].url} width={80} height={80}  alt="Song Image" 
+                            className={`${isLoading ? "hidden" : "block"} shadow-md w-14 h-14 rounded-md`} 
+                            priority
+                            onLoad={handleImageLoad}
+                            />
                         </div>
                         <div className="h-14 gap-1 flex flex-col justify-around">
                             <h1 className="text-lg leading-sm line-clamp-1 text-ellipsis">{currentSong.name}</h1>
