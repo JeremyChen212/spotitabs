@@ -564,3 +564,13 @@ html {
 // ::-webkit-scrollbar { width: 8px; height: 8px;}
 // ::-webkit-scrollbar-track-piece { background-color: #282828;}
 // ::-webkit-scrollbar-thumb { height: 100px; background-color: #666; border-radius: 3px;}
+
+#searchIcon.active~#selectorBubble {
+  display: block;
+  left: -4px;
+}
+#playlistIcon.active~#selectorBubble {
+  display: block;
+  left: 2rem;
+}
+

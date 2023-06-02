@@ -50,20 +50,21 @@ export default function Navbar() {
             return false
         }
     }
-    useEffect(() => {
-        console.log(menuOpen)
-        if(menuOpen) {
+    
+        useEffect(() => {
             console.log(menuOpen)
-            document.querySelector('html')?.classList.add("mobile")
-        } else {
-            document.querySelector('html')?.classList.remove("mobile")
-        }
-      }, [menuOpen, windowSize]);
-      useEffect(() => {
-        if (menuOpen) {
-          setMenuOpen(!menuOpen);
-        }
-      }, [router.asPath]);
+            if(menuOpen) {
+                console.log(menuOpen)
+                document.querySelector('html')?.classList.add("mobile")
+            } else {
+                document.querySelector('html')?.classList.remove("mobile")
+            }
+        }, [menuOpen, windowSize]);
+        useEffect(() => {
+            if (menuOpen) {
+            setMenuOpen(!menuOpen);
+            }
+        }, [router.asPath]);
     return (
         <>
         {windowSize.width > 640 ? (
@@ -82,12 +83,13 @@ export default function Navbar() {
                     <Icon icon={"/Icons/LeftIcon.svg"}  onClickFunc={() => router.back()} ></Icon>
                     <Icon icon={"/Icons/RightIcon.svg"}   onClickFunc={() => window.history.forward()}></Icon>
                 </div>
-                <div className="flex gap-3 h-full">
+                <div id='toolbar' className="flex w-fit relative gap-3 h-full">
                     {/* <Icon active={checkActiveTab("search")}
                    icon={"/images/HomeIcon.svg"}></Icon> */}
-                    <Icon active={checkActiveTab("search")} myClass={'search-icon'} onClickFunc={() => router.push("/search")}  icon={"/Icons/SearchIcon.svg"}></Icon>
-                    <Icon active={checkActiveTab("playlists")} onClickFunc={() => router.push("/playlists")} icon={"/Icons/PlaylistsIcon.svg"}></Icon>
-                    <Icon active={checkActiveTab("saved")} onClickFunc={() => router.push("/saved")} icon={"/Icons/SaveIcon.svg"}></Icon>
+                    <Icon id={"searchIcon"} active={checkActiveTab("search")} myClass={'search-icon tool-icon'} onClickFunc={() => router.push("/search")}  icon={"/Icons/SearchIcon.svg"} text='Search'></Icon>
+                    <Icon id={"playlistIcon"} active={checkActiveTab("playlists")} myClass={'tool-icon'} onClickFunc={() => router.push("/playlists")} icon={"/Icons/PlaylistsIcon.svg"} text='Your Playlists'></Icon>
+                    <Icon id={"savedIcon"} active={checkActiveTab("saved")} myClass={'tool-icon'} onClickFunc={() => router.push("/saved")} icon={"/Icons/SaveIcon.svg"} text='Saved Songs'></Icon>
+                    {/* <div id='selectorBubble' className="transition-all ease-out absolute hidden bg-[white] opacity-20 top-[50%] z-10 translate-y-[-50%] w-8 h-8 rounded-md"></div> */}
                     <Profile session={session}/>
                 </div>
                 </div>
