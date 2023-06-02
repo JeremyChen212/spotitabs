@@ -57,10 +57,10 @@ function Explore({session, serverGetStartedPlaylists, userplaylists, myGlobalVar
             getTopGenres()
             console.log(serverGetStartedPlaylists)
         }
-        console.log(userplaylists)
+        console.log(router.query)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-  if (playlists) {
+  if (playlists && router.query) {
     return (
         <>
         <Head>

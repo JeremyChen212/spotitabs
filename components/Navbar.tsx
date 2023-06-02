@@ -86,8 +86,8 @@ export default function Navbar() {
                 <div id='toolbar' className="flex w-fit relative gap-3 h-full">
                     {/* <Icon active={checkActiveTab("search")}
                    icon={"/images/HomeIcon.svg"}></Icon> */}
-                    <Icon id={"searchIcon"} active={checkActiveTab("search")} myClass={'search-icon tool-icon'} onClickFunc={() => router.push("/search")}  icon={"/Icons/SearchIcon.svg"} text='Search'></Icon>
-                    <Icon id={"playlistIcon"} active={checkActiveTab("playlists")} myClass={'tool-icon'} onClickFunc={() => router.push("/playlists")} icon={"/Icons/PlaylistsIcon.svg"} text='Your Playlists'></Icon>
+                    <Icon id={"searchIcon"} active={checkActiveTab("search")} myClass={'search-icon tool-icon'} onClickFunc={() => router.push("/search")}  icon={"/Icons/SearchIcon.svg"} text='Search • ⌘/k'></Icon>
+                    <Icon id={"playlistIcon"} active={checkActiveTab("playlists")} myClass={'tool-icon'} onClickFunc={() => router.push("/playlists")} icon={"/Icons/PlaylistsIcon.svg"} text='Your Playlists • ⌘/j'></Icon>
                     <Icon id={"savedIcon"} active={checkActiveTab("saved")} myClass={'tool-icon'} onClickFunc={() => router.push("/saved")} icon={"/Icons/SaveIcon.svg"} text='Saved Songs'></Icon>
                     {/* <div id='selectorBubble' className="transition-all ease-out absolute hidden bg-[white] opacity-20 top-[50%] z-10 translate-y-[-50%] w-8 h-8 rounded-md"></div> */}
                     <Profile session={session}/>

@@ -26,6 +26,26 @@ export default function Layout({children}: any) {
       console.log("overlay")
     }
   }, [router.pathname])
+
+  
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Check if Command (Mac) or Control (Windows) key and 'k' key are pressed
+      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+        router.push('/search'); // Redirect to the search page
+      }
+      if ((event.metaKey || event.ctrlKey) && event.key === 'j') {
+        router.push('/playlists'); // Redirect to the search page
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   // {window.width}
   return (
     <div className={`min-h-[100vh] px-6 w-full box-border items-start h-fit grid grid-rows-[max-content] text-white`}>

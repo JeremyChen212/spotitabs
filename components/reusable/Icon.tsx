@@ -52,9 +52,7 @@ export default function Icon(Props: IconProps) {
                 />
                 // <FontAwesomeIcon icon={faBookOpenReader} />
             )}
-            {!active &&
             <span className="opacity-0 group-hover:opacity-100 pointer-events-none inline-block text-[white] text-[0.75rem] absolute top-[100%] transition-all bg-[#13151b] whitespace-nowrap rounded-md px-4 py-2 left-[50%] translate-x-[-50%] group-hover:visible group-hover:top-[140%]">{text}</span>
-            }
         </button>
         // </div>
         
