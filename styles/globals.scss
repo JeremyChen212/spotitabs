@@ -574,3 +574,10 @@ html {
   left: 2rem;
 }
 
+#smallScrollTop
+// ,#playlistTop 
+{
+  background-color: rgba(var(--bg1-rgb), 0.6);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+}

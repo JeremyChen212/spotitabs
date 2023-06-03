@@ -17,17 +17,18 @@ export const colors = {
     '--text': "#717890",
     '--accent': "#A5A4A4",
     '--bg1': '#1A1C22',
+    '--bg1-rgb': '26,28,34',
     '--bg2': '#23262E',
     '--bg3': '#242733'
   },
   light: {
-    '--primary': '#A4FDD3',
+    '--primary': '#2DA25F',
     '--secondary': '#3D3D3D',
-    '--text': "#E4E4E4",
+    '--text': "#000000",
     '--accent': "#A5A4A4",
-    '--bg1': '#13111A',
-    '--bg2': '#1F1C1C',
-    '--bg3': '#302C2C'
+    '--bg1': 'white',
+    '--bg2': '#000000',
+    '--bg3': '#89F0C3'
   }
 };
 

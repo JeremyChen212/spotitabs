@@ -98,6 +98,30 @@ export default function SpotifyContextProvider ({children, test}: any)  {
     } catch (err) {
       console.log(err)
     }
+    // GET UG SEARCH RESULTS
+
+    // GET AND STORE FIRST LINK THAT DOES NOT NEED PREMIUM
+
+
+    // CREATE SCRAPERS TS FILES [OUTSIDE THIS FILE]
+
+    // STORE SONG LYRICS USING WEBSCRAPE
+    // /html/body/div[1]/div[2]/main/div[2]/article[1]/section[2]/article/section[3]
+    setCurrentSong((prevState) => ({
+      ...prevState,
+      lyrics: 'value3',
+    }));
+
+    // STORE TUNING INFORMATION
+    // //*[@id="tuning"]
+
+    // STORE CAPO INFORMATION
+    // /html/body/div[1]/div[2]/main/div[2]/article[1]/section[1]/div[3]/table/tr[4]/td/span
+
+    // STORE KEY INFORMATION
+    // /html/body/div[1]/div[2]/main/div[2]/article[1]/section[1]/div[3]/table/tr[3]/td/span
+    
+
   }
   const fetchPlaylists = async() => {
     // console.log(session.user.accessToken)
