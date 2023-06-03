@@ -14,7 +14,7 @@ export const colors = {
   darkblue: {
     '--primary': '#A698F9',
     '--secondary': '#3D3D3D',
-    '--text': "#717890",
+    '--text': "#FFFFFF",
     '--accent': "#A5A4A4",
     '--bg1': '#1A1C22',
     '--bg1-rgb': '26,28,34',
