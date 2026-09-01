@@ -1,38 +1,80 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Spotitabs 🎸
 
-## Getting Started
+A guitar-learning tool that turns songs you already listen to into an interactive practice experience.
 
-First, run the development server:
+Spotitabs connects to a user's Spotify library and brings playback, chords, tabs, lyrics, key, and BPM into one synchronized interface so guitarists can learn songs without constantly switching between different tools.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+> Designed and built from initial user research and Figma prototypes through frontend implementation and API integration.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Preview
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+<!-- Add your best screenshot or GIF here -->
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+![Spotitabs Preview](./public/spotitabs-preview.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Why I Built It
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+When learning songs on guitar, I found myself constantly jumping between Spotify, chord websites, tabs, lyrics, and other tools.
 
-## Learn More
+I wanted to explore a simpler question:
 
-To learn more about Next.js, take a look at the following resources:
+**What if the song itself became the learning interface?**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I spoke with guitar learners across different skill levels and found similar friction around:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- switching between playback and learning resources
+- finding accurate song information
+- keeping tabs or chords synchronized with the music
+- navigating multiple tools while actively practicing
 
-## Deploy on Vercel
+Spotitabs was my attempt to bring that workflow into one focused experience.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Core Experience
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Users can:
+
+- Connect their Spotify library
+- Select songs they already listen to
+- View synchronized chords, tabs, and lyrics
+- See song metadata including key and BPM
+- Control playback without leaving the learning interface
+- Move between songs while preserving a consistent practice workflow
+
+## Design Process
+
+I explored the product through **4 interactive Figma prototypes**, testing different approaches to navigation, visual hierarchy, and playback controls.
+
+Early versions separated playback and learning content too aggressively, which made the experience feel like several tools placed on the same page rather than one cohesive product.
+
+I iterated toward a layout where playback remains persistent while learning content becomes the primary focus.
+
+The final direction prioritizes:
+
+**song → playback → learning content → controls**
+
+rather than exposing every available feature at once.
+
+## Technical Architecture
+
+Spotitabs is built with **Next.js and TypeScript** and integrates external music services to combine playback and song-learning information into a single interface.
+
+```text
+Spotify
+   │
+   ├── User library / playlists
+   ├── Track metadata
+   └── Playback context
+          │
+          ▼
+      Spotitabs
+     Next.js UI
+          │
+     ┌────┴─────┐
+     ▼          ▼
+ Song data    Audio /
+ metadata     analysis
+     │          │
+     └────┬─────┘
+          ▼
+ Chords · Tabs · Lyrics
+      Key · BPM
